@@ -1,17 +1,18 @@
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var helpers = require('./helpers');
+const webpack = require('webpack'),
+  HtmlWebpackPlugin = require('html-webpack-plugin'),
+  ExtractTextPlugin = require('extract-text-webpack-plugin'),
+  helpers = require('./helpers');
 
 module.exports = {
   entry: {
     'polyfills': './src/polyfills.ts',
-    'vendor': './src/vendor.ts',
+    'vendor': './src/vendor.ts', // vendor: ['angular', 'firebase', 'angularfire', 'angular-ui-router']
     'app': './src/main.ts'
   },
 
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: ['.ts', '.js'],
+    modules: ['node_modules']
   },
 
   module: {
@@ -25,8 +26,20 @@ module.exports = {
           } , 'angular2-template-loader'
         ]
       },
+      /* maybe unnecessary
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        include: helpers.root('src', 'app'),
+        loader: 'babel',
+        query: {
+          presets: ['es2015']
+        }
+      },
+      */
       {
         test: /\.html$/,
+        exclude: /node_modules/,
         loader: 'html-loader'
       },
       {
@@ -34,14 +47,21 @@ module.exports = {
         loader: 'file-loader?name=assets/[name].[hash].[ext]'
       },
       {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        include: helpers.root('src'),
+        loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader', 'sass-loader'] })
+      },
+      {
         // matches application-wide styles
         test: /\.css$/,
-        exclude: helpers.root('src', 'app'),
+        exclude: [helpers.root('src', 'app'), /node_modules/],
         loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader?sourceMap' })
       },
       {
         // handles component-scoped styles (specified in a component's styleUrls property)
         test: /\.css$/,
+        exclude: /node_modules/,
         include: helpers.root('src', 'app'),
         loader: 'raw-loader'
       }
@@ -65,7 +85,8 @@ module.exports = {
 
     // auto inject scripts and links
     new HtmlWebpackPlugin({
-      template: 'src/index.html'
+      template: 'src/index.html',
+      inject: 'body'
     })
   ]
 };

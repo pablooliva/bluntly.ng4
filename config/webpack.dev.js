@@ -1,10 +1,10 @@
-var webpackMerge = require('webpack-merge');
-// The CSS styles are buried inside the Javascript bundles by default.
-// The ExtractTextPlugin extracts them into external .css files that the
-// HtmlWebpackPlugin inscribes as <link> tags into the index.html.
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var commonConfig = require('./webpack.common.js');
-var helpers = require('./helpers');
+const webpackMerge = require('webpack-merge'),
+  // The CSS styles are buried inside the Javascript bundles by default.
+  // The ExtractTextPlugin extracts them into external .css files that the
+  // HtmlWebpackPlugin inscribes as <link> tags into the index.html.
+  ExtractTextPlugin = require('extract-text-webpack-plugin'),
+  commonConfig = require('./webpack.common.js'),
+  helpers = require('./helpers');
 
 module.exports = webpackMerge(commonConfig, {
   devtool: 'cheap-module-eval-source-map',
