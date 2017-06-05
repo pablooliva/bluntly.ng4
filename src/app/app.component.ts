@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+// imports the application-wide css
 import '../assets/css/styles.css';
 
 @Component({

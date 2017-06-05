@@ -19,7 +19,7 @@
 !.vscode/extensions.json
 
 # misc
-/cli_version
+/ng_cli_version/
 /.sass-cache
 /connect.lock
 /coverage

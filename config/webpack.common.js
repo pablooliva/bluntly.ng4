@@ -34,11 +34,13 @@ module.exports = {
         loader: 'file-loader?name=assets/[name].[hash].[ext]'
       },
       {
+        // matches application-wide styles
         test: /\.css$/,
         exclude: helpers.root('src', 'app'),
         loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader?sourceMap' })
       },
       {
+        // handles component-scoped styles (specified in a component's styleUrls property)
         test: /\.css$/,
         include: helpers.root('src', 'app'),
         loader: 'raw-loader'
@@ -55,13 +57,15 @@ module.exports = {
       {} // a map of your routes
     ),
 
+    // The CommonsChunkPlugin identifies the hierarchy among three chunks: app -> vendor -> polyfills.
+    // Where Webpack finds that app has shared dependencies with vendor, it removes them from app.
     new webpack.optimize.CommonsChunkPlugin({
       name: ['app', 'vendor', 'polyfills']
     }),
 
+    // auto inject scripts and links
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     })
   ]
 };
-
