@@ -43,8 +43,16 @@ module.exports = {
         loader: 'html-loader'
       },
       {
-        test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
+        test: /\.(woff|woff2|ttf|eot|ico)$/,
         loader: 'file-loader?name=assets/[name].[hash].[ext]'
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/,
+        use: [
+          'file-loader?name=assets/[name].[hash].[ext]',
+          // options > https://github.com/imagemin
+          'img-loader'
+        ]
       },
       {
         test: /\.scss$/,
