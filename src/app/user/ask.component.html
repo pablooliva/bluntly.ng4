@@ -1,0 +1,82 @@
+<div class="form-group">
+    <div class="container-fluid blnt-main-inner-container">
+        <div class="row blnt-row-btm-pad">
+            <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+                <h1>Ask</h1>
+                <p uib-alert class="alert-warning" ng-hide="hasAuth">
+                    <a ui-sref=".login">Log In</a> or <a ui-sref=".register">Sign Up</a> to save your questions.
+                </p>
+                <div ui-view></div>
+                <button ng-click="createAnotherSet()" ng-hide="showForm"><span class="glyphicon glyphicon-plus"></span> Create Another Set</button>
+                <section ng-show="showForm">
+                    <p>Ask up to 3 questions per set.</p>
+                    <form name="askQForm" ng-submit="saveSet()" novalidate>
+                        <div class="form-group" ng-class="{ 'has-error' : askQForm.question1.$invalid && !askQForm.question1.$pristine }">
+                            <label class="control-label hidden" for="question1">Question 1</label>
+                            <input name="question1" id="question1" class="form-control" placeholder="1." autofocus ng-model="ask.questions.question1" ng-required="true" />
+                            <p class="help-block" ng-show="askQForm.question1.$invalid && !askQForm.question1.$pristine">Provide at least 1 question.</p>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label hidden" for="question2">Question 2</label>
+                            <input name="question2" id="question2" class="form-control" placeholder="2." ng-model="ask.questions.question2" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label hidden" for="question3">Question 3</label>
+                            <input name="question3" id="question3" class="form-control" placeholder="3." ng-model="ask.questions.question3" />
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : askQForm.setName.$invalid && (!askQForm.setName.$pristine || askQForm.setName.$touched) }">
+                            <label for="set-name" class="control-label">Provide a label or name for this set of questions.</label>
+                            <input type="text" name="setName" id="set-name" class="form-control" placeholder="Set name" ng-required="true" ng-model="ask.setName" />
+                            <p class="help-block" ng-show="askQForm.setName.$invalid && (!askQForm.setName.$pristine || askQForm.setName.$touched)">A set name is required.</p>
+                        </div>
+                        <section class="blnt-custom-highlight">
+                            <div class="blnt-inline-tb">
+                                <h4>Share Yourself</h4>
+                                <p>After someone answers your questions, you can choose to display a brief "bio" and links to connect with you.</p>
+                                <p><span ng-show="bios">Choose a Bio or </span><a ui-sref="bio">Create/Edit a Bio</a>.</p>
+                                <div ng-repeat="bio in bios | orderBy: 'bioName'">
+                                    <label class="blnt-radio-button">
+                                        <input type="radio" name="setBio" id="set-bio-{{ $index + 1 }}" value="{{ bio.$id }}" ng-model="ask.bio">
+                                        {{ bio.bioName }}
+                                    </label>
+                                </div>
+                            </div>
+                        </section>
+                        <button type="submit" class="btn btn-success" ng-disabled="askQForm.$invalid || !hasAuth">Save Set</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+        <div class="row blnt-secondary-row blnt-row-btm-pad">
+            <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+                <section ng-show="questionSets.length >= 1">
+                    <h3>Get Answers</h3>
+                    <p>Responses will be anonymous. At least three (3) people will need to respond to the questions in a set before you can see the answers.</p>
+                    <h4>Share Your Sets</h4>
+                    <table class="table table-condensed blnt-link-tbl">
+                        <thead>
+                        <tr>
+                            <th>QR Code</th>
+                            <th>Link</th>
+                            <th>Set Name</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="set in questionSets">
+                            <td class="blnt-new-brdr">
+                                <a href="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{ shareLinkPre + currentAuth.uid + '/' + set.$id }}"><span class="glyphicon glyphicon-qrcode"></span></a>
+                            </td>
+                            <td class="blnt-new-brdr">
+                                <input class="hidden" id="copy-me-data-{{ $index }}" value="{{ shareLinkPre + currentAuth.uid + '/'+ set.$id }}">
+                                <button class="btn btn-primary btn-xs" id="copy-me-btn-{{ $index }}" ng-click="copyMe('copy-me-data-', $index)">Copy link</button>
+                            </td>
+                            <td class="blnt-new-brdr">
+                                <a href="{{ shareLinkPre + currentAuth.uid + '/'+ set.$id }}">{{ set.setName }}</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </div>

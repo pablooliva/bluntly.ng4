@@ -1,5 +1,58 @@
-<main>
-  <h1>Hello from Angular App with Webpack</h1>
+<header class="row blnt-main-header">
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-  <img src="../assets/images/angular.png">
-</main>
+        <a class="navbar-brand" href="#" id="blnt-logo"><img class="blnt-logo" alt="b.luntly home" src="../assets/images/b.luntly-logo.svg"></a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item" uiSrefActive="active">
+                    <a class="nav-link" uiSref="ask">Ask</a>
+                </li>
+                <li class="nav-item" uiSrefActive="active">
+                    <a class="nav-link" uiSref="answers">Answers</a>
+                </li>
+                <li class="nav-item" uiSrefActive="active" *ngIf="!currentAuth">
+                    <a uiSref="login">Log In</a>
+                </li>
+                <li class="nav-item" uiSrefActive="active" *ngIf="!currentAuth">
+                    <a uiSref="register">Sign Up</a>
+                </li>
+                <li class="nav-item" uiSrefActive="active" *ngIf="currentAuth">
+                    <a href="">{{ currentAuth.email }}</a>
+                </li>
+                <li class="nav-item" uiSrefActive="active" *ngIf="currentAuth">
+                    <a href="#" (ngClick)="logout()">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<section class="row blnt-main">
+    <div class="col-xs-12">
+        <ui-view></ui-view>
+    </div>
+</section>
+
+<footer class="row blnt-footer">
+    <section class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4 blnt-footer-inner">
+        <h1 class="blnt-reg">About</h1>
+        <p>The disconnect between how we see ourselves and how others see us has always fascinated me. On the flip side
+            of that, I also think that we always jump to assumptions and make quick judgements about others. This app
+            helps me, and you, explore these topics.</p>
+        <h2 class="blnt-reg">Contact</h2>
+        <p><a class="blnt-contrast-off-white" href="mailto:tellme@b.luntly.com">tellme@b.luntly.com</a></p>
+        <p class="blnt-footer-brk"><img class="blnt-logo-footer" alt="b.luntly home"
+                                        src="../assets/images/b.luntly-logo.svg"></p>
+        <p class="blnt-sm-text">Check me out on <a class="blnt-contrast-off-white"
+                                                   href="https://github.com/pablooliva/bluntly">GitHub</a>.</p>
+        <p class="blnt-sm-text">Copyright &copy; 2016 Pablo Oliva. Licensed under <a class="blnt-contrast-off-white"
+                                                                                     href="https://www.gnu.org/licenses/gpl.html">GNU
+            GPL v. 3.</a></p>
+    </section>
+</footer>

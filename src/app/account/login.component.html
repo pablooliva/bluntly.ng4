@@ -1,0 +1,26 @@
+<div class="container-fluid blnt-main-inner-container">
+    <div class="row blnt-row-btm-pad">
+        <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+            <h1>Log In</h1>
+            <div ui-view></div>
+            <form name="loginForm" ng-submit="login()" novalidate>
+                <div class="form-group" ng-class="{ 'has-error' : loginForm.email.$invalid && (!loginForm.email.$pristine || loginForm.email.$touched) }">
+                    <label class="control-label" for="email">Email</label>
+                    <input type="email" name="email" class="form-control" id="email" autocomplete="email" autofocus ng-model="user.email" ng-required="true"/>
+                    <p class="help-block" ng-show="loginForm.email.$invalid && (!loginForm.email.$pristine || loginForm.email.$touched)">Must be a valid email.</p>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : loginForm.password.$invalid && (!loginForm.password.$pristine || loginForm.password.$touched) }">
+                    <label class="control-label" for="password">Password</label>
+                    <input type="password" name="password" class="form-control" id="password" autocomplete="current-password" ng-model="user.password" ng-required="true"/>
+                    <p class="help-block" ng-show="loginForm.password.$invalid && (!loginForm.password.$pristine || loginForm.password.$touched)">Password is required.</p>
+                </div>
+                <button type="submit" class="btn btn-success" ng-disabled="loginForm.$invalid">Log In</button>
+            </form>
+            <p class="blnt-top-pad">Not registered? <a ui-sref="register">Sign up.</a></p>
+        </div>
+    </div>
+    <div class="row blnt-secondary-row blnt-row-btm-pad">
+        <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+        </div>
+    </div>
+</div>
