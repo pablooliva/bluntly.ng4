@@ -1,34 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
-  selector: 'blnt-login',
-  templateUrl: './login.component.html'
+  selector: "blnt-login",
+  templateUrl: "./login.component.html"
 })
-export class LoginComponent {
-  /*$scope.login = function() {
-    Alerts.closeAlert('login');
-    $state.go('login');
-    Authentication.$signInWithEmailAndPassword($scope.user.email, $scope.user.password)
-      .then(function() {
-        $state.go('ask');
-      })
-      .catch(function() {
-        Alerts.addAlert({ type: 'danger', msg: 'Login attempt failed.', source: 'login' });
-        $state.go('.alerts');
-      });
-  };*/
+export class LoginComponent implements OnInit {
+  public loginForm: FormGroup;
 
-  /*$scope.login = function() {
-    Alerts.closeAlert('login');
+  constructor(public fb: FormBuilder) {}
 
-    Authentication.$signInWithEmailAndPassword($scope.user.email, $scope.user.password)
-      .then(function() {
-        Alerts.addAlert({ type: 'success', msg: 'You are now logged in.', source: 'login' });
-        $state.go('^.alerts');
-      })
-      .catch(function() {
-        Alerts.addAlert({ type: 'danger', msg: 'Login attempt failed.', source: 'login' });
-        $state.go('^.alerts');
-      });
-  };*/
+  public ngOnInit(): void {
+    this.loginForm = this.fb.group({
+      email: ["", [Validators.required]],
+      password: ["", [Validators.required]]
+    });
+  }
+
+  public onSubmit(): void {
+    console.warn("Test");
+    console.warn(this.loginForm.get("email").value);
+  }
 }

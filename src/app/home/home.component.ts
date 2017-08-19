@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'blnt-home',
-  templateUrl: './home.component.html'
+  selector: "blnt-home",
+  templateUrl: "./home.component.html"
 })
 export class HomeComponent {
 }

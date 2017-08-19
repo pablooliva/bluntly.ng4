@@ -1,3 +1,6 @@
+@import "bs.custom";
+@import "~bootstrap/scss/bootstrap";
+
 /*************
  *
  * all widths, device independent
@@ -8,9 +11,18 @@
 
 /*** bootstrap fixes ***/
 
+body.container-fluid {
+  padding: 0;
+}
 .navbar {
   border-radius:0;
   background-color: #2196f3;
+}
+.navbar-brand {
+  margin: 0 2rem;
+}
+#navbar ul {
+  margin: 0 2rem 1rem 2rem;
 }
 
 
@@ -24,9 +36,9 @@ $lighter-blue:#e6f4fe;
 $contrast-white:#fff;
 $contrast-off-white:#ebebeb;
 $primary-highlight:#FF4900;
-$primary-highlight-light:#FF9A72;
+$primary-highlight-light: #ffe0db;
 $secondary-highlight:#FFC413;
-$secondary-highlight-light:#FFDC72;
+$secondary-highlight-light: #ffeea8;
 $tertiary-highlight:$dark-blue;
 $tertiary-highlight-light:$light-blue;
 $header-color:#444;
@@ -45,6 +57,10 @@ img, video {
   height:auto;
 }
 
+.hidden {
+  display: none;
+}
+
 .blnt-lrg-text {
   font-size:3rem;
 }
@@ -52,6 +68,7 @@ img, video {
 .blnt-md-text {
   font-size:1.8rem;
   line-height:1.5;
+  margin:3rem 0;
 }
 
 .blnt-sm-text {
@@ -59,7 +76,7 @@ img, video {
 }
 
 .blnt-reg {
-  font-size:1.5rem;
+  font-size:1.3rem;
   color:$contrast-off-white;
 }
 
@@ -141,11 +158,11 @@ img, video {
 }
 
 .blnt-logo {
-  margin:-0.4rem 2rem 0 2rem;
   @include blnt-logo(3);
 }
 
 .blnt-logo-main {
+  display: none;
   @include blnt-logo(7);
 }
 
@@ -171,7 +188,8 @@ img, video {
 .blnt-em-tb-header {
   border-top-left-radius:1rem;
   border-top-right-radius:1rem;
-  padding:1.5rem 3rem;
+  padding:1.5rem 2rem;
+  font-size:2.5rem;
 
   .blnt-primary-highlight & {
     background-color:$primary-highlight;
@@ -194,11 +212,10 @@ img, video {
 
 .blnt-em-tb-content {
   margin:1rem 0;
-  padding:1rem;
+  padding:0.5rem 2rem 2rem 1.5rem;
 }
 
 .blnt-em-tb-content-list {
-  font-size:1.6rem;
   color:$header-color;
   line-height:1.5;
 }
@@ -296,9 +313,18 @@ img, video {
  *
  *************/
 
+@media (min-width: 768px) {
+  #navbar ul {
+    margin: 0;
+  }
+  .blnt-logo-main {
+    display: block;
+  }
+}
+
 @media (min-width: 992px) {
   .blnt-home-bg {
-    background:url('../images/cartoon.svg') 3% 100% no-repeat;
+    background:url('../images/cartoon.svg') 3% 100% no-repeat #fff;
   }
 
   .blnt-home-lyr2-bg {
@@ -308,7 +334,7 @@ img, video {
 
 @media (min-width: 1200px) {
   .blnt-home-bg {
-    background:url('../images/cartoon.svg') 10% 100% no-repeat;
+    background:url('../images/cartoon.svg') 10% 100% no-repeat #fff;
   }
 
   .blnt-home-lyr2-bg {
@@ -324,7 +350,7 @@ img, video {
 
 @media (min-width: 1700px) {
   .blnt-home-bg {
-    background:url('../images/cartoon.svg') 20% 100% no-repeat;
+    background:url('../images/cartoon.svg') 20% 100% no-repeat #fff;
   }
 
   .blnt-home-lyr2-bg {
