@@ -1,5 +1,4 @@
 {
-    "extends": "tslint-microsoft-contrib",
     "rulesDirectory": [
         "node_modules/codelyzer"
     ],
@@ -145,6 +144,9 @@
         ],
 
         // Codelyzer rules
+        "angular-whitespace": [true, "check-interpolation", "check-pipe", "check-semicolon"],
+        "banana-in-box": true,
+        "templates-no-negated-async": true,
         "directive-selector": [
             true,
             "attribute",
@@ -160,6 +162,7 @@
         "use-input-property-decorator": true,
         "use-output-property-decorator": true,
         "use-host-property-decorator": true,
+        "use-view-encapsulation": true,
         "no-attribute-parameter-decorator": true,
         "no-input-rename": true,
         "no-output-rename": true,
@@ -175,6 +178,7 @@
         "directive-class-suffix": false,
         "templates-use-public": true,
         "no-access-missing-member": true,
-        "invoke-injectable": true
+        "invoke-injectable": true,
+        "template-to-ng-template": true
     }
 }

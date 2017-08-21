@@ -1,40 +1,9 @@
-<header class="row blnt-main-header">
-    <nav class="navbar navbar-expand-md col">
-        <a class="navbar-brand" href="#" id="blnt-logo"><img class="blnt-logo" alt="b.luntly home" src="../assets/images/b.luntly-logo.svg"></a>
-        <button class="navbar-toggler collapsed float-right" type="button" (click)="isCollapsed = !isCollapsed" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fa fa-bars fa-lg" aria-hidden="true"></i>
-        </button>
-        <div class="navbar-collapse collapse" id="navbar" [collapse]="isCollapsed">
-            <ul class="nav navbar-nav" (click)="isCollapsed = !isCollapsed">
-                <li class="nav-item" uiSrefActive="active">
-                    <a class="nav-link" uiSref="ask">Ask</a>
-                </li>
-                <li class="nav-item" uiSrefActive="active">
-                    <a class="nav-link" uiSref="answers">Answers</a>
-                </li>
-                <li class="nav-item" uiSrefActive="active" *ngIf="!currentAuth">
-                    <a class="nav-link" uiSref="login">Log In</a>
-                </li>
-                <li class="nav-item" uiSrefActive="active" *ngIf="!currentAuth">
-                    <a class="nav-link" uiSref="register">Sign Up</a>
-                </li>
-                <li class="nav-item" uiSrefActive="active" *ngIf="currentAuth">
-                    <a class="nav-link" href="">{{ currentAuth.email }}</a>
-                </li>
-                <li class="nav-item" uiSrefActive="active" *ngIf="currentAuth">
-                    <a class="nav-link" href="#" (click)="logout()" >Logout</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</header>
-
-<section class="row blnt-main" [class.blnt-home-bg]="isHome">
-    <div class="col-10 col-lg-8 col-xl-6 mx-auto" [class.blnt-home-lyr2-bg]="isHome">
-        <ui-view></ui-view>
+<blnt-header></blnt-header>
+<section class="row blnt-main">
+    <div class="col-10 col-lg-8 col-xl-6 mx-auto">
+        <router-outlet></router-outlet>
     </div>
 </section>
-
 <footer class="row blnt-footer">
     <section class="col-10 col-lg-8 col-xl-6 mx-auto blnt-footer-inner">
         <h1 class="blnt-reg">About</h1>

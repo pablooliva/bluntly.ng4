@@ -26,7 +26,6 @@ body.container-fluid {
 }
 
 
-
 /*** non-specfic, document-wide style ***/
 
 $primary-blue:#2198F3;
@@ -57,6 +56,10 @@ img, video {
   height:auto;
 }
 
+.nav-link {
+  color: $contrast-off-white;
+}
+
 .hidden {
   display: none;
 }
@@ -68,7 +71,7 @@ img, video {
 .blnt-md-text {
   font-size:1.8rem;
   line-height:1.5;
-  margin:3rem 0;
+  margin:0 0 3rem 0;
 }
 
 .blnt-sm-text {
@@ -112,8 +115,8 @@ img, video {
   padding:0;
 }
 
-.blnt-row-btm-pad {
-  padding-bottom:5rem;
+.blnt-row-pad {
+  padding:3rem 0 5rem 0;
 }
 
 .blnt-secondary-row {
@@ -320,40 +323,10 @@ img, video {
   .blnt-logo-main {
     display: block;
   }
-}
-
-@media (min-width: 992px) {
-  .blnt-home-bg {
-    background:url('../images/cartoon.svg') 3% 100% no-repeat #fff;
+  .blnt-home-bg.blnt-row-pad {
+    padding-bottom:25rem;
   }
-
-  .blnt-home-lyr2-bg {
-    background:url('../images/cartoon-question.svg') 98% 50% no-repeat;
-  }
-}
-
-@media (min-width: 1200px) {
-  .blnt-home-bg {
-    background:url('../images/cartoon.svg') 10% 100% no-repeat #fff;
-  }
-
-  .blnt-home-lyr2-bg {
-    background:url('../images/cartoon-question.svg') 95% 50% no-repeat;
-  }
-}
-
-@media (min-width: 1400px) {
-  .blnt-home-lyr2-bg {
-    background:url('../images/cartoon-question.svg') 90% 50% no-repeat;
-  }
-}
-
-@media (min-width: 1700px) {
   .blnt-home-bg {
     background:url('../images/cartoon.svg') 20% 100% no-repeat #fff;
-  }
-
-  .blnt-home-lyr2-bg {
-    background:url('../images/cartoon-question.svg') 80% 50% no-repeat;
   }
 }

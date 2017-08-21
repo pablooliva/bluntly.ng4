@@ -1,0 +1,30 @@
+<header class="row blnt-main-header">
+    <nav class="navbar navbar-expand-md col">
+        <a class="navbar-brand" href="#" id="blnt-logo"><img class="blnt-logo" alt="b.luntly home" src="../../../assets/images/b.luntly-logo.svg"></a>
+        <button class="navbar-toggler collapsed float-right" type="button" (click)="isCollapsed = !isCollapsed" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa fa-bars fa-lg" aria-hidden="true"></i>
+        </button>
+        <div class="navbar-collapse collapse" id="navbar" [collapse]="isCollapsed">
+            <ul class="nav navbar-nav" (click)="isCollapsed = !isCollapsed">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="ask" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Ask</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="answers" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Answers</a>
+                </li>
+                <li class="nav-item" *ngIf="!currentAuth">
+                    <a class="nav-link" routerLink="login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Log In</a>
+                </li>
+                <li class="nav-item" *ngIf="!currentAuth">
+                    <a class="nav-link" routerLink="register" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Sign Up</a>
+                </li>
+                <li class="nav-item" *ngIf="currentAuth">
+                    <a class="nav-link" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{ currentAuth.email }}</a>
+                </li>
+                <li class="nav-item" *ngIf="currentAuth">
+                    <a class="nav-link" href="#" (click)="logout()">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
