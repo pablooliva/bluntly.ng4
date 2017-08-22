@@ -1,5 +1,6 @@
 <div class="blnt-row-pad">
     <h1>Log In</h1>
+    <blnt-alert></blnt-alert>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group" ngClass="{ 'has-error' : loginForm.email.errors }">
             <label class="control-label" for="email">Email</label>

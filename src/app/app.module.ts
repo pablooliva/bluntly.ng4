@@ -7,6 +7,7 @@ import { AngularFireDatabaseModule } from "angularfire2/database";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { CoreModule } from "./core/core.module";
+import { SharedModule } from "./shared/shared.module";
 import { UsersModule } from "./users/users.module";
 
 import { AuthService } from "./shared/auth.service";
@@ -27,6 +28,7 @@ import { AuthService } from "./shared/auth.service";
     AngularFireDatabaseModule,
     AppRoutingModule,
     CoreModule,
+    SharedModule,
     UsersModule
   ],
   providers: [

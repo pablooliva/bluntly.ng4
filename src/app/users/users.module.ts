@@ -7,6 +7,7 @@ import { RegisterComponent } from "./register/register.component";
 import { LoginComponent } from "./login/login.component";
 import { BioEditComponent } from "./bio/bio-edit.component";
 import { UsersRoutingModule } from "./users-routing.module";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { UsersRoutingModule } from "./users-routing.module";
     CommonModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    UsersRoutingModule
+    UsersRoutingModule,
+    SharedModule
   ]
 })
 export class UsersModule {
