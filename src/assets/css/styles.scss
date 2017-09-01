@@ -56,6 +56,10 @@ img, video {
   height:auto;
 }
 
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  margin-bottom: 1.5rem;
+}
+
 .nav-link {
   color: $contrast-off-white;
 }
@@ -236,10 +240,6 @@ img, video {
 
   .blnt-custom-highlight & {
     background-color:$lighter-blue;
-  }
-
-  h2 {
-    margin-top:1rem;
   }
 
   form {

@@ -46,6 +46,7 @@
   "devDependencies": {
     "@types/jasmine": "2.5.36",
     "@types/node": "^6.0.87",
+    "angular-router-loader": "^0.6.0",
     "angular2-template-loader": "^0.6.0",
     "autoprefixer": "^7.1.2",
     "awesome-typescript-loader": "^3.2.3",

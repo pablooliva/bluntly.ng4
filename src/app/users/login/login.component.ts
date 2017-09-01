@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "../../shared/auth.service";
+import { AlertsService } from "../../shared/alerts.service";
 
 @Component({
   selector: "blnt-login",
@@ -9,7 +10,7 @@ import { AuthService } from "../../shared/auth.service";
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
 
-  constructor(public fb: FormBuilder, private _authService: AuthService) {}
+  constructor(public fb: FormBuilder, private _authService: AuthService, private _alertsService: AlertsService) {}
 
   public ngOnInit(): void {
     this.loginForm = this.fb.group({

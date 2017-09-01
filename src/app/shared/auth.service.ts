@@ -4,38 +4,45 @@ import { Observable } from "rxjs/Observable";
 import { AngularFireAuth } from "angularfire2/auth";
 import * as firebase from "firebase/app";
 
+import { AlertsService } from "./alerts.service";
+import { IBSAlertTypes } from "./alerts.component";
+
 @Injectable()
 export class AuthService {
   private _user: Observable<firebase.User>;
   public currentAuth: Object;
 
-  constructor(private _afAuth: AngularFireAuth, private _router: Router) {
+  constructor(private _afAuth: AngularFireAuth, private _alertsService: AlertsService, private _router: Router) {
     this._user = this._afAuth.authState;
   }
 
   public register(email: string, password: string): void {
     this._afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then(response => {
-        console.warn("created", response);
-        this._router.navigate(["/"]);
+        console.warn("*** REGISTRATION ***", response);
+        this.setAlert(IBSAlertTypes[IBSAlertTypes.success], true, "Your registration was successful. You may now log in.");
+        this._router.navigate(["/users/login"]);
       })
       .catch((error: firebase.FirebaseError) => {
         const errorCode: string = error.code;
         const errorMessage: string = error.message;
+        let blntErrorMessage: string;
 
         switch (errorCode) {
           case "auth/email-already-in-use":
-            console.error("Email already in use.", errorMessage);
+            blntErrorMessage = "Email already in use.";
             break;
           case "auth/invalid-email":
-            console.error("Not a valid email address.", errorMessage);
+            blntErrorMessage = "Not a valid email address.";
             break;
           case "auth/weak-password":
-            console.error("Password should have more characters.", errorMessage);
+            blntErrorMessage = "Password should have more characters.";
             break;
           default:
-            console.error("Registration failed.", errorMessage);
+            blntErrorMessage = "Registration failed.";
         }
+
+        this.setAlert(IBSAlertTypes[IBSAlertTypes.danger], false, blntErrorMessage, errorMessage);
       });
   }
 
@@ -51,28 +58,40 @@ export class AuthService {
       .catch((error: firebase.FirebaseError) => {
         const errorCode: string = error.code;
         const errorMessage: string = error.message;
+        let blntErrorMessage: string;
 
         switch (errorCode) {
           case "auth/user-disabled":
-            console.error("This account has been disabled.", errorMessage);
+            blntErrorMessage = "This account has been disabled.";
             break;
           case "auth/invalid-email":
-            console.error("Not a valid email address.", errorMessage);
+            blntErrorMessage = "Not a valid email address.";
             break;
           case "auth/user-not-found":
-            console.error("User not found.", errorMessage);
+            blntErrorMessage = "User not found.";
             break;
           case "auth/wrong-password":
-            console.error("Password is invalid.", errorMessage);
+            blntErrorMessage = "Password is invalid.";
             break;
           default:
-            console.error("Log in attempt failed.", errorMessage);
+            blntErrorMessage = "Log in attempt failed.";
         }
-        });
+
+        this.setAlert(IBSAlertTypes[IBSAlertTypes.danger], false, blntErrorMessage, errorMessage);
+      });
   }
 
   public logout(): void {
     this._afAuth.auth.signOut();
     this.currentAuth = null;
+  }
+
+  private setAlert(type: string, persistent: boolean, primaryMsg: string, secondaryMsg?: string): void {
+    this._alertsService.addAlert({
+      type: type,
+      messagePrimary: primaryMsg,
+      messageSecondary: secondaryMsg,
+      persistent: persistent
+    });
   }
 }

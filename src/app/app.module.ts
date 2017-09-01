@@ -8,9 +8,10 @@ import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { CoreModule } from "./core/core.module";
 import { SharedModule } from "./shared/shared.module";
-import { UsersModule } from "./users/users.module";
 
 import { AuthService } from "./shared/auth.service";
+import { AlertsService} from "./shared/alerts.service";
+import {AlertGuardService} from "./shared/alert-guard.service";
 
 @NgModule({
   declarations: [
@@ -28,11 +29,12 @@ import { AuthService } from "./shared/auth.service";
     AngularFireDatabaseModule,
     AppRoutingModule,
     CoreModule,
-    SharedModule,
-    UsersModule
+    SharedModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    AlertsService,
+    AlertGuardService
   ],
   bootstrap: [
     AppComponent
