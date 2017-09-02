@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
 import {Routes, RouterModule} from "@angular/router";
 
-import {AlertGuardService} from "../shared/alert-guard.service";
+import {AlertGuardService} from "../shared/alerts/alert-guard.service";
 import {UsersComponent} from "./users.component";
 import {RegisterComponent} from "./register/register.component";
 import {LoginComponent} from "./login/login.component";

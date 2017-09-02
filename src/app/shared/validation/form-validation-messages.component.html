@@ -1,0 +1,13 @@
+<ng-container *ngIf="controlValidation.control.invalid &&
+(controlValidation.control.dirty || controlValidation.control.touched)">
+    <ng-container [ngSwitch]="controlValidation.type">
+        <ng-container *ngSwitchCase="'email'">
+            <p *ngIf="controlValidation.control.errors.required" class="help-block error">Email is required.</p>
+            <p *ngIf="controlValidation.control.errors.email" class="help-block error">Must be a valid email.</p>
+        </ng-container>
+        <ng-container *ngSwitchCase="'password'">
+            <p *ngIf="controlValidation.control.errors.required" class="help-block error">Password is required.</p>
+            <p *ngIf="controlValidation.control.errors.minlength" class="help-block error">Password must be at least 6 characters long.</p>
+        </ng-container>
+    </ng-container>
+</ng-container>

@@ -4,8 +4,8 @@ import { Observable } from "rxjs/Observable";
 import { AngularFireAuth } from "angularfire2/auth";
 import * as firebase from "firebase/app";
 
-import { AlertsService } from "./alerts.service";
-import { IBSAlertTypes } from "./alerts.component";
+import { AlertsService } from "./alerts/alerts.service";
+import { IBSAlertTypes } from "./alerts/alerts.component";
 
 @Injectable()
 export class AuthService {

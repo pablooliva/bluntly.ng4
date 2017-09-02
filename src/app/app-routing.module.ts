@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
-import {AlertGuardService} from "./shared/alert-guard.service";
+import {AlertGuardService} from "./shared/alerts/alert-guard.service";
 import { HomeComponent } from "./core/home/home.component";
 import { NotFoundComponent } from "./core/not-found/not-found.component";
 

@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+
 import { AuthService } from "../../shared/auth.service";
-import { AlertsService } from "../../shared/alerts.service";
+import { IControl } from "../../shared/validation/form-validation-messages.component";
 
 @Component({
   selector: "blnt-login",
@@ -9,14 +10,25 @@ import { AlertsService } from "../../shared/alerts.service";
 })
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
+  public controlValidation: Object = {};
 
-  constructor(public fb: FormBuilder, private _authService: AuthService, private _alertsService: AlertsService) {}
+  constructor(public fb: FormBuilder, private _authService: AuthService) {}
 
   public ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: ["", [Validators.required]],
+      email: ["", [Validators.required, Validators.email]],
       password: ["", [Validators.required]]
     });
+
+    this.controlValidation["email"] = {
+      control: this.loginForm.controls.email,
+      type: IControl[IControl.email]
+    };
+
+    this.controlValidation["password"] = {
+      control: this.loginForm.controls.password,
+      type: IControl[IControl.password]
+    };
   }
 
   public onSubmit(): void {

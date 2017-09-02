@@ -1,5 +1,6 @@
 @import "bs.custom";
 @import "~bootstrap/scss/bootstrap";
+@import "variables";
 
 /*************
  *
@@ -28,20 +29,6 @@ body.container-fluid {
 
 /*** non-specfic, document-wide style ***/
 
-$primary-blue:#2198F3;
-$dark-blue:#0367B4;
-$light-blue:#77BEF5;
-$lighter-blue:#e6f4fe;
-$contrast-white:#fff;
-$contrast-off-white:#ebebeb;
-$primary-highlight:#FF4900;
-$primary-highlight-light: #ffe0db;
-$secondary-highlight:#FFC413;
-$secondary-highlight-light: #ffeea8;
-$tertiary-highlight:$dark-blue;
-$tertiary-highlight-light:$light-blue;
-$header-color:#444;
-
 @mixin blnt-logo($factor){
   width:($factor * 3) + rem;
   height:($factor) + rem;
@@ -58,10 +45,6 @@ img, video {
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   margin-bottom: 1.5rem;
-}
-
-.nav-link {
-  color: $contrast-off-white;
 }
 
 .hidden {
@@ -93,10 +76,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   &:hover {
     color:$contrast-off-white;
   }
-}
-
-.blnt-top-pad {
-  margin:2rem 0;
 }
 
 
@@ -150,9 +129,17 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   margin-top:3rem;
 }
 
+.blnt-top-pad {
+  margin:2rem 0;
+}
+
 
 
 /*** block elements & skin ***/
+
+.nav-link {
+  color: $contrast-off-white;
+}
 
 .blnt-footer {
   color:$contrast-off-white;
@@ -225,12 +212,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .blnt-em-tb-content-list {
   color:$header-color;
   line-height:1.5;
-}
-
-.glyphicon {
-  .blnt-em-tb-header & {
-    top:0.6rem;
-  }
 }
 
 .blnt-inline-tb {
@@ -308,6 +289,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   height:3em;
 }
 
+input.ng-dirty.ng-invalid, input.ng-touched.ng-invalid {
+  border:1px solid $error-color;
+  border-left:5px solid $error-color;
+}
 
 
 /*************
