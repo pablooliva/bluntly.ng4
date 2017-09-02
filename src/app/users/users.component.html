@@ -1,8 +1,9 @@
-<div class="container-fluid blnt-main-inner-container">
-    <div class="row blnt-row-btm-pad">
-        <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
-            <h1>Users</h1>
-            <p>Registered users can create questions that deserve blunt answers.</p>
-        </div>
-    </div>
+<div class="blnt-row-pad">
+    <h1>Users</h1>
+    <blnt-alert></blnt-alert>
+    <ul class="blnt-options">
+        <li><a [routerLink]="['/users']">Ask Questions</a> Create sets of up to 3 questions that you can then share with others who can anonymously provide you with answers or feedback on any topic you are interested in.</li>
+        <li><a [routerLink]="['/users']">Get Answers</a> You can view answers after at least 3 individual people have answered your set of questions. </li>
+        <li><a [routerLink]="['/users', 'bio']">Share Your Bio</a> Surprise those that answer your questions. Tell them something interesting about yourself. Create separate bios for different audiences. For example, create one for potential employers and another for friends and family.</li>
+    </ul>
 </div>

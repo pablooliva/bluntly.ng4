@@ -6,7 +6,7 @@ import { HomeComponent } from "./core/home/home.component";
 import { NotFoundComponent } from "./core/not-found/not-found.component";
 
 const appRoutes: Routes = [
-  {path: "", canActivate: [ AlertGuardService ], component: HomeComponent},
+  {path: "", pathMatch: "full", canActivate: [ AlertGuardService ], component: HomeComponent},
   {path: "not-found", canActivate: [ AlertGuardService ], component: NotFoundComponent},
   {path: "users", loadChildren: "./users/users.module#UsersModule"},
   {path: "**", redirectTo: "not-found"}

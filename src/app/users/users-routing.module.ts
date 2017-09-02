@@ -11,7 +11,7 @@ const userRoutes: Routes = [
   {path: "", canActivate: [ AlertGuardService ], component: UsersComponent},
   {path: "login", canActivate: [ AlertGuardService ], component: LoginComponent},
   {path: "register", canActivate: [ AlertGuardService ], component: RegisterComponent},
-  {path: "bioEdit", canActivate: [ AlertGuardService ], component: BioEditComponent}
+  {path: "bio", canActivate: [ AlertGuardService ], component: BioEditComponent}
 ];
 
 @NgModule({

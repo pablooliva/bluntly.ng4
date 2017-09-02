@@ -52,7 +52,7 @@ export class AuthService {
           console.warn("response", response);
           this._user.subscribe(u => {
             this.currentAuth = u;
-            this._router.navigate(["/"]);
+            this._router.navigate(["/users"]);
           });
         })
       .catch((error: firebase.FirebaseError) => {
@@ -84,6 +84,7 @@ export class AuthService {
   public logout(): void {
     this._afAuth.auth.signOut();
     this.currentAuth = null;
+    this._router.navigate(["/"]);
   }
 
   private setAlert(type: string, persistent: boolean, primaryMsg: string, secondaryMsg?: string): void {

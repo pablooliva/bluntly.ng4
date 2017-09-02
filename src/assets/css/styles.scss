@@ -177,6 +177,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   .blnt-tertiary-highlight & {
     background-color:$tertiary-highlight-light;
   }
+  .blnt-quaternary-highlight & {
+    background-color:$quaternary-highlight-light;
+  }
 }
 
 .blnt-em-tb-header {
@@ -191,6 +194,14 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   }
   .blnt-secondary-highlight & {
     background-color:$secondary-highlight;
+    color:$contrast-white;
+  }
+  .blnt-tertiary-highlight & {
+    background-color:$tertiary-highlight;
+    color:$contrast-white;
+  }
+  .blnt-quaternary-highlight & {
+    background-color:$quaternary-highlight;
     color:$contrast-white;
   }
 }
