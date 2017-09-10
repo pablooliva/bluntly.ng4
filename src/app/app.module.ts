@@ -10,8 +10,9 @@ import { CoreModule } from "./core/core.module";
 import { SharedModule } from "./shared/shared.module";
 
 import { AuthService } from "./shared/auth.service";
+import { AFUtils } from "./shared/utils";
 import { AlertsService} from "./shared/alerts/alerts.service";
-import {AlertGuardService} from "./shared/alerts/alert-guard.service";
+import { AlertGuardService } from "./shared/alerts/alert-guard.service";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {AlertGuardService} from "./shared/alerts/alert-guard.service";
   ],
   providers: [
     AuthService,
+    AFUtils,
     AlertsService,
     AlertGuardService
   ],

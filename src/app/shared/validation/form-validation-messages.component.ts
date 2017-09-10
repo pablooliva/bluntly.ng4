@@ -1,14 +1,21 @@
 import { Component, Input } from "@angular/core";
 import { AbstractControl } from "@angular/forms";
 
-export enum IControl {
+// Must correlate to a Switch Case in template
+export enum ControlType {
+  text,
   email,
   password
+}
+
+export enum MessageType {
+  unique
 }
 
 export interface IControlValidation {
   control: AbstractControl;
   type: string;
+  message?: MessageType;
 }
 
 @Component({

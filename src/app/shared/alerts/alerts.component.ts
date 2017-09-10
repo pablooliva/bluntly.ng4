@@ -3,13 +3,13 @@ import { AlertsService } from "./alerts.service";
 import { Subscription } from "rxjs/Subscription";
 
 export interface IAlerts {
-  type: string;
+  type: BSAlertTypes;
   messagePrimary: string;
   messageSecondary?: string;
   persistent: boolean;
 }
 
-export enum IBSAlertTypes {
+export enum BSAlertTypes {
   success,
   info,
   warning,
@@ -23,6 +23,8 @@ export enum IBSAlertTypes {
 })
 export class AlertsComponent implements OnInit, OnDestroy {
   public alerts: IAlerts[];
+  public bsAlertTypes: Object = BSAlertTypes;
+
   private alertsSubscription: Subscription;
 
   public constructor(private _alertsService: AlertsService) {}

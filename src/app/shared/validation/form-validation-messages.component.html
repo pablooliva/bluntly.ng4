@@ -1,6 +1,10 @@
-<ng-container *ngIf="controlValidation.control.invalid &&
+<ng-container *ngIf="controlValidation.control.errors &&
 (controlValidation.control.dirty || controlValidation.control.touched)">
     <ng-container [ngSwitch]="controlValidation.type">
+        <ng-container *ngSwitchCase="'text'">
+            <p *ngIf="controlValidation.control.errors.required" class="help-block error">This field is required.</p>
+            <p *ngIf="controlValidation.control.errors.unique" class="help-block error">{{ controlValidation.message.unique }}</p>
+        </ng-container>
         <ng-container *ngSwitchCase="'email'">
             <p *ngIf="controlValidation.control.errors.required" class="help-block error">Email is required.</p>
             <p *ngIf="controlValidation.control.errors.email" class="help-block error">Must be a valid email.</p>

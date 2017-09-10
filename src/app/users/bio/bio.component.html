@@ -1,76 +1,83 @@
 <div class="blnt-row-pad">
     <h1>User Bio</h1>
-    <blnt-alert></blnt-alert>
     <h2>Care to share?</h2>
     <p>Let those that answer your questions know a little more about you. Create as many bios as you would like. Later, when creating a set of questions you can choose which bio to share.</p>
     <div class="blnt-bio-option-container">
-        <button (onClick)="optionChosen('create')">Create Bio</button>
-        <button (onClick)="optionChosen('edit')">Edit Bio</button>
+        <button (click)="createBio(true)">Create Bio</button>
+        <button (click)="createBio(false)">Edit Bio</button>
     </div>
+    <blnt-alert></blnt-alert>
     <div class="blnt-bio-container">
-        <ng-container *ngIf="createBio">
+        <ng-container *ngIf="createBioFlag">
             <h3>Create a Bio</h3>
             <p>Required:</p>
             <ol>
                 <li>Bio name, plus..</li>
                 <li>One other field</li>
             </ol>
-            <form [formGroup]="bioForm" (ngSubmit)="onSubmit()" novalidate>
+            <form [formGroup]="bioForm" (ngSubmit)="onCreate()" novalidate>
                 <div class="form-group">
-                    <label class="control-label" for="bio-name">Bio name (only seen by you)</label>
-                    <input type="text" name="bio-name" id="bio-name" class="form-control" [formControlName]="bioName">
+                    <label class="control-label" for="bio-name">Bio name</label>
+                    <input type="text" name="bio-name" id="bio-name" class="form-control" [formControlName]="'bioName'">
+                    <blnt-validation-msg [controlValidation]="controlValidation['text']"></blnt-validation-msg>
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="user-name">Your name</label>
-                    <input type="text" name="user-name" id="user-name" class="form-control" [formControlName]="userName">
+                    <input type="text" name="user-name" id="user-name" class="form-control" [formControlName]="'userName'">
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="fact">Something people may not know about you, something surprising</label>
-                    <input type="text" name="fact" id="fact" class="form-control" [formControlName]="fact">
+                    <input type="text" name="fact" id="fact" class="form-control" [formControlName]="'fact'">
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="bio-desc">A short description about yourself</label>
-                    <input type="text" name="bio-desc" id="bio-desc" class="form-control" [formControlName]="desc">
+                    <input type="text" name="bio-desc" id="bio-desc" class="form-control" [formControlName]="'desc'">
                 </div>
                 <h4>Popular Ways to Connect</h4>
                 <div class="form-group">
                     <label class="control-label" for="facebook">Facebook</label>
-                    <input type="text" placeholder="https://www.facebook.com/..user.." name="facebook" id="facebook" class="form-control" [formControlName]="facebook">
+                    <input type="text" placeholder="https://www.facebook.com/..user.." name="facebook" id="facebook" class="form-control" [formControlName]="'facebook'">
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="twitter">Twitter</label>
-                    <input type="text" placeholder="https://twitter.com/..user.." name="twitter" id="twitter" class="form-control" [formControlName]="twitter">
+                    <input type="text" placeholder="https://twitter.com/..user.." name="twitter" id="twitter" class="form-control" [formControlName]="'twitter'">
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="linkedin">LinkedIn</label>
-                    <input type="text" placeholder="https://www.linkedin.com/in/..user.." name="linkedin" id="linkedin" class="form-control" [formControlName]="linkedin">
+                    <input type="text" placeholder="https://www.linkedin.com/in/..user.." name="linkedin" id="linkedin" class="form-control" [formControlName]="'linkedin'">
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="xing">Xing</label>
-                    <input type="text" placeholder="https://www.xing.com/profile/..user.." name="xing" id="xing" class="form-control" [formControlName]="xing">
+                    <input type="text" placeholder="https://www.xing.com/profile/..user.." name="xing" id="xing" class="form-control" [formControlName]="'xing'">
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="github">GitHub</label>
-                    <input type="text" placeholder="https://github.com/..user.." name="github" id="github" class="form-control" [formControlName]="github">
+                    <input type="text" placeholder="https://github.com/..user.." name="github" id="github" class="form-control" [formControlName]="'github'">
                 </div>
                 <h4>Other Ways to Connect</h4>
-                <div class="form-group">
-                    <label class="control-label" for="other-one-name">Name</label>
-                    <input type="text" name="other-one-name" id="other-one-name" class="form-control" [formControlName]="other.one.name" ng-required="bio.other.one.link">
-                </div>
-                <div class="form-group" ng-class="{ 'has-error' : bioForm['other-one-link'].$invalid }">
-                    <label class="control-label" for="other-one-link">Link</label>
-                    <input type="text" placeholder="http://domain.com" name="other-one-link" id="other-one-link" class="form-control" [formControlName]="other.one.link" ng-required="bio.other.one.name">
-                </div>
-                <div class="form-group" ng-class="{ 'has-error' : bioForm['other-two-name'].$invalid }">
-                    <label class="control-label" for="other-two-name">Name</label>
-                    <input type="text" name="other-two-name" id="other-two-name" class="form-control" [formControlName]="other.two.name" ng-required="bio.other.two.link">
-                </div>
-                <div class="form-group" ng-class="{ 'has-error' : bioForm['other-two-link'].$invalid }">
-                    <label class="control-label" for="other-two-link">Link</label>
-                    <input type="text" placeholder="http://domain.com" name="other-two-link" id="other-two-link" class="form-control" [formControlName]="other.two.link" ng-required="bio.other.two.name">
-                </div>
-                <button type="submit" class="btn btn-success" ng-disabled="btnDisabled">Save Bio</button>
+                <ng-container [formGroupName]="'other'">
+                    <ng-container [formGroupName]="'one'">
+                        <div class="form-group">
+                            <label class="control-label" for="other-one-name">Name</label>
+                            <input type="text" name="other-one-name" id="other-one-name" class="form-control" [formControlName]="'name'">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="other-one-link">Link</label>
+                            <input type="text" placeholder="http://domain.com" name="other-one-link" id="other-one-link" class="form-control" [formControlName]="'link'">
+                        </div>
+                    </ng-container>
+                    <ng-container [formGroupName]="'two'">
+                        <div class="form-group">
+                            <label class="control-label" for="other-two-name">Name</label>
+                            <input type="text" name="other-two-name" id="other-two-name" class="form-control" [formControlName]="'name'">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="other-two-link">Link</label>
+                            <input type="text" placeholder="http://domain.com" name="other-two-link" id="other-two-link" class="form-control" [formControlName]="'link'">
+                        </div>
+                    </ng-container>
+                </ng-container>
+                <button type="submit" class="btn btn-success" [disabled]="!bioForm.valid">Save Bio</button>
             </form>
         </ng-container>
         <ng-container *ngIf="editBio">

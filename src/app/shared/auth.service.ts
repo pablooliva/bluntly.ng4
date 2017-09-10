@@ -5,7 +5,7 @@ import { AngularFireAuth } from "angularfire2/auth";
 import * as firebase from "firebase/app";
 
 import { AlertsService } from "./alerts/alerts.service";
-import { IBSAlertTypes } from "./alerts/alerts.component";
+import { BSAlertTypes } from "./alerts/alerts.component";
 
 @Injectable()
 export class AuthService {
@@ -19,8 +19,7 @@ export class AuthService {
   public register(email: string, password: string): void {
     this._afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then(response => {
-        console.warn("*** REGISTRATION ***", response);
-        this.setAlert(IBSAlertTypes[IBSAlertTypes.success], true, "Your registration was successful. You may now log in.");
+        this.setAlert(BSAlertTypes.success, true, "Your registration was successful. You may now log in.");
         this._router.navigate(["/users/login"]);
       })
       .catch((error: firebase.FirebaseError) => {
@@ -42,14 +41,13 @@ export class AuthService {
             blntErrorMessage = "Registration failed.";
         }
 
-        this.setAlert(IBSAlertTypes[IBSAlertTypes.danger], false, blntErrorMessage, errorMessage);
+        this.setAlert(BSAlertTypes.danger, false, blntErrorMessage, errorMessage);
       });
   }
 
   public login(email: string, password: string): void {
     this._afAuth.auth.signInWithEmailAndPassword(email, password)
       .then(response => {
-          console.warn("response", response);
           this._user.subscribe(u => {
             this.currentAuth = u;
             this._router.navigate(["/users"]);
@@ -77,7 +75,7 @@ export class AuthService {
             blntErrorMessage = "Log in attempt failed.";
         }
 
-        this.setAlert(IBSAlertTypes[IBSAlertTypes.danger], false, blntErrorMessage, errorMessage);
+        this.setAlert(BSAlertTypes.danger, false, blntErrorMessage, errorMessage);
       });
   }
 
@@ -87,7 +85,7 @@ export class AuthService {
     this._router.navigate(["/"]);
   }
 
-  private setAlert(type: string, persistent: boolean, primaryMsg: string, secondaryMsg?: string): void {
+  private setAlert(type: BSAlertTypes, persistent: boolean, primaryMsg: string, secondaryMsg?: string): void {
     this._alertsService.addAlert({
       type: type,
       messagePrimary: primaryMsg,

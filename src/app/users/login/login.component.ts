@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { AuthService } from "../../shared/auth.service";
-import { IControl } from "../../shared/validation/form-validation-messages.component";
+import { ControlType } from "../../shared/validation/form-validation-messages.component";
 
 @Component({
   selector: "blnt-login",
@@ -22,12 +22,12 @@ export class LoginComponent implements OnInit {
 
     this.controlValidation["email"] = {
       control: this.loginForm.controls.email,
-      type: IControl[IControl.email]
+      type: ControlType[ControlType.email]
     };
 
     this.controlValidation["password"] = {
       control: this.loginForm.controls.password,
-      type: IControl[IControl.password]
+      type: ControlType[ControlType.password]
     };
   }
 

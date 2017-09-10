@@ -1,5 +1,5 @@
 <alert *ngFor="let alert of alerts, let idx = index"
-       [type]="alert.type"
+       [type]="bsAlertTypes[alert.type]"
        dismissible="true"
        (onClosed)="onClosed($event, idx)">
     <strong>{{ alert.messagePrimary }}</strong> {{ alert.messageSecondary }}
