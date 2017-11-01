@@ -13,5 +13,8 @@
             <p *ngIf="controlValidation.control.errors.required" class="help-block error">Password is required.</p>
             <p *ngIf="controlValidation.control.errors.minlength" class="help-block error">Password must be at least 6 characters long.</p>
         </ng-container>
+        <ng-container *ngSwitchCase="'group'">
+            <p *ngIf="controlValidation.control.errors.atLeastOneRequired" class="help-block error">{{ controlValidation.message.groupValidation }}</p>
+        </ng-container>
     </ng-container>
 </ng-container>

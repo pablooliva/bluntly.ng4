@@ -44,8 +44,12 @@
     "zone.js": "^0.8.16"
   },
   "devDependencies": {
+    "@types/angular": "^1.6.36",
+    "@types/core-js": "^0.9.43",
     "@types/jasmine": "2.5.36",
     "@types/node": "^6.0.87",
+    "@types/webpack": "^3.0.14",
+    "@types/webpack-env": "^1.13.2",
     "angular-router-loader": "^0.6.0",
     "angular2-template-loader": "^0.6.0",
     "autoprefixer": "^7.1.2",

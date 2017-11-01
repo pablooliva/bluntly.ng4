@@ -1,19 +1,28 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs/Observable";
 import { AngularFireAuth } from "angularfire2/auth";
 import * as firebase from "firebase/app";
 
 import { AlertsService } from "./alerts/alerts.service";
 import { BSAlertTypes } from "./alerts/alerts.component";
+import { Subject } from "rxjs/Subject";
 
 @Injectable()
 export class AuthService {
-  private _user: Observable<firebase.User>;
-  public currentAuth: Object;
+  public currentUserSubject: Subject<firebase.User>;
+  public currentUser: firebase.User;
 
   constructor(private _afAuth: AngularFireAuth, private _alertsService: AlertsService, private _router: Router) {
-    this._user = this._afAuth.authState;
+    this.currentUserSubject = new Subject();
+    this._afAuth.auth.onAuthStateChanged(user => {
+      this.currentUserSubject.next(user);
+      this.currentUser = user;
+      /*if (user) {
+        this._router.navigate(["/users"]);
+      } else {
+        this._router.navigate(["/"]);
+      }*/
+    });
   }
 
   public register(email: string, password: string): void {
@@ -48,11 +57,8 @@ export class AuthService {
   public login(email: string, password: string): void {
     this._afAuth.auth.signInWithEmailAndPassword(email, password)
       .then(response => {
-          this._user.subscribe(u => {
-            this.currentAuth = u;
-            this._router.navigate(["/users"]);
-          });
-        })
+        this._router.navigate(["/users"]);
+      })
       .catch((error: firebase.FirebaseError) => {
         const errorCode: string = error.code;
         const errorMessage: string = error.message;
@@ -81,7 +87,6 @@ export class AuthService {
 
   public logout(): void {
     this._afAuth.auth.signOut();
-    this.currentAuth = null;
     this._router.navigate(["/"]);
   }
 

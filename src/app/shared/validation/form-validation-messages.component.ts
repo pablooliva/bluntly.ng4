@@ -5,11 +5,13 @@ import { AbstractControl } from "@angular/forms";
 export enum ControlType {
   text,
   email,
-  password
+  password,
+  group
 }
 
 export enum MessageType {
-  unique
+  unique,
+  groupValidation
 }
 
 export interface IControlValidation {
