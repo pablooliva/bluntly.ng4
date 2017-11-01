@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "baseUrl": "",
+        "target": "es5",
+        "module": "es2015",
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "sourceMap": true,
+        "skipLibCheck": true,
+        "noEmit": true,
+        "mapRoot": "",
+        "rootDir": ".",
+        "lib": [
+            "dom",
+            "es2015"
+        ]
+    },
+    "include": [
+        "app/**/*.ts",
+        "lib/**/*.ts",
+        "src/**/*.ts"
+    ],
+    "angularCompilerOptions": {
+        "genDir": ".compiled",
+        "entryModule": "app/app-module#AppModule",
+        "skipMetadataEmit": true
+    }
+}

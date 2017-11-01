@@ -1,0 +1,328 @@
+@import "bs.custom";
+@import "~bootstrap/scss/bootstrap";
+@import "variables";
+
+/*************
+ *
+ * all widths, device independent
+ *
+ *************/
+
+
+
+/*** bootstrap fixes ***/
+
+body.container-fluid {
+  padding: 0;
+}
+.navbar {
+  border-radius:0;
+  background-color: #2196f3;
+}
+.navbar-brand {
+  margin: 0 2rem;
+}
+#navbar ul {
+  margin: 0 2rem 1rem 2rem;
+}
+
+
+/*** non-specfic, document-wide style ***/
+
+@mixin blnt-logo($factor){
+  width:($factor * 3) + rem;
+  height:($factor) + rem;
+}
+
+body {
+  margin-bottom:2rem;
+}
+
+img, video {
+  max-width:100%;
+  height:auto;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  margin-bottom: 1.5rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.blnt-lrg-text {
+  font-size:3rem;
+}
+
+.blnt-md-text {
+  font-size:1.8rem;
+  line-height:1.5;
+  margin:0 0 3rem 0;
+}
+
+.blnt-sm-text {
+  font-size:1.2rem;
+}
+
+.blnt-reg {
+  font-size:1.3rem;
+  color:$contrast-off-white;
+}
+
+.blnt-contrast-off-white {
+  color:$contrast-off-white;
+
+  &:hover {
+    color:$contrast-off-white;
+  }
+}
+
+
+
+/*** document & structure ***/
+
+.blnt-body {
+  background-color:$dark-blue;
+}
+
+.blnt-main-header {
+  background-color:$contrast-white;
+}
+
+.blnt-main {
+  background-color:$contrast-white;
+}
+
+.blnt-main-inner-container {
+  padding:0;
+}
+
+.blnt-row-pad {
+  padding:3rem 0 5rem 0;
+}
+
+.blnt-secondary-row {
+  background-color:$secondary-highlight-light;
+  padding-top:2rem;
+}
+
+.blnt-secondary-bl-row {
+  background-color:$lighter-blue;
+  padding-top:2rem;
+
+  .alert {
+    margin-top:4rem;
+    margin-bottom:-1.2rem;
+  }
+
+  p {
+    color:#000;
+  }
+
+  label {
+    color:#000;
+  }
+}
+
+.blnt-footer-inner {
+  margin-top:3rem;
+}
+
+.blnt-top-pad {
+  margin:2rem 0;
+}
+
+
+
+/*** block elements & skin ***/
+
+.nav-link {
+  color: $contrast-off-white;
+}
+
+.blnt-footer {
+  color:$contrast-off-white;
+}
+
+.blnt-footer-brk {
+  border-top:1px dashed #fff;
+  padding-top:2rem;
+  margin-top:2rem;
+}
+
+.blnt-logo {
+  @include blnt-logo(3);
+}
+
+.blnt-logo-main {
+  display: none;
+  @include blnt-logo(7);
+}
+
+.blnt-logo-footer {
+  @include blnt-logo(3);
+}
+
+.blnt-em-tb {
+  border-radius:1rem;
+  margin:1rem -15px;
+
+  .blnt-primary-highlight & {
+    background-color:$primary-highlight-light;
+  }
+  .blnt-secondary-highlight & {
+    background-color:$secondary-highlight-light;
+  }
+  .blnt-tertiary-highlight & {
+    background-color:$tertiary-highlight-light;
+  }
+  .blnt-quaternary-highlight & {
+    background-color:$quaternary-highlight-light;
+  }
+}
+
+.blnt-em-tb-header {
+  border-top-left-radius:1rem;
+  border-top-right-radius:1rem;
+  padding:1.5rem 2rem;
+  font-size:2.5rem;
+
+  .blnt-primary-highlight & {
+    background-color:$primary-highlight;
+    color:$contrast-white;
+  }
+  .blnt-secondary-highlight & {
+    background-color:$secondary-highlight;
+    color:$contrast-white;
+  }
+  .blnt-tertiary-highlight & {
+    background-color:$tertiary-highlight;
+    color:$contrast-white;
+  }
+  .blnt-quaternary-highlight & {
+    background-color:$quaternary-highlight;
+    color:$contrast-white;
+  }
+}
+
+.blnt-em-tb-header-anchor {
+  color:$contrast-white;
+
+  &:hover {
+    color:$contrast-white;
+    text-decoration:none;
+  }
+}
+
+.blnt-em-tb-content {
+  margin:1rem 0;
+  padding:0.5rem 2rem 2rem 1.5rem;
+}
+
+.blnt-em-tb-content-list {
+  color:$header-color;
+  line-height:1.5;
+}
+
+.blnt-inline-tb {
+  border-radius:1rem;
+  padding:1rem 2rem;
+  margin:2rem 0;
+
+  .blnt-custom-highlight & {
+    background-color:$lighter-blue;
+  }
+
+  form {
+    margin-bottom:1rem;
+  }
+}
+
+.blnt-link-tbl {
+  thead tr th {
+    border:none;
+  }
+
+  .blnt-new-brdr {
+    border-top:1px solid $header-color;
+  }
+
+  td:first-child {
+    width:7rem;
+    text-align:center;
+    font-size:2rem;
+  }
+
+  td:nth-child(2){
+    width:9rem;
+    padding-top:0.9rem;
+  }
+
+  td:nth-child(3){
+    font-size:1.8rem;
+  }
+}
+
+.blnt-inline-list li {
+  display:inline-block;
+  margin: 1rem 0.5rem;
+}
+
+.blnt-social-list-txt-adj {
+  padding-top:1rem;
+  line-height:1;
+}
+
+.blnt-bios-list {
+  margin:0 2rem;
+
+  li:first-child {
+    margin-bottom:1.3rem;
+  }
+}
+
+.blnt-radio-button {
+  display:block;
+  padding:0.5rem 1rem 0.7rem 1rem;
+  margin:0.2rem 0;
+  background-color:$contrast-white;
+  border-radius:0.5rem;
+
+  &:hover {
+    background-color:$secondary-highlight;
+    cursor:pointer;
+  }
+}
+
+.blnt-social-logos {
+  width:3em;
+  height:3em;
+}
+
+input.ng-dirty.ng-invalid, input.ng-touched.ng-invalid {
+  border:1px solid $error-color;
+  border-left:5px solid $error-color;
+}
+
+
+/*************
+ *
+ * device dependent
+ *
+ *************/
+
+@media (min-width: 768px) {
+  #navbar ul {
+    margin: 0;
+  }
+  .blnt-logo-main {
+    display: block;
+  }
+  .blnt-home-bg.blnt-row-pad {
+    padding-bottom:25rem;
+  }
+  .blnt-home-bg {
+    background:url('../images/cartoon.svg') 20% 100% no-repeat #fff;
+  }
+}

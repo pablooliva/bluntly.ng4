@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
-import '../assets/css/styles.css';
+import "../assets/css/font-awesome.css";
+import "../assets/css/styles.scss";
 
 @Component({
-  selector: 'my-app',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "blnt-app",
+  templateUrl: "./app.component.html"
 })
-export class AppComponent { }
+export class AppComponent {
+}

@@ -1,0 +1,18 @@
+<div class="blnt-row-pad">
+    <h1>Log In</h1>
+    <blnt-alert></blnt-alert>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(); needFocus.focus()" novalidate>
+        <div class="form-group">
+            <label class="control-label" for="email">Email</label>
+            <input type="email" name="email" class="form-control" id="email" autocomplete="email" autofocus #needFocus [formControlName]="'email'" />
+            <blnt-validation-msg [controlValidation]="controlValidation['email']"></blnt-validation-msg>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="password">Password</label>
+            <input type="password" name="password" class="form-control" id="password" autocomplete="current-password" [formControlName]="'password'" />
+            <blnt-validation-msg [controlValidation]="controlValidation['password']"></blnt-validation-msg>
+        </div>
+        <button class="btn btn-success" [disabled]="!loginForm.valid">Log In</button>
+    </form>
+    <p class="blnt-top-pad">Not registered? <a [routerLink]="['/users', 'register']">Sign up.</a></p>
+</div>

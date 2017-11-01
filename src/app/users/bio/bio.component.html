@@ -1,0 +1,23 @@
+<div class="blnt-row-pad">
+    <h1>User Bio</h1>
+    <blnt-alert></blnt-alert>
+    <h2>Care to share?</h2>
+    <p>Let those that answer your questions know a little more about you. Create as many bios as you would like. Later, when creating a set of questions you can choose which bio to share.</p>
+    <p><a routerLink="../bioCreate">Create a Bio</a></p>
+    <h3>Existing Bios</h3>
+    <ul>
+        <li *ngFor="let bio of (bios | async)">
+            {{ bio.bioName }} <span>[
+            <ng-container *ngIf="!buttons[bio.$key]">
+                <a routerLink="../bioEdit/{{bio.$key}}">Edit</a> |
+                <button (click)="showDelete($event, bio.$key)">Delete</button>
+            </ng-container>
+            <ng-container *ngIf="buttons[bio.$key]">
+                Confirm delete:
+                <button (click)="hideDelete($event, bio.$key)">No</button>
+                <button (click)="bioDelete($event, bio.$key)">Yes</button>
+            </ng-container>
+            ]</span>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,13 @@
+@import "../../../assets/css/variables.scss";
+
+.help-block {
+  margin-bottom:0;
+}
+
+.help-block:first-child {
+  margin-top:0.3rem;
+}
+
+.error {
+  color:$error-color;
+}
