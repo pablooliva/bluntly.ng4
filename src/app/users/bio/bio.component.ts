@@ -40,16 +40,6 @@ export class BioComponent implements OnInit, OnDestroy {
     }
   }
 
-  public showDelete(event: any, bioId: string): void {
-    event.preventDefault();
-    this.buttons[bioId] = true;
-  }
-
-  public hideDelete(event: any, bioId: string): void {
-    event.preventDefault();
-    this.buttons[bioId] = false;
-  }
-
   public bioDelete(event: any, bioId: string): void {
     event.preventDefault();
     const recordPath: string = this._afUtils.afPathMaker(["bios", this._userID, bioId]);

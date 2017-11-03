@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ReactiveFormsModule } from "@angular/forms";
+import { ClipboardModule } from "ngx-clipboard";
 
 import { UsersRoutingModule } from "./users-routing.module";
 import { SharedModule } from "../shared/shared.module";
@@ -11,6 +12,7 @@ import { BioComponent } from "./bio/bio.component";
 import { BioCreateComponent } from "./bio/create/bio-create.component";
 import { BioEditComponent } from "./bio/edit/bio-edit.component";
 import { BioFormComponent } from "./bio/form/bio-form.component";
+import { AskComponent } from "../questions/questions/ask.component";
 
 @NgModule({
   declarations: [
@@ -20,13 +22,15 @@ import { BioFormComponent } from "./bio/form/bio-form.component";
     BioComponent,
     BioCreateComponent,
     BioEditComponent,
-    BioFormComponent
+    BioFormComponent,
+    AskComponent
   ],
   imports: [
     CommonModule,
     UsersRoutingModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    ClipboardModule
   ]
 })
 export class UsersModule {

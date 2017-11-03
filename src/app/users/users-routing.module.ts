@@ -8,6 +8,7 @@ import { LoginComponent } from "./login/login.component";
 import { BioComponent } from "./bio/bio.component";
 import { BioCreateComponent } from "./bio/create/bio-create.component";
 import { BioEditComponent } from "./bio/edit/bio-edit.component";
+import { AskComponent } from "../questions/questions/ask.component";
 
 const userRoutes: Routes = [
   {path: "", canActivate: [ AlertGuardService ], component: UsersComponent},
@@ -15,7 +16,8 @@ const userRoutes: Routes = [
   {path: "register", canActivate: [ AlertGuardService ], component: RegisterComponent},
   {path: "bio", canActivate: [ AlertGuardService ], component: BioComponent},
   {path: "bioCreate", canActivate: [ AlertGuardService ], component: BioCreateComponent},
-  {path: "bioEdit/:bioId", canActivate: [ AlertGuardService ], component: BioEditComponent}
+  {path: "bioEdit/:bioId", canActivate: [ AlertGuardService ], component: BioEditComponent},
+  {path: "ask", canActivate: [ AlertGuardService ], component: AskComponent}
 ];
 
 @NgModule({

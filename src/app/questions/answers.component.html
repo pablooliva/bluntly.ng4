@@ -1,47 +1,45 @@
-<div class="container-fluid blnt-main-inner-container">
-    <div class="row blnt-row-btm-pad">
-        <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
-            <h1>Answers to Your Questions</h1>
-            <p uib-alert class="alert-warning" ng-hide="hasAuth">
-                <a ui-sref=".login">Log In</a> or <a ui-sref=".register">Sign Up</a> to get some answers.
-            </p>
-            <p ng-hide="hasAuth">I have always been fascinated by the differences in how we see ourselves and how others see us. b.luntly allows you to ask others questions about yourself and then receive blunt and anonymous answers.</p>
-            <div ui-view></div>
-            <section ng-show="hasAuth">
-                <p ng-show="questionSets.length === 0">You have not created any <a ui-sref="ask">question sets</a> yet.</p>
-                <section ng-show="questionSets.length >= 1">
+<div class="row blnt-row-btm-pad">
+    <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+        <h1>Answers to Your Questions</h1>
+        <p uib-alert class="alert-warning" ng-hide="hasAuth">
+            <a ui-sref=".login">Log In</a> or <a ui-sref=".register">Sign Up</a> to get some answers.
+        </p>
+        <p ng-hide="hasAuth">I have always been fascinated by the differences in how we see ourselves and how others see us. b.luntly allows you to ask others questions about yourself and then receive blunt and anonymous answers.</p>
+        <div ui-view></div>
+        <section ng-show="hasAuth">
+            <p ng-show="questionSets.length === 0">You have not created any <a ui-sref="ask">question sets</a> yet.</p>
+            <section ng-show="questionSets.length >= 1">
 
-                    <section ng-show="showSets" ng-hide="!showSets">
-                        <h2>Sets</h2>
-                        <p>These are the question sets that you have created. Select one to see the responses.</p>
-                        <ul>
-                            <li ng-repeat="set in questionSets"><a href="" ng-click="showIndSet(set.$id)">{{set.setName}}</a></li>
-                        </ul>
-                    </section>
-
-                    <section ng-show="!showSets" ng-hide="showSets">
-                        <a href="" ng-click="showSetList()">Back to all sets</a>
-                        <h3>Set: {{ setTitle }}</h3>
-                        <h4>Questions</h4>
-                        <ol>
-                            <li ng-repeat="(key, value) in setQuestions"><a href="" ng-click="showIndQuestion(key)">{{ value }}</a></li>
-                        </ol>
-                    </section>
-
+                <section ng-show="showSets" ng-hide="!showSets">
+                    <h2>Sets</h2>
+                    <p>These are the question sets that you have created. Select one to see the responses.</p>
+                    <ul>
+                        <li ng-repeat="set in questionSets"><a href="" ng-click="showIndSet(set.$id)">{{set.setName}}</a></li>
+                    </ul>
                 </section>
+
+                <section ng-show="!showSets" ng-hide="showSets">
+                    <a href="" ng-click="showSetList()">Back to all sets</a>
+                    <h3>Set: {{ setTitle }}</h3>
+                    <h4>Questions</h4>
+                    <ol>
+                        <li ng-repeat="(key, value) in setQuestions"><a href="" ng-click="showIndQuestion(key)">{{ value }}</a></li>
+                    </ol>
+                </section>
+
             </section>
-        </div>
+        </section>
     </div>
-    <div class="row blnt-secondary-row blnt-row-btm-pad">
-        <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
-            <section ng-show="showIndAns">
-                <h3>Answers</h3>
-                <p ng-hide="indQuestion"><img src="images/loading.gif"></p>
-                <p class="blnt-md-text" ng-show="indQuestion.length <= 1">There are no answers to this question yet.</p>
-                <ul ng-show="indQuestion.length >= 2">
-                    <li class="blnt-md-text" ng-repeat="answers in indQuestion" ng-hide="answers.$id === 'metadata'">{{ answers.answer }}</li>
-                </ul>
-            </section>
-        </div>
+</div>
+<div class="row blnt-secondary-row blnt-row-btm-pad">
+    <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+        <section ng-show="showIndAns">
+            <h3>Answers</h3>
+            <p ng-hide="indQuestion"><img src="images/loading.gif"></p>
+            <p class="blnt-md-text" ng-show="indQuestion.length <= 1">There are no answers to this question yet.</p>
+            <ul ng-show="indQuestion.length >= 2">
+                <li class="blnt-md-text" ng-repeat="answers in indQuestion" ng-hide="answers.$id === 'metadata'">{{ answers.answer }}</li>
+            </ul>
+        </section>
     </div>
 </div>

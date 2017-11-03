@@ -10,11 +10,11 @@
             {{ bio.bioName }} <span>[
             <ng-container *ngIf="!buttons[bio.$key]">
                 <a routerLink="../bioEdit/{{bio.$key}}">Edit</a> |
-                <button (click)="showDelete($event, bio.$key)">Delete</button>
+                <button (click)="buttons[bio.$key] = true">Delete</button>
             </ng-container>
             <ng-container *ngIf="buttons[bio.$key]">
                 Confirm delete:
-                <button (click)="hideDelete($event, bio.$key)">No</button>
+                <button (click)="buttons[bio.$key] = false">No</button>
                 <button (click)="bioDelete($event, bio.$key)">Yes</button>
             </ng-container>
             ]</span>
