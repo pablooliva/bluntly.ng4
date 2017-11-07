@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'blnt-questions',
-  templateUrl: './questions.component.html'
+  selector: "blnt-questions",
+  templateUrl: "./answers.component.html"
 })
 export class QuestionsComponent {
   /*const qRef = firebase.database().ref().child('questions').child($stateParams.user).child($stateParams.qSet).child('setQuestions');

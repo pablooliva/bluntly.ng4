@@ -25,7 +25,8 @@ export class BioComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.buttons = {};
     this._userID = this._authService.currentUser["uid"];
-    this.bios = this._db.list("/bios/" + this._userID);
+    const recordPath: string = this._afUtils.afPathMaker(["bios", this._userID]);
+    this.bios = this._db.list(recordPath);
 
     this._biosSubscription = this.bios.subscribe(records => {
       records.forEach(record => {

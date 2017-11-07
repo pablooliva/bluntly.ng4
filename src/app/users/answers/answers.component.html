@@ -1,0 +1,29 @@
+<div class="blnt-row-pad">
+    <h1>Answers to Your Questions</h1>
+    <p *ngIf="!haveQuestions">You have not created any <a [routerLink]="['/users', 'ask']">question sets</a> yet.</p>
+    <ng-container *ngIf="haveQuestions && !displaySet">
+        <h2>Sets</h2>
+        <p>These are the question sets that you have created. Select one to see the responses.</p>
+        <ol>
+            <li *ngFor="let set of questionSets"><button type="button" (click)="displayQSet(set.$key)">{{ set.setName }}</button></li>
+        </ol>
+    </ng-container>
+    <ng-container *ngIf="displaySet">
+        <h2>Set: {{ displaySet.setName }}</h2>
+        <button type="button" (click)="displaySet = null; questionRef = {}">Close</button>
+        <ol>
+            <li *ngFor="let key of questionKeys">
+                <button type="button" (click)="displayAnswers(key)">{{ displaySet.questions[key] }}</button>
+                <div *ngIf="questionRef[key]">
+                    <button type="button" (click)="questionRef[key] = null">Close</button>
+                    <ng-container *ngIf="haveAnswers">
+                        <ul>
+                            <li *ngFor="let answer of answers">{{ answer["answer"] }}</li>
+                        </ul>
+                    </ng-container>
+                    <ng-container *ngIf="!haveAnswers">Answers are not yet available.</ng-container>
+                </div>
+            </li>
+        </ol>
+    </ng-container>
+</div>

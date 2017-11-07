@@ -3,12 +3,8 @@
 @import "variables";
 
 /*************
- *
  * all widths, device independent
- *
  *************/
-
-
 
 /*** bootstrap fixes ***/
 
@@ -26,6 +22,9 @@ body.container-fluid {
   margin: 0 2rem 1rem 2rem;
 }
 
+.nav-item {
+  margin:0 0.2rem;
+}
 
 /*** non-specfic, document-wide style ***/
 
@@ -77,8 +76,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     color:$contrast-off-white;
   }
 }
-
-
 
 /*** document & structure ***/
 
@@ -132,8 +129,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .blnt-top-pad {
   margin:2rem 0;
 }
-
-
 
 /*** block elements & skin ***/
 
@@ -245,24 +240,27 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-size:0.8rem;
   }
 
-  .blnt-new-brdr {
-    border-top:1px solid $header-color;
-  }
-
   td:first-child {
     width:4.9rem;
     text-align:center;
     font-size:2rem;
+    color:#dddddd;
   }
 
   td:nth-child(2){
-    width:20rem;
     padding-top:1.5rem;
   }
 
   td:nth-child(3){
+    width:20rem;
     font-size:1.2rem;
     padding-top:1.3rem;
+  }
+
+  td:nth-child(4){
+    font-size:1.8rem;
+    text-align:center;
+    width:5rem;
   }
 
   button{
@@ -310,7 +308,6 @@ input.ng-dirty.ng-invalid, input.ng-touched.ng-invalid {
   border:1px solid $error-color;
   border-left:5px solid $error-color;
 }
-
 
 /*************
  *

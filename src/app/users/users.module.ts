@@ -12,7 +12,8 @@ import { BioComponent } from "./bio/bio.component";
 import { BioCreateComponent } from "./bio/create/bio-create.component";
 import { BioEditComponent } from "./bio/edit/bio-edit.component";
 import { BioFormComponent } from "./bio/form/bio-form.component";
-import { AskComponent } from "../questions/questions/ask.component";
+import { AskComponent } from "./questions/ask.component";
+import { AnswersComponent } from "./answers/answers.component";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AskComponent } from "../questions/questions/ask.component";
     BioCreateComponent,
     BioEditComponent,
     BioFormComponent,
-    AskComponent
+    AskComponent,
+    AnswersComponent
   ],
   imports: [
     CommonModule,

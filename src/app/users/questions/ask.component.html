@@ -2,7 +2,7 @@
     <h1>Ask</h1>
     <blnt-alert></blnt-alert>
     <div class="blnt-primary-section">
-        <button *ngIf="!showForm" (click)="showForm = true">Create a New Set</button>
+        <button *ngIf="!showForm" (click)="showForm = true">Create New Questions</button>
         <ng-container *ngIf="showForm">
             <p>Required:</p>
             <ol>
@@ -30,45 +30,46 @@
                     <h4>Questions</h4>
                     <blnt-validation-msg [controlValidation]="controlValidation['group']"></blnt-validation-msg>
                     <div class="form-group">
-                        <label class="control-label" for="question1">Q. 1</label>
-                        <input name="question1" id="question1" class="form-control" [formControlName]="'question1'">
+                        <input name="question1" id="question1" class="form-control" placeholder="1." [formControlName]="'question1'">
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="question2">Q. 2</label>
-                        <input name="question1" id="question2" class="form-control" [formControlName]="'question2'">
+                        <input name="question1" id="question2" class="form-control" placeholder="2." [formControlName]="'question2'">
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="question1">Q. 3</label>
-                        <input name="question1" id="question3" class="form-control" [formControlName]="'question3'">
+                        <input name="question1" id="question3" class="form-control" placeholder="3." [formControlName]="'question3'">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success" [disabled]="!askQForm.valid">Save Set</button> <button type="button" class="btn btn-danger" (click)="showForm = false">Cancel</button>
+                <button type="submit" class="btn btn-success" [disabled]="!askQForm.valid">Save Set</button> <button type="button" class="btn btn-danger" (click)="cancelQSet()">Cancel</button>
             </form>
         </ng-container>
     </div>
-    <div *ngIf="questionSets">
-        <h3>Get Answers</h3>
-        <p class="blnt-mrg-btm-extra">Responses will be anonymous. At least three (3) people will need to respond to the questions in a set before you can see the answers.</p>
-        <h4 class="blnt-mrg-btm-short">Share Your Sets</h4>
+    <div>
+        <h3>Share Your Questions</h3>
+        <p class="blnt-mrg-btm-extra">At least three (3) people will need to respond before you can see the answers. Responses are anonymous.</p>
         <table class="table table-condensed blnt-link-tbl">
             <thead>
             <tr>
-                <th>QR Code</th>
-                <th>Link</th>
+                <th></th>
                 <th>Set Name</th>
+                <th>Link to Questions</th>
+                <th>QR Code</th>
             </tr>
             </thead>
             <tbody>
+            <tr *ngIf="!haveQuestions">
+                <td colspan="4">No sets currently exist.</td>
+            </tr>
             <tr *ngFor="let set of (questionSets | async); let i = index">
-                <td class="blnt-new-brdr">
-                    <a href="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{ shareLinkPre + userId + '/' + set.$key }}"><i class="fa fa-qrcode" aria-hidden="true"></i></a>
+                <td>{{ i + 1 }}.</td>
+                <td>
+                    <a href="{{ shareLinkPre + userId + '/' + set.$key }}">{{ set.setName }}</a>
                 </td>
-                <td class="blnt-new-brdr">
+                <td>
                     <input name="copy-me-data-{{ i }}" class="blnt-link" id="copy-me-data-{{ i }}" value="{{ shareLinkPre + userId + '/' + set.$key }}" #inputTarget>
                     <button class="btn btn-primary btn-sm" id="copy-me-btn-{{ i }}" [ngxClipboard]="inputTarget" (click)="copyLink($event)">Copy link</button>
                 </td>
-                <td class="blnt-new-brdr">
-                    <a href="{{ shareLinkPre + userId + '/' + set.$key }}">{{ set.setName }}</a>
+                <td>
+                    <a href="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{ shareLinkPre + userId + '/' + set.$key }}"><i class="fa fa-qrcode" aria-hidden="true"></i></a>
                 </td>
             </tr>
             </tbody>

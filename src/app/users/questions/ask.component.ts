@@ -1,6 +1,9 @@
-import { Component, ElementRef, OnInit, Renderer2 } from "@angular/core";
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2 } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database";
+import { Subscription } from "rxjs/Subscription";
+import { cloneDeep } from "lodash";
+import { Object } from "core-js";
 
 import { AuthService } from "../../shared/auth.service";
 import { AFUtils } from "../../shared/utils";
@@ -14,7 +17,7 @@ import { ControlType } from "../../shared/validation/form-validation-messages.co
   templateUrl: "./ask.component.html",
   styleUrls: ["./ask.component.scss"]
 })
-export class AskComponent implements OnInit {
+export class AskComponent implements OnInit, OnDestroy {
   public showForm: boolean;
   public askQForm: FormGroup;
   public controlValidation: Object = {};
@@ -22,6 +25,9 @@ export class AskComponent implements OnInit {
   public questionSets: FirebaseListObservable<any[]>;
   public userId: string;
   public shareLinkPre: string;
+  public haveQuestions: boolean;
+
+  private _questionsSubscription: Subscription;
 
   public constructor(
     public fb: FormBuilder,
@@ -34,6 +40,7 @@ export class AskComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
+    this.haveQuestions = false;
     this.userId = this._authService.currentUser["uid"];
 
     const orderBy: string = "setName";
@@ -44,6 +51,13 @@ export class AskComponent implements OnInit {
     this.showForm = false;
     this.bios = this._db.list(biosPath);
     this.questionSets = this._db.list(questionsPath);
+    const qSet: FirebaseListObservable<any[]> = this.questionSets;
+
+    this._questionsSubscription = qSet.subscribe(records => {
+      if (records.length) {
+        this.haveQuestions = true;
+      }
+    });
 
     this.askQForm = this.fb.group({
       setName: ["", Validators.required, Unique.createValidator(this._db, questionsPath, orderBy, null)],
@@ -67,25 +81,52 @@ export class AskComponent implements OnInit {
     };
   }
 
-  public saveQSet(): void {
-    this.questionSets.push(this.askQForm.value)
-      .then(response => {
-        this._alertsService.addAlert({
-          type: BSAlertTypes.success,
-          messagePrimary: `New question set, ${this.askQForm.value.setName}, successfully created.`,
-          persistent: false
-        });
+  public ngOnDestroy(): void {
+    if (this._questionsSubscription) {
+      this._questionsSubscription.unsubscribe();
+    }
+  }
 
-        this.askQForm.reset();
-        this.showForm = false;
+  public saveQSet(): void {
+    const qForm: Object = cloneDeep(this.askQForm.value);
+    qForm["questions"] = {};
+    qForm["active"] = true;
+    qForm["timeCreated"] = Date.now();
+
+    this.questionSets.push(qForm)
+      .then(response => {
+        const qPath: string = this._afUtils.afPathMaker(["questions", this.userId, response.key, "questions"]);
+        const setQuestions: FirebaseListObservable<any[]> = this._db.list(qPath);
+
+        const filteredQuestions: string[] = Object.values(this.askQForm.value.questions).filter(value => value !== "");
+        for (let i: number = 0; i < filteredQuestions.length; i++) {
+          setQuestions.push(filteredQuestions[i])
+            .then(response2 => {
+              if (i === filteredQuestions.length - 1) {
+                this._alertsService.addAlert({
+                  type: BSAlertTypes.success,
+                  messagePrimary: `New question set [ "${this.askQForm.value.setName}" ] successfully created.`,
+                  persistent: false
+                });
+
+                this.askQForm.reset();
+                this.showForm = false;
+              }
+            })
+            .catch(error => {
+              this.questionSets.remove(response.key);
+              this._errorMsg();
+            });
+        }
       })
       .catch(error => {
-        this._alertsService.addAlert({
-          type: BSAlertTypes.danger,
-          messagePrimary: "Please try again. Something went wrong.",
-          persistent: false
-        });
+        this._errorMsg();
       });
+  }
+
+  public cancelQSet(): void {
+    this.showForm = false;
+    this.askQForm.reset();
   }
 
   public copyLink(event: MouseEvent): void {
@@ -100,5 +141,13 @@ export class AskComponent implements OnInit {
       this._renderer.addClass(elem, "btn-primary");
       elem.innerText = "Copy Link";
     }, 3000);
+  }
+
+  private _errorMsg(): void {
+    this._alertsService.addAlert({
+      type: BSAlertTypes.danger,
+      messagePrimary: "Please try again. Something went wrong.",
+      persistent: false
+    });
   }
 }

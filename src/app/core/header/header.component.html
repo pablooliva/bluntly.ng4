@@ -7,10 +7,10 @@
         <div class="navbar-collapse collapse" id="navbar" [collapse]="isCollapsed">
             <ul class="nav navbar-nav" (click)="isCollapsed = !isCollapsed">
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/users', 'ask']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Ask</a>
+                    <a class="nav-link" [routerLink]="['/users', 'ask']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Ask Questions</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="answers" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Answer</a>
+                    <a class="nav-link" [routerLink]="['/users', 'answers']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Get Answers</a>
                 </li>
                 <li class="nav-item" *ngIf="!currentUser">
                     <a class="nav-link" [routerLink]="['/users', 'login']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Log In</a>
