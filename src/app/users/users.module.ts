@@ -14,6 +14,7 @@ import { BioEditComponent } from "./bio/edit/bio-edit.component";
 import { BioFormComponent } from "./bio/form/bio-form.component";
 import { AskComponent } from "./questions/ask.component";
 import { AnswersComponent } from "./answers/answers.component";
+import { ShareComponent } from "./share/share.component";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AnswersComponent } from "./answers/answers.component";
     BioEditComponent,
     BioFormComponent,
     AskComponent,
-    AnswersComponent
+    AnswersComponent,
+    ShareComponent
   ],
   imports: [
     CommonModule,

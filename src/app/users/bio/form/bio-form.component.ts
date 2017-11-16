@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from "angularfire2/database";
@@ -16,11 +16,13 @@ import { BSAlertTypes } from "../../../shared/alerts/alerts.component";
   templateUrl: "./bio-form.component.html",
   styleUrls: [ "./bio-form.component.scss" ]
 })
-export class BioFormComponent implements OnInit, OnDestroy {
+export class BioFormComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() public bioId: string;
+  @ViewChild("needFocus") needFocus: ElementRef;
 
   public bioForm: FormGroup;
   public controlValidation: Object = {};
+  public showOtherConnect: boolean;
 
   private _bio: FirebaseListObservable<any[]>;
   private _existingBio: FirebaseObjectObservable<any[]>;
@@ -38,6 +40,7 @@ export class BioFormComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     const orderBy: string = "bioName";
+    this.showOtherConnect = false;
 
     this._recordPath = this._afUtils.afPathMaker(["bios", this._authService.currentUser["uid"]]);
     this._bio = this._db.list(this._recordPath);
@@ -86,10 +89,19 @@ export class BioFormComponent implements OnInit, OnDestroy {
     };
   }
 
+  public ngAfterViewInit(): void {
+    this.needFocus.nativeElement.focus();
+  }
+
   public ngOnDestroy(): void {
     if (this._existingBioSubscription) {
       this._existingBioSubscription.unsubscribe();
     }
+  }
+
+  public showOther(e: MouseEvent): void {
+    e.preventDefault();
+    this.showOtherConnect = true;
   }
 
   public onSubmit(): void {

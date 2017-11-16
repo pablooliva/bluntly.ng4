@@ -6,24 +6,28 @@
         </button>
         <div class="navbar-collapse collapse" id="navbar" [collapse]="isCollapsed">
             <ul class="nav navbar-nav" (click)="isCollapsed = !isCollapsed">
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/users', 'ask']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Ask Questions</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/users', 'answers']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Get Answers</a>
-                </li>
-                <li class="nav-item" *ngIf="!currentUser">
-                    <a class="nav-link" [routerLink]="['/users', 'login']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Log In</a>
-                </li>
-                <li class="nav-item" *ngIf="!currentUser">
-                    <a class="nav-link" [routerLink]="['/users', 'register']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Sign Up</a>
-                </li>
-                <li class="nav-item" *ngIf="currentUser">
-                    <a class="nav-link" [routerLink]="['/users']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{  currentUser.email }}</a>
-                </li>
-                <li class="nav-item" *ngIf="currentUser">
-                    <a class="nav-link" href="#" (click)="logout()">Logout</a>
-                </li>
+                <ng-container *ngIf="!currentUser">
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/users', 'login']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/users', 'register']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Sign Up</a>
+                    </li>
+                </ng-container>
+                <ng-container *ngIf="currentUser">
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/users', 'ask']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Ask Questions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/users', 'answers']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Get Answers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/users']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">My Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" (click)="logout()">Logout</a>
+                    </li>
+                </ng-container>
             </ul>
         </div>
     </nav>

@@ -1,9 +1,13 @@
 <div class="blnt-row-pad">
-    <h1>Users</h1>
+    <h1 class="blnt-primary-blue">Users <img src="../../assets/images/users.svg" alt="User Profile" class="blnt-h1-img"></h1>
     <blnt-alert></blnt-alert>
-    <ul class="blnt-options">
-        <li><a [routerLink]="['/users', 'ask']">Ask Questions</a> Create sets of questions that can be answered anonymously.</li>
-        <li><a [routerLink]="['/users', 'answers']">Get Answers</a> Answers are available after at least 3 individual people have responded to a set of questions.</li>
-        <li><a [routerLink]="['/users', 'bio']">Share Your Bio</a> Surprise those that answer your questions. Tell them something interesting about yourself. Create separate bios for different audiences. For example, create one for potential employers and another for friends and family.</li>
-    </ul>
+    <div class="blnt-content-group">
+        <h2>Your Options</h2>
+        <ul class="blnt-options fa-ul">
+            <li><a [routerLink]="['/users', 'ask']"><i class="fa-li fa fa-question fa-fw" aria-hidden="true"></i> Ask Questions</a> Create sets of questions that can be answered anonymously.</li>
+            <li><a [routerLink]="['/users', 'answers']"><i class="fa-li fa fa-lightbulb-o fa-fw" aria-hidden="true"></i> Get Answers</a> Answers are available after at least 3 individual people have responded to a set of questions.</li>
+            <li><a [routerLink]="['/users', 'bio']"><i class="fa-li fa fa-retweet fa-fw" aria-hidden="true"></i>
+                Share Your Bio</a> Surprise those that answer your questions. Tell them something interesting about yourself. Create separate bios for different audiences. For example, create one for potential employers and another for friends and family.</li>
+        </ul>
+    </div>
 </div>

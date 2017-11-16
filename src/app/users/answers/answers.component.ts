@@ -7,21 +7,22 @@ import { Subscription } from "rxjs/Subscription";
 
 @Component({
   selector: "blnt-answers",
-  templateUrl: "./answers.component.html"
+  templateUrl: "./answers.component.html",
+  styleUrls: ["./answers.component.scss"]
 })
 export class AnswersComponent implements OnInit, OnDestroy {
   public questionSets: any[];
+  public questionSetsObs: FirebaseListObservable<any[]>;
   public haveQuestions: boolean;
   public displaySet: any;
   public questionKeys: string[];
-  public answers: any[];
-  public haveAnswers: boolean;
+  public answers: Object;
+  public haveAnswers: Object;
   public questionRef: Object;
+  public userId: string;
 
   private _questionsSubscription: Subscription;
-  private _answersSubscription: Subscription;
-
-  public userId: string;
+  private _answersSubscription: Subscription[];
 
   public constructor(
     private _authService: AuthService,
@@ -30,19 +31,22 @@ export class AnswersComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
+    this.answers = {};
     this.questionRef = {};
     this.haveQuestions = false;
-    this.haveAnswers = false;
+    this.haveAnswers = {};
     this.userId = this._authService.currentUser["uid"];
     const questionsPath: string = this._afUtils.afPathMaker(["questions", this.userId]);
-    const questionSets: FirebaseListObservable<any[]> = this._db.list(questionsPath);
+    this.questionSetsObs = this._db.list(questionsPath);
 
-    this._questionsSubscription = questionSets.subscribe(records => {
+    this._questionsSubscription = this.questionSetsObs.subscribe(records => {
       if (records.length) {
         this.haveQuestions = true;
       }
       this.questionSets = records;
     });
+
+    this._answersSubscription = [];
   }
 
   public ngOnDestroy(): void {
@@ -50,7 +54,7 @@ export class AnswersComponent implements OnInit, OnDestroy {
       this._questionsSubscription.unsubscribe();
     }
     if (this._answersSubscription) {
-      this._answersSubscription.unsubscribe();
+      this._answersSubscription.forEach(sub => sub.unsubscribe());
     }
   }
 
@@ -63,13 +67,13 @@ export class AnswersComponent implements OnInit, OnDestroy {
   public displayAnswers(answersId: string): void {
     const answersPath: string = this._afUtils.afPathMaker(["answers", answersId]);
     const answersSet: FirebaseListObservable<any[]> = this._db.list(answersPath);
-
-    this._answersSubscription = answersSet.subscribe(records => {
+    const ansIndSubscription: Subscription = answersSet.subscribe(records => {
       if (records.length) {
-        this.haveAnswers = true;
+        this.haveAnswers[answersId] = true;
       }
-      this.answers = records;
+      this.answers[answersId] = records;
     });
     this.questionRef[answersId] = answersId;
+    this._answersSubscription.push(ansIndSubscription);
   }
 }

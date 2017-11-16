@@ -1,0 +1,30 @@
+<div class="blnt-content-group-secondary">
+    <h3>{{ shareTitle }}</h3>
+    <p class="blnt-mrg-btm-extra">Share the links or QR codes below to get answers. Responses are anonymous and only after every third person responds are answers revealed.</p>
+    <table class="table table-condensed blnt-link-tbl">
+        <thead>
+        <tr>
+            <th>Set Name</th>
+            <th>Link to Questions</th>
+            <th>QR Code</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngIf="!haveQuestions">
+            <td colspan="3">No sets currently exist.</td>
+        </tr>
+        <tr *ngFor="let set of (questionSets | async); let i = index">
+            <td>
+                <a href="{{ shareLinkPre + userId + '/' + set.$key }}">{{ set.setName }}</a>
+            </td>
+            <td>
+                <input name="copy-me-data-{{ i }}" class="form-control blnt-link" id="copy-me-data-{{ i }}" value="{{ shareLinkPre + userId + '/' + set.$key }}" #inputTarget>
+                <button class="btn btn-primary btn-sm" id="copy-me-btn-{{ i }}" [ngxClipboard]="inputTarget" (click)="copyLink($event)">Copy link</button>
+            </td>
+            <td>
+                <a href="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{ shareLinkPre + userId + '/' + set.$key }}"><i class="fa fa-qrcode" aria-hidden="true"></i></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

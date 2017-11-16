@@ -1,0 +1,65 @@
+<div class="blnt-row-pad">
+    <ng-container *ngIf="!successfulSub">
+        <h1 class="blnt-primary-blue">Your Opinion Matters! <img src="../../assets/images/you-can-help.svg" alt="Your opinion matters" class="blnt-h1-img"></h1>
+        <blnt-alert></blnt-alert>
+        <div class="blnt-content-group-green">
+            <h2 class="h3">Can You Help?</h2>
+            <ul class="fa-ul blnt-help-list">
+                <li><i class="fa-li fa fa-thumbs-up" aria-hidden="true"></i> <strong>Please answer these questions honestly.</strong> Someone is counting on your opinion.</li>
+                <li><i class="fa-li fa fa-shield" aria-hidden="true"></i> <strong>Answers are anonymous.</strong> Only after each third person responds will answers be revealed. Plus, there is no identifying information attached to the answers.</li>
+                <li><i class="fa-li fa fa-heart" aria-hidden="true"></i> <strong>Remember the Golden Rule.</strong> One should treat others as one would like to be treated. In simple terms, be nice!</li>
+            </ul>
+        </div>
+        <form [formGroup]="qForm" (ngSubmit)="onSubmit()" (keydown.enter)="$event.preventDefault()" novalidate>
+            <div class="blnt-content-group-secondary blnt-content-group-last"
+                 [ngClass]="{ 'blnt-group-error': qForm.hasError('atLeastOneRequired') && qForm.touched }">
+                <h2 class="h3">Questions</h2>
+                <p *ngIf="!questions">The question is... where are the questions?</p>
+                <ng-container *ngIf="questions">
+                    <div class="blnt-help-text"
+                         [ngClass]="{ 'hidden': qForm.hasError('atLeastOneRequired') && ( qForm.dirty || qForm.touched ) }">* Please answer at least one (1) question</div>
+                    <blnt-validation-msg [controlValidation]="controlValidation['group']" class="post-h2"></blnt-validation-msg>
+                    <div class="form-group" *ngFor="let key of qKeys; index as i;">
+                        <label class="control-label" [for]="key">{{ questions[key] }}</label>
+                        <ng-container *ngIf="i === 0">
+                            <input type="text" [name]="key" [id]="key" class="form-control" autofocus [formControlName]="key">
+                        </ng-container>
+                        <ng-container *ngIf="i !== 0">
+                            <input type="text" [name]="key" [id]="key" class="form-control" [formControlName]="key">
+                        </ng-container>
+                    </div>
+                </ng-container>
+            </div>
+            <button type="submit" class="btn btn-success" [disabled]="!qForm.valid">Save Answers <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
+        </form>
+    </ng-container>
+    <ng-container *ngIf="successfulSub">
+        <h1 class="blnt-primary-blue">Thank You! <img src="../../assets/images/thank-you.svg" alt="Thank you" class="blnt-h1-img"></h1>
+        <div class="blnt-content-group">
+            <h2>You Are Appreciated</h2>
+            <p>Your answers will be consumed vigorously. Thank you for taking the time to respond.</p>
+        </div>
+        <div class="blnt-content-group-green" [ngClass]="{ 'blnt-content-group-last': !hasBio }">
+            <h3>Create Your Own</h3>
+            <p>Want blunt answers about yourself? Create your own set of questions to get honest, anonymous answers.</p>
+            <p><button (click)="anonCreateQuestions()" class="btn btn-success">Create Questions <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button></p>
+        </div>
+        <div class="blnt-content-group-secondary blnt-content-group-last" *ngIf="hasBio">
+            <h3>More About.. <img src="../../assets/images/creator.svg" alt="Interesting individual" class="blnt-sub-section-img"></h3>
+            <p>The questions you answered came from an interesting individual.</p>
+            <p *ngIf="bio.userName">People call me {{ bio.userName }}</p>
+            <p *ngIf="bio.desc">About me: {{ bio.desc }}</p>
+            <p *ngIf="bio.fact">You may not know that... {{ bio.fact }}</p>
+            <h4 class="bltn-social-sect">Connect with Me</h4>
+            <ul *ngIf="bio.facebook || bio.twitter || bio.linkedin || bio.xing || bio.github || bio.other.one.name || bio.other.two.name" class="list-unstyled blnt-inline-list">
+                <li *ngIf="bio.facebook"><a href="{{ bio.facebook }}"><img class="blnt-social-logos" alt="Facebook" src="../../assets/images/facebook-logo.svg"></a></li>
+                <li *ngIf="bio.twitter"><a href="{{ bio.twitter }}"><img class="blnt-social-logos" alt="Twitter" src="../../assets/images/twitter-logo.svg"></a></li>
+                <li *ngIf="bio.linkedin"><a href="{{ bio.linkedin }}"><img class="blnt-social-logos" alt="LinkedIn" src="../../assets/images/linkedin-logo.svg"></a></li>
+                <li *ngIf="bio.xing"><a href="{{ bio.xing }}"><img class="blnt-social-logos" alt="Xing" src="../../assets/images/xing-logo.svg"></a></li>
+                <li *ngIf="bio.github"><a href="{{ bio.github }}"><img class="blnt-social-logos" alt="GitHub" src="../../assets/images/github-logo.svg"></a></li>
+                <li *ngIf="bio.other.one.name"><a class="blnt-lrg-text" href="{{ bio.other.one.link }}">{{ bio.other.one.name }}</a></li>
+                <li *ngIf="bio.other.two.name"><a class="blnt-lrg-text" href="{{ bio.other.two.link }}">{{ bio.other.two.name }}</a></li>
+            </ul>
+        </div>
+    </ng-container>
+</div>

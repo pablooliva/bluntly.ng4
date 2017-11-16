@@ -9,6 +9,7 @@ const appRoutes: Routes = [
   {path: "", pathMatch: "full", canActivate: [ AlertGuardService ], component: HomeComponent},
   {path: "not-found", canActivate: [ AlertGuardService ], component: NotFoundComponent},
   {path: "users", loadChildren: "./users/users.module#UsersModule"},
+  {path: "q/:user/:qid", loadChildren: "./questions/questions.module#QuestionsModule"},
   {path: "**", redirectTo: "not-found"}
 ];
 

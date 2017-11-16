@@ -1,72 +1,150 @@
 <div class="blnt-bio-container">
-    <form [formGroup]="bioForm" (ngSubmit)="onSubmit()" novalidate>
-        <div class="form-group">
-            <label class="control-label h4" for="bio-name">Bio name</label>
-            <input type="text" name="bio-name" id="bio-name" class="form-control" [formControlName]="'bioName'">
+    <form [formGroup]="bioForm" (ngSubmit)="onSubmit(); needFocus.focus()" (keydown.enter)="$event.preventDefault()" novalidate>
+        <div class="blnt-form-group">
+            <h4>Bio name</h4>
+            <label class="control-label" for="bio-name">Name your bio</label>
+            <input type="text" name="bio-name" id="bio-name" class="form-control" autofocus #needFocus [formControlName]="'bioName'">
+            <div class="blnt-help-text"
+                 [ngClass]="{ 'hidden':
+                    bioForm.get('bioName').hasError('required')
+                    && ( bioForm.get('bioName').dirty || bioForm.get('bioName').touched )
+                 }">* Required</div>
             <blnt-validation-msg [controlValidation]="controlValidation['text']"></blnt-validation-msg>
         </div>
-        <div [formGroupName]="'bioSubForm'">
+        <div class="blnt-form-group-last"
+            [ngClass]="{ 'blnt-group-error':
+                bioForm.get('bioSubForm').hasError('atLeastOneRequired')
+                && bioForm.get('bioSubForm').touched
+            }"
+            [formGroupName]="'bioSubForm'">
             <h4>Bio details</h4>
-            <blnt-validation-msg [controlValidation]="controlValidation['group']" class="post-h4"></blnt-validation-msg>
+            <div class="blnt-help-text"
+                 [ngClass]="{ 'hidden':
+                    bioForm.get('bioSubForm').hasError('atLeastOneRequired')
+                    && ( bioForm.get('bioSubForm').dirty || bioForm.get('bioSubForm').touched )
+                 }">* At least one (1) detail below required</div>
+            <blnt-validation-msg [controlValidation]="controlValidation['group']" class="blnt-post-h4"></blnt-validation-msg>
             <div class="form-group">
                 <label class="control-label" for="user-name">Your name</label>
-                <input type="text" name="user-name" id="user-name" class="form-control" [formControlName]="'userName'">
+                <input type="text" name="user-name" id="user-name" class="form-control"
+                    [ngClass]="{ 'blnt-group-error-element':
+                        bioForm.get('bioSubForm').hasError('atLeastOneRequired')
+                        && bioForm.get('bioSubForm').touched
+                    }"
+                    [formControlName]="'userName'">
             </div>
             <div class="form-group">
-                <label class="control-label" for="fact">Something people may not know about you, something surprising</label>
-                <input type="text" name="fact" id="fact" class="form-control" [formControlName]="'fact'">
+                <label class="control-label" for="fact">Share something surprising that people may not know about you</label>
+                <textarea name="fact" id="fact" class="form-control"
+                          [ngClass]="{ 'blnt-group-error-element':
+                        bioForm.get('bioSubForm').hasError('atLeastOneRequired')
+                        && bioForm.get('bioSubForm').touched
+                    }"
+                          [formControlName]="'fact'"></textarea>
             </div>
             <div class="form-group">
                 <label class="control-label" for="bio-desc">A short description about yourself</label>
-                <textarea name="bio-desc" id="bio-desc" class="form-control" [formControlName]="'desc'"></textarea>
+                <textarea name="bio-desc" id="bio-desc" class="form-control"
+                    [ngClass]="{ 'blnt-group-error-element':
+                        bioForm.get('bioSubForm').hasError('atLeastOneRequired')
+                        && bioForm.get('bioSubForm').touched
+                    }"
+                    [formControlName]="'desc'"></textarea>
             </div>
             <h6>Popular Ways to Connect</h6>
-            <ol>
+            <ul class="blnt-bio-form-social">
                 <li class="form-group">
-                    <label class="control-label" for="facebook">Facebook</label>
-                    <input type="text" placeholder="https://www.facebook.com/..user.." name="facebook" id="facebook" class="form-control" [formControlName]="'facebook'">
-                </li>
-                <li class="form-group">
-                    <label class="control-label" for="twitter">Twitter</label>
-                    <input type="text" placeholder="https://twitter.com/..user.." name="twitter" id="twitter" class="form-control" [formControlName]="'twitter'">
-                </li>
-                <li class="form-group">
-                    <label class="control-label" for="linkedin">LinkedIn</label>
-                    <input type="text" placeholder="https://www.linkedin.com/in/..user.." name="linkedin" id="linkedin" class="form-control" [formControlName]="'linkedin'">
+                    <label class="control-label" for="facebook"><img src="../../../../../src/assets/images/facebook-logo.svg" alt="Facebook" title="Facebook" class="blnt-social-logos"></label>
+                    <input type="text" placeholder="https://www.facebook.com/..user.." name="facebook" id="facebook" class="form-control"
+                        [ngClass]="{ 'blnt-group-error-element':
+                            bioForm.get('bioSubForm').hasError('atLeastOneRequired')
+                            && bioForm.get('bioSubForm').touched
+                        }"
+                        [formControlName]="'facebook'">
                 </li>
                 <li class="form-group">
-                    <label class="control-label" for="xing">Xing</label>
-                    <input type="text" placeholder="https://www.xing.com/profile/..user.." name="xing" id="xing" class="form-control" [formControlName]="'xing'">
+                    <label class="control-label" for="twitter"><img src="../../../../../src/assets/images/twitter-logo.svg" alt="Twitter" title="Twitter" class="blnt-social-logos"></label>
+                    <input type="text" placeholder="https://twitter.com/..user.." name="twitter" id="twitter" class="form-control"
+                        [ngClass]="{ 'blnt-group-error-element':
+                            bioForm.get('bioSubForm').hasError('atLeastOneRequired')
+                            && bioForm.get('bioSubForm').touched
+                        }"
+                        [formControlName]="'twitter'">
                 </li>
                 <li class="form-group">
-                    <label class="control-label" for="github">GitHub</label>
-                    <input type="text" placeholder="https://github.com/..user.." name="github" id="github" class="form-control" [formControlName]="'github'">
+                    <label class="control-label" for="linkedin"><img src="../../../../../src/assets/images/linkedin-logo.svg" alt="LinkedIn" title="LinkedIn" class="blnt-social-logos"></label>
+                    <input type="text" placeholder="https://www.linkedin.com/in/..user.." name="linkedin" id="linkedin" class="form-control"
+                        [ngClass]="{ 'blnt-group-error-element':
+                            bioForm.get('bioSubForm').hasError('atLeastOneRequired')
+                            && bioForm.get('bioSubForm').touched
+                        }"
+                        [formControlName]="'linkedin'">
                 </li>
-            </ol>
-            <h6>Other Ways to Connect</h6>
-            <ol [formGroupName]="'other'">
-                <li [formGroupName]="'one'">
-                    <div class="form-group">
-                        <label class="control-label" for="other-one-name">Name to identify link</label>
-                        <input type="text" name="other-one-name" id="other-one-name" class="form-control" [formControlName]="'name'">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="other-one-link">Link</label>
-                        <input type="text" placeholder="http://domain.com" name="other-one-link" id="other-one-link" class="form-control" [formControlName]="'link'">
-                    </div>
+        <li class="form-group">
+                    <label class="control-label" for="xing"><img src="../../../../../src/assets/images/xing-logo.svg" alt="Xing" title="Xing" class="blnt-social-logos"></label>
+                    <input type="text" placeholder="https://www.xing.com/profile/..user.." name="xing" id="xing" class="form-control"
+                        [ngClass]="{ 'blnt-group-error-element':
+                            bioForm.get('bioSubForm').hasError('atLeastOneRequired')
+                            && bioForm.get('bioSubForm').touched
+                        }"
+                        [formControlName]="'xing'">
                 </li>
-                <li [formGroupName]="'two'">
-                    <div class="form-group">
-                        <label class="control-label" for="other-two-name">Name to identify link</label>
-                        <input type="text" name="other-two-name" id="other-two-name" class="form-control" [formControlName]="'name'">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="other-two-link">Link</label>
-                        <input type="text" placeholder="http://domain.com" name="other-two-link" id="other-two-link" class="form-control" [formControlName]="'link'">
-                    </div>
+                <li class="form-group">
+                    <label class="control-label" for="github"><img src="../../../../../src/assets/images/github-logo.svg" alt="GitHub" title="GitHub" class="blnt-social-logos"></label>
+                    <input type="text" placeholder="https://github.com/..user.." name="github" id="github" class="form-control"
+                        [ngClass]="{ 'blnt-group-error-element':
+                            bioForm.get('bioSubForm').hasError('atLeastOneRequired')
+                            && bioForm.get('bioSubForm').touched
+                        }"
+                        [formControlName]="'github'">
                 </li>
-            </ol>
+            </ul>
+            <h6><button class="blnt-extra-margin" (click)="showOther($event)" *ngIf="!showOtherConnect"><i class="fa fa-plus" aria-hidden="true"></i></button> Other Ways to Connect</h6>
+            <ng-container *ngIf="showOtherConnect">
+                <ol [formGroupName]="'other'">
+                    <li [formGroupName]="'one'">
+                        <div class="form-group blnt-half-size">
+                            <label class="control-label" for="other-one-name">Link label</label>
+                            <input type="text" name="other-one-name" id="other-one-name" class="form-control"
+                                [ngClass]="{ 'blnt-group-error-element':
+                                    bioForm.get('bioSubForm').hasError('atLeastOneRequired')
+                                    && bioForm.get('bioSubForm').touched
+                                }"
+                                [formControlName]="'name'">
+                        </div>
+                        <div class="form-group blnt-half-size">
+                            <label class="control-label" for="other-one-link">Link</label>
+                            <input type="text" placeholder="http://domain.com" name="other-one-link" id="other-one-link" class="form-control"
+                                [ngClass]="{ 'blnt-group-error-element':
+                                    bioForm.get('bioSubForm').hasError('atLeastOneRequired')
+                                    && bioForm.get('bioSubForm').touched
+                                }"
+                                [formControlName]="'link'">
+                        </div>
+                    </li>
+                    <li [formGroupName]="'two'">
+                        <div class="form-group blnt-half-size">
+                            <label class="control-label" for="other-two-name">Link label</label>
+                            <input type="text" name="other-two-name" id="other-two-name" class="form-control"
+                                [ngClass]="{ 'blnt-group-error-element':
+                                    bioForm.get('bioSubForm').hasError('atLeastOneRequired')
+                                    && bioForm.get('bioSubForm').touched
+                                }"
+                                [formControlName]="'name'">
+                        </div>
+                        <div class="form-group blnt-half-size">
+                            <label class="control-label" for="other-two-link">Link</label>
+                            <input type="text" placeholder="http://domain.com" name="other-two-link" id="other-two-link" class="form-control"
+                                [ngClass]="{ 'blnt-group-error-element':
+                                    bioForm.get('bioSubForm').hasError('atLeastOneRequired')
+                                    && bioForm.get('bioSubForm').touched
+                                }"
+                                [formControlName]="'link'">
+                        </div>
+                    </li>
+                </ol>
+            </ng-container>
         </div>
-        <button type="submit" class="btn btn-success" [disabled]="!bioForm.valid">Save Bio</button>
+        <button type="submit" class="btn btn-success" [disabled]="!bioForm.valid">{{ bioId ? "Save Edit" : "Create Bio" }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
     </form>
 </div>

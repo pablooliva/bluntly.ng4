@@ -13,7 +13,7 @@ body.container-fluid {
 }
 .navbar {
   border-radius:0;
-  background-color: #2196f3;
+  background-color:$primary-blue;
 }
 .navbar-brand {
   margin: 0 2rem;
@@ -33,17 +33,13 @@ body.container-fluid {
   height:($factor) + rem;
 }
 
-body {
-  margin-bottom:2rem;
-}
-
 img, video {
   max-width:100%;
   height:auto;
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-  margin-bottom: 1.5rem;
+  margin-bottom:1.5rem;
 }
 
 .hidden {
@@ -51,7 +47,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 .blnt-lrg-text {
-  font-size:3rem;
+  font-size:1.5rem;
 }
 
 .blnt-md-text {
@@ -61,7 +57,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 .blnt-sm-text {
-  font-size:1.2rem;
+  font-size:0.9rem;
 }
 
 .blnt-reg {
@@ -75,6 +71,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   &:hover {
     color:$contrast-off-white;
   }
+}
+
+.blnt-p-pre-h {
+  margin-bottom:1.5rem;
 }
 
 /*** document & structure ***/
@@ -96,7 +96,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 .blnt-row-pad {
-  padding:3rem 0 5rem 0;
+  padding:3rem 0;
 }
 
 .blnt-secondary-row {
@@ -132,8 +132,52 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 /*** block elements & skin ***/
 
+footer {
+  background-color:$dark-blue;
+}
+
+button {
+  cursor:pointer;
+
+  &:disabled {
+    cursor:auto;
+  }
+}
+
+.blnt-primary-blue {
+  color:$primary-blue;
+}
+
+.blnt-primary-green {
+  color:$primary-green;
+}
+
+.blnt-primary-purple {
+  color:$secondary-purple;
+}
+
+.blnt-h1-img {
+  width:9rem;
+  height:9rem;
+  z-index:1;
+  position:absolute;
+  top:1.7rem;
+  right:3rem;
+}
+
+.blnt-h1-img-sm {
+  @extend .blnt-h1-img;
+  width:7rem;
+  height:8rem;
+}
+
 .nav-link {
-  color: $contrast-off-white;
+  color:$contrast-off-white;
+
+  &:hover {
+    color:$contrast-off-white;
+    text-decoration:underline;
+  }
 }
 
 .blnt-footer {
@@ -156,7 +200,29 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 .blnt-logo-footer {
-  @include blnt-logo(3);
+  @include blnt-logo(2);
+}
+
+.blnt-content-group {
+  border-left:5px solid $primary-blue;
+  padding:2rem;
+  background:$lighter-blue;
+}
+
+.blnt-content-group-green {
+  border-left:5px solid $primary-green;
+  padding:2rem;
+  background:$primary-green-light;
+}
+
+.blnt-content-group-secondary {
+  border-left:5px solid $secondary-purple;
+  padding:2rem;
+  background:$secondary-purple-light;
+}
+
+.blnt-content-group-last {
+  margin-bottom:2rem;
 }
 
 .blnt-em-tb {
@@ -221,9 +287,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 .blnt-inline-tb {
-  border-radius:1rem;
+  border-radius:0.5rem;
   padding:1rem;
-  margin:2rem 0;
+  margin:0.5rem 0;
+  overflow:auto;
 
   .blnt-custom-highlight & {
     background-color:$lighter-blue;
@@ -238,44 +305,34 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   thead tr th {
     border:none;
     font-size:0.8rem;
+    font-weight:normal;
+    padding:0.75rem 0;
+  }
+
+  td {
+    padding:0.75rem 1rem 0.75rem 0;
+    border-top:1px solid #e4defd;
   }
 
   td:first-child {
-    width:4.9rem;
-    text-align:center;
-    font-size:2rem;
-    color:#dddddd;
-  }
-
-  td:nth-child(2){
-    padding-top:1.5rem;
   }
 
   td:nth-child(3){
-    width:20rem;
-    font-size:1.2rem;
-    padding-top:1.3rem;
-  }
-
-  td:nth-child(4){
-    font-size:1.8rem;
-    text-align:center;
-    width:5rem;
+    font-size:1.6rem;
+    line-height:1rem;
   }
 
   button{
     margin-top: -0.2rem;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.75rem;
+    line-height: 1.2rem;
   }
 }
 
 .blnt-inline-list li {
   display:inline-block;
-  margin: 1rem 0.5rem;
-}
-
-.blnt-social-list-txt-adj {
-  padding-top:1rem;
-  line-height:1;
+  margin:0 0.7rem 0 0;
 }
 
 .blnt-bios-list {
@@ -289,24 +346,83 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .blnt-radio-button {
   display:block;
   padding:0.5rem 1rem 0.7rem 1rem;
-  margin:0.2rem 0;
-  background-color:$contrast-white;
-  border-radius:0.5rem;
+  margin:0.2rem 0.3rem 0.2rem 0;
+  background-color:$dark-blue;
+  color:#fff;
+  border-radius:0.3rem;
+  width:48%;
+  float:left;
 
   &:hover {
-    background-color:$secondary-highlight;
+    background-color:$primary-blue;
+    color:#fff;
     cursor:pointer;
+  }
+
+  input[type="radio"] {
+    margin:0.4rem 0.4rem 0 0;
   }
 }
 
 .blnt-social-logos {
-  width:3em;
-  height:3em;
+  width:2rem;
+  height:2rem;
+}
+
+.blnt-help-text {
+  margin-top:0.3rem;
+  color:$supplemental-info-color;
+}
+
+.blnt-form-group {
+  padding:1.3rem 1.5rem;
+  border-left:5px solid $form-group-color;
+  background-color:$form-group-background-color;
+  overflow:auto;
+}
+
+.blnt-form-group-last {
+  @extend .blnt-form-group;
+  margin-bottom:2rem;
+}
+
+.blnt-button-to-link {
+  border:none;
+  background:transparent;
+  margin:0 0.2rem;
+  padding:0;
+  color:$anchor;
+  outline:none;
+
+  &:hover {
+    text-decoration:underline;
+    color:$anchor-hover;
+  }
+
+  &:focus {
+    outline:none;
+  }
 }
 
 input.ng-dirty.ng-invalid, input.ng-touched.ng-invalid {
   border:1px solid $error-color;
   border-left:5px solid $error-color;
+}
+
+.blnt-group-error {
+  border-left:5px solid $error-color;
+  background-color:$error-background-color;
+}
+
+.blnt-group-error-element {
+  border:1px solid $error-color;
+  border-left:5px solid $error-color;
+
+  &:focus {
+    border:1px solid $error-color;
+    border-left:5px solid $error-color;
+    outline:none;
+  }
 }
 
 /*************

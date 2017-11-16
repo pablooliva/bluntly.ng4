@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { AuthService } from "../../shared/auth.service";
@@ -8,7 +8,9 @@ import { ControlType } from "../../shared/validation/form-validation-messages.co
   selector: "blnt-login",
   templateUrl: "./login.component.html"
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
+  @ViewChild("needFocus") needFocus: ElementRef;
+
   public loginForm: FormGroup;
   public controlValidation: Object = {};
 
@@ -29,6 +31,10 @@ export class LoginComponent implements OnInit {
       control: this.loginForm.controls.password,
       type: ControlType[ControlType.password]
     };
+  }
+
+  public ngAfterViewInit(): void {
+    this.needFocus.nativeElement.focus();
   }
 
   public onSubmit(): void {

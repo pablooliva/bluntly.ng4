@@ -1,0 +1,27 @@
+.blnt-bios {
+  li {
+    margin-bottom:1rem;
+  }
+}
+
+.blnt-btn-adjust {
+  border:1px;
+}
+
+.blnt-btn-pad {
+  margin:0 0.5rem;
+}
+
+.blnt-bio-btn {
+  padding:0.25rem 0.5rem;
+  font-size:1.1rem;
+  line-height:1.5;
+  border-radius:0.2rem;
+  background-color:#f8f9fa;
+  border-color:#f8f9fa;
+
+  &:hover {
+    text-decoration:none;
+    background-color:#ffffff;
+  }
+}

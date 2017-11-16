@@ -1,78 +1,67 @@
 <div class="blnt-row-pad">
-    <h1>Ask</h1>
+    <h1 class="blnt-primary-blue">Ask <img src="../../../assets/images/ask-questions.svg" alt="Ask Questions" class="blnt-h1-img"></h1>
     <blnt-alert></blnt-alert>
-    <div class="blnt-primary-section">
-        <button *ngIf="!showForm" (click)="showForm = true">Create New Questions</button>
-        <ng-container *ngIf="showForm">
-            <p>Required:</p>
-            <ol>
-                <li>Set name</li>
-                <li>Ask at least one (1) question</li>
-            </ol>
-            <form [formGroup]="askQForm" (ngSubmit)="saveQSet()" novalidate>
-                <div class="blnt-custom-highlight">
-                    <div class="blnt-inline-tb">
-                        <h4>Share Yourself</h4>
-                        <p>After someone answers your questions, you can choose to display a brief "bio" with links to connect with you.</p>
-                        <p><ng-container *ngIf="bios">Choose a Bio or </ng-container><a routerLink="/users/bio">Create/Edit a Bio</a>.</p>
-                        <label class="blnt-radio-button" *ngFor="let bio of (bios | async)">
-                            <input type="radio" name="bio" id="bio-{{i}}" value="{{ bio.$key }}" formControlName="bio">
-                            {{ bio.bioName }}
-                        </label>
-                    </div>
-                </div>
+    <ng-container *ngIf="!showForm">
+        <div class="blnt-content-group">
+            <h2>Create New Questions</h2>
+            <p>Create a new set of questions to share.</p>
+            <button class="btn btn-success" (click)="showForm = true">New Questions <i class="fa fa-plus fa-fw" aria-hidden="true"></i></button>
+        </div>
+        <blnt-share [shareTitle]="'Share Your Questions'" [questionSets]="questionSets"></blnt-share>
+    </ng-container>
+    <ng-container *ngIf="showForm">
+        <form [formGroup]="askQForm" (ngSubmit)="saveQSet(); needFocus.focus()" (keydown.enter)="$event.preventDefault()" novalidate>
+            <div class="blnt-form-group">
+                <h2>New Questions</h2>
                 <div class="form-group">
-                    <label class="control-label h4" for="set-name">Set name</label>
-                    <input type="text" name="set-name" id="set-name" class="form-control" [formControlName]="'setName'">
+                    <h4>Set name</h4>
+                    <label class="control-label" for="set-name">Label or title for this set of questions</label>
+                    <input type="text" name="set-name" id="set-name" class="form-control" autofocus #needFocus [formControlName]="'setName'">
+                    <div class="blnt-help-text"
+                         [ngClass]="{ 'hidden':
+                            ( askQForm.get('setName').hasError('required') || askQForm.get('setName').hasError('unique') )
+                            && ( askQForm.get('setName').dirty || askQForm.get('setName').touched )
+                         }">* Required</div>
                     <blnt-validation-msg [controlValidation]="controlValidation['text']"></blnt-validation-msg>
                 </div>
-                <div [formGroupName]="'questions'">
-                    <h4>Questions</h4>
-                    <blnt-validation-msg [controlValidation]="controlValidation['group']"></blnt-validation-msg>
-                    <div class="form-group">
-                        <input name="question1" id="question1" class="form-control" placeholder="1." [formControlName]="'question1'">
-                    </div>
-                    <div class="form-group">
-                        <input name="question1" id="question2" class="form-control" placeholder="2." [formControlName]="'question2'">
-                    </div>
-                    <div class="form-group">
-                        <input name="question1" id="question3" class="form-control" placeholder="3." [formControlName]="'question3'">
-                    </div>
+            </div>
+            <div class="blnt-form-group"
+                [ngClass]="{ 'blnt-group-error':
+                    askQForm.get('questions').hasError('atLeastOneRequired')
+                    && askQForm.get('questions').touched
+                }"
+                [formGroupName]="'questions'">
+                <h4>Questions</h4>
+                <div class="blnt-help-text"
+                     [ngClass]="{ 'hidden':
+                        askQForm.get('questions').hasError('atLeastOneRequired')
+                        && ( askQForm.get('questions').dirty || askQForm.get('questions').touched )
+                     }">* At least one (1) question below required</div>
+                <blnt-validation-msg [controlValidation]="controlValidation['group']" class="blnt-post-h4"></blnt-validation-msg>
+                <div class="form-group">
+                    <label class="control-label" for="question1">Question 1</label>
+                    <input name="question1" id="question1" class="form-control" [formControlName]="'question1'">
                 </div>
-                <button type="submit" class="btn btn-success" [disabled]="!askQForm.valid">Save Set</button> <button type="button" class="btn btn-danger" (click)="cancelQSet()">Cancel</button>
-            </form>
-        </ng-container>
-    </div>
-    <div>
-        <h3>Share Your Questions</h3>
-        <p class="blnt-mrg-btm-extra">At least three (3) people will need to respond before you can see the answers. Responses are anonymous.</p>
-        <table class="table table-condensed blnt-link-tbl">
-            <thead>
-            <tr>
-                <th></th>
-                <th>Set Name</th>
-                <th>Link to Questions</th>
-                <th>QR Code</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngIf="!haveQuestions">
-                <td colspan="4">No sets currently exist.</td>
-            </tr>
-            <tr *ngFor="let set of (questionSets | async); let i = index">
-                <td>{{ i + 1 }}.</td>
-                <td>
-                    <a href="{{ shareLinkPre + userId + '/' + set.$key }}">{{ set.setName }}</a>
-                </td>
-                <td>
-                    <input name="copy-me-data-{{ i }}" class="blnt-link" id="copy-me-data-{{ i }}" value="{{ shareLinkPre + userId + '/' + set.$key }}" #inputTarget>
-                    <button class="btn btn-primary btn-sm" id="copy-me-btn-{{ i }}" [ngxClipboard]="inputTarget" (click)="copyLink($event)">Copy link</button>
-                </td>
-                <td>
-                    <a href="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{ shareLinkPre + userId + '/' + set.$key }}"><i class="fa fa-qrcode" aria-hidden="true"></i></a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+                <div class="form-group">
+                    <label class="control-label" for="question2">Question 2</label>
+                    <input name="question2" id="question2" class="form-control" [formControlName]="'question2'">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="question3">Question 3</label>
+                    <input name="question3" id="question3" class="form-control" [formControlName]="'question3'">
+                </div>
+            </div>
+            <div class="blnt-form-group-last">
+                <h4>Tell 'em About Yourself</h4>
+                <p>After someone is finished answering your questions, you can choose to display a brief "bio" and links to connect with you.</p>
+                <p><ng-container *ngIf="bios">Choose a Bio or </ng-container><a routerLink="/users/bio">Create/Edit a Bio</a>.</p>
+                <label class="blnt-radio-button" *ngFor="let bio of (bios | async)">
+                    <input type="radio" name="bio" id="bio-{{i}}" value="{{ bio.$key }}" formControlName="bio">
+                    {{ bio.bioName }}
+                </label>
+            </div>
+            <button type="submit" class="btn btn-success" [disabled]="!askQForm.valid">Save Set <i aria-hidden="true" class="fa fa-arrow-circle-right"></i></button> <button type="button" class="btn btn-danger" (click)="cancelQSet()">Cancel <i class="fa fa-ban" aria-hidden="true"></i>
+        </button>
+        </form>
+    </ng-container>
 </div>

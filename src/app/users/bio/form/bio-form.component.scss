@@ -1,4 +1,33 @@
-.post-h4 {
+.blnt-post-h4 {
   display: block;
   margin-bottom: 1.5rem;
+}
+
+.blnt-extra-margin {
+  margin-right:0.3rem;
+}
+
+ul.blnt-bio-form-social {
+  list-style-type:none;
+  padding-left:0.5rem;
+  margin-bottom:2rem;
+
+  label {
+    display:block;
+    float:left;
+    margin:0.2rem 0.5rem 0 0;
+  }
+
+  input[type="text"] {
+    width:90%;
+  }
+}
+
+ol {
+  overflow:auto;
+}
+
+.blnt-half-size {
+  width:49%;
+  display:inline-block;
 }

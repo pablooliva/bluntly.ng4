@@ -7,11 +7,13 @@ import { Subscription } from "rxjs/Subscription";
 
 @Component({
   selector: "blnt-bio",
-  templateUrl: "./bio.component.html"
+  templateUrl: "./bio.component.html",
+  styleUrls: ["./bio.component.scss"]
 })
 export class BioComponent implements OnInit, OnDestroy {
   public bios: FirebaseListObservable<any[]>;
   public buttons: Object;
+  public haveBios: boolean;
 
   private _userID: string;
   private _biosSubscription: Subscription;
@@ -23,12 +25,16 @@ export class BioComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
+    this.haveBios = false;
     this.buttons = {};
     this._userID = this._authService.currentUser["uid"];
     const recordPath: string = this._afUtils.afPathMaker(["bios", this._userID]);
     this.bios = this._db.list(recordPath);
 
     this._biosSubscription = this.bios.subscribe(records => {
+      if (records.length) {
+        this.haveBios = true;
+      }
       records.forEach(record => {
         this.buttons[record.$key] = false;
       });

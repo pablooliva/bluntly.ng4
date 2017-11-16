@@ -1,23 +1,24 @@
 <div class="blnt-row-pad">
-    <h1>User Bio</h1>
+    <h1 class="blnt-primary-blue">User Bio <img src="../../../assets/images/writing.svg" alt="User Bio" class="blnt-h1-img"></h1>
     <blnt-alert></blnt-alert>
-    <h2>Care to share?</h2>
-    <p>Let those that answer your questions know a little more about you. Create as many bios as you would like. Later, when creating a set of questions you can choose which bio to share.</p>
-    <p><a routerLink="../bioCreate">Create a Bio</a></p>
-    <h3>Existing Bios</h3>
-    <ul>
-        <li *ngFor="let bio of (bios | async)">
-            {{ bio.bioName }} <span>[
-            <ng-container *ngIf="!buttons[bio.$key]">
-                <a routerLink="../bioEdit/{{bio.$key}}">Edit</a> |
-                <button (click)="buttons[bio.$key] = true">Delete</button>
-            </ng-container>
-            <ng-container *ngIf="buttons[bio.$key]">
-                Confirm delete:
-                <button (click)="buttons[bio.$key] = false">No</button>
-                <button (click)="bioDelete($event, bio.$key)">Yes</button>
-            </ng-container>
-            ]</span>
-        </li>
-    </ul>
+    <div class="blnt-content-group">
+        <h2>Care to share?</h2>
+        <p>Let those who answer your questions know a little more about you. Create as many bios as you would like. Later, when creating a set of questions you can choose which bio to share.</p>
+        <p><a class="btn btn-success" routerLink="../bioCreate">Create a Bio <i class="fa fa-file-text fa-fw" aria-hidden="true"></i></a></p>
+    </div>
+    <div class="blnt-content-group-secondary" *ngIf="haveBios">
+        <h2>Existing Bios</h2>
+        <ul class="blnt-bios">
+            <li *ngFor="let bio of (bios | async)">
+                <ng-container *ngIf="!buttons[bio.$key]">
+                    <button class="btn-link" (click)="buttons[bio.$key] = true"><i class="fa fa-trash fa-fw" aria-hidden="true"></i></button> <a class="blnt-bio-btn" routerLink="../bioEdit/{{bio.$key}}"><i class="fa fa-pencil fa-flip-horizontal fa-fw" aria-hidden="true"></i> {{ bio.bioName }}</a>
+                </ng-container>
+                <ng-container *ngIf="buttons[bio.$key]">
+                    <i class="fa fa-trash fa-fw blnt-btn-pad" aria-hidden="true"></i> Delete {{ bio.bioName }} bio?:
+                    <button class="blnt-btn-adjust btn-sm btn-success" (click)="buttons[bio.$key] = false"> No </button>
+                    <button class="btn-sm btn-danger blnt-btn-adjust" (click)="bioDelete($event, bio.$key)"> Yes </button>
+                </ng-container>
+            </li>
+        </ul>
+    </div>
 </div>

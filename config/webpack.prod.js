@@ -3,7 +3,12 @@ const webpack = require("webpack"),
   ExtractTextPlugin = require("extract-text-webpack-plugin"),
   commonConfig = require("./webpack.common.js"),
   helpers = require("./helpers"),
-  ENV = process.env.NODE_ENV = process.env.ENV = "production";
+  ENV = process.env.NODE_ENV = process.env.ENV = "production",
+  APP_URL = process.env.APP_URL = "http://b.luntly.com/",
+  METADATA = webpackMerge(commonConfig.metadata, {
+    APP_URL: APP_URL,
+    ENV: ENV
+  });
 
 module.exports = webpackMerge(commonConfig, {
   devtool: "source-map",
@@ -26,8 +31,12 @@ module.exports = webpackMerge(commonConfig, {
     }),
     new ExtractTextPlugin("[name].[hash].css"),
     new webpack.DefinePlugin({
+      "ENV": JSON.stringify(METADATA.ENV),
+      "APP_URL": JSON.stringify(METADATA.APP_URL),
       "process.env": {
-        "ENV": JSON.stringify(ENV)
+        "ENV": JSON.stringify(METADATA.ENV),
+        "NODE_ENV": JSON.stringify(METADATA.ENV),
+        "APP_URL" : JSON.stringify(METADATA.APP_URL)
       }
     }),
     new webpack.LoaderOptionsPlugin({
