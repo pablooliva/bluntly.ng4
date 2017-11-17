@@ -1,6 +1,6 @@
 <div class="blnt-row-pad">
-    <h1 class="blnt-primary-green">Log In <img src="../../../assets/images/enter.svg" alt="Log In" class="blnt-h1-img-sm"></h1>
     <blnt-alert></blnt-alert>
+    <h1 class="blnt-primary-green">Log In <img src="../../../assets/images/enter.svg" alt="Log In" class="blnt-h1-img-sm"></h1>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit(); needFocus.focus()" novalidate>
         <div class="blnt-form-group-last">
             <div class="form-group">
@@ -14,7 +14,7 @@
                 <blnt-validation-msg [controlValidation]="controlValidation['password']"></blnt-validation-msg>
             </div>
         </div>
-        <button class="btn btn-success" [disabled]="!loginForm.valid">Log In <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+        <button class="btn btn-success" [disabled]="!loginForm.valid">Log in <i class="fa fa-sign-in" aria-hidden="true"></i></button>
     </form>
     <p class="blnt-top-pad">Not registered? <a [routerLink]="['/users', 'register']">Sign up.</a></p>
 </div>

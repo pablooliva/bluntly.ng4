@@ -42,6 +42,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   margin-bottom:1.5rem;
 }
 
+h1, .h1 {
+  font-size:2.6rem;
+}
+
 .hidden {
   display: none;
 }
@@ -51,9 +55,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 .blnt-md-text {
-  font-size:1.8rem;
-  line-height:1.5;
-  margin:0 0 3rem 0;
+  font-size:2rem;
+  line-height:1.3;
+  margin:0 0 1.5rem 0;
 }
 
 .blnt-sm-text {
@@ -85,6 +89,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 .blnt-main-header {
   background-color:$contrast-white;
+
+  .fa-bars {
+    color:$contrast-white;
+  }
 }
 
 .blnt-main {
@@ -96,7 +104,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 .blnt-row-pad {
-  padding:3rem 0;
+  padding:2rem 0 3rem 0;
 }
 
 .blnt-secondary-row {
@@ -159,10 +167,9 @@ button {
 .blnt-h1-img {
   width:9rem;
   height:9rem;
-  z-index:1;
-  position:absolute;
-  top:1.7rem;
-  right:3rem;
+  float:right;
+  margin-right:1.5rem;
+  margin-top:-2rem;
 }
 
 .blnt-h1-img-sm {
@@ -230,16 +237,10 @@ button {
   margin:1rem -15px;
 
   .blnt-primary-highlight & {
-    background-color:$primary-highlight-light;
+    background-color:$primary-green-light;
   }
   .blnt-secondary-highlight & {
-    background-color:$secondary-highlight-light;
-  }
-  .blnt-tertiary-highlight & {
-    background-color:$tertiary-highlight-light;
-  }
-  .blnt-quaternary-highlight & {
-    background-color:$quaternary-highlight-light;
+    background-color:$secondary-purple-light;
   }
 }
 
@@ -250,19 +251,11 @@ button {
   font-size:2.5rem;
 
   .blnt-primary-highlight & {
-    background-color:$primary-highlight;
+    background-color:$primary-green;
     color:$contrast-white;
   }
   .blnt-secondary-highlight & {
-    background-color:$secondary-highlight;
-    color:$contrast-white;
-  }
-  .blnt-tertiary-highlight & {
-    background-color:$tertiary-highlight;
-    color:$contrast-white;
-  }
-  .blnt-quaternary-highlight & {
-    background-color:$quaternary-highlight;
+    background-color:$secondary-purple;
     color:$contrast-white;
   }
 }
@@ -378,12 +371,15 @@ button {
   padding:1.3rem 1.5rem;
   border-left:5px solid $form-group-color;
   background-color:$form-group-background-color;
-  overflow:auto;
 }
 
 .blnt-form-group-last {
   @extend .blnt-form-group;
   margin-bottom:2rem;
+}
+
+.blnt-overflow-adj {
+  overflow:auto;
 }
 
 .blnt-button-to-link {
@@ -442,6 +438,8 @@ input.ng-dirty.ng-invalid, input.ng-touched.ng-invalid {
     padding-bottom:25rem;
   }
   .blnt-home-bg {
-    background:url('../images/cartoon.svg') 20% 100% no-repeat #fff;
+    background:url('../images/cartoon.svg') 97% 100% no-repeat #fff;
+    background-size:contain;
+    padding-bottom:2rem;
   }
 }

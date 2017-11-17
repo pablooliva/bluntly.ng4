@@ -1,6 +1,6 @@
 <div class="blnt-row-pad">
-    <h1 class="blnt-primary-green">Answers <img src="../../../assets/images/answers.svg" alt="Get answers" class="blnt-h1-img"></h1>
     <blnt-alert></blnt-alert>
+    <h1 class="blnt-primary-green">Answers <img src="../../../assets/images/answers.svg" alt="Get answers" class="blnt-h1-img"></h1>
     <div class="blnt-content-group-green">
         <h2>Browse Your Sets</h2>
         <p *ngIf="!haveQuestions">You have not created any <a [routerLink]="['/users', 'ask']">question sets</a> yet.</p>
@@ -12,7 +12,7 @@
         </ng-container>
         <ng-container *ngIf="displaySet">
             <button class="btn-success btn-sm blnt-btn-sm" type="button" (click)="displaySet = null; questionRef = {}">
-                <i class="fa fa-arrow-circle-left fa-fw" aria-hidden="true"></i> All Sets
+                <i class="fa fa-arrow-circle-left fa-fw" aria-hidden="true"></i> All sets
             </button>
             <h3>Set "{{ displaySet.setName }}"</h3>
             <p>Select a question to see the corresponding answers.</p>

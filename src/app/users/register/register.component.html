@@ -1,8 +1,10 @@
 <div class="blnt-row-pad">
-    <h1 class="blnt-primary-green">Sign Up <img src="../../../assets/images/regsiter.svg" alt="Sign Up" class="blnt-h1-img-sm"></h1>
     <blnt-alert></blnt-alert>
+    <h1 class="blnt-primary-green">Sign Up <img src="../../../assets/images/regsiter.svg" alt="Sign Up" class="blnt-h1-img-sm"></h1>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit(); needFocus.focus()" novalidate>
         <div class="blnt-form-group-last">
+            <h2>Get Started</h2>
+            <p>Sign up for an account to start creating the questions that you want to share.</p>
             <div class="form-group">
                 <label class="control-label" for="email">Email</label>
                 <input type="email" name="email" class="form-control" id="email" autocomplete="email" autofocus #needFocus [formControlName]="'email'" />
@@ -14,6 +16,6 @@
                 <blnt-validation-msg [controlValidation]="controlValidation['password']"></blnt-validation-msg>
             </div>
         </div>
-        <button class="btn btn-success" [disabled]="!registerForm.valid">Register <i class="fa fa-user-plus" aria-hidden="true"></i></button>
+        <button class="btn btn-success" [disabled]="!registerForm.valid">Sign up <i class="fa fa-user-plus" aria-hidden="true"></i></button>
     </form>
 </div>

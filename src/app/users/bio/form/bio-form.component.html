@@ -11,7 +11,7 @@
                  }">* Required</div>
             <blnt-validation-msg [controlValidation]="controlValidation['text']"></blnt-validation-msg>
         </div>
-        <div class="blnt-form-group-last"
+        <div class="blnt-form-group-last blnt-overflow-adj"
             [ngClass]="{ 'blnt-group-error':
                 bioForm.get('bioSubForm').hasError('atLeastOneRequired')
                 && bioForm.get('bioSubForm').touched
@@ -145,6 +145,6 @@
                 </ol>
             </ng-container>
         </div>
-        <button type="submit" class="btn btn-success" [disabled]="!bioForm.valid">{{ bioId ? "Save Edit" : "Create Bio" }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
+        <button type="submit" class="btn btn-success" [disabled]="!bioForm.valid">{{ bioId ? "Save edit" : "Create bio" }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
     </form>
 </div>

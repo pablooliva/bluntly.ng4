@@ -8,21 +8,21 @@
             <ul class="nav navbar-nav" (click)="isCollapsed = !isCollapsed">
                 <ng-container *ngIf="!currentUser">
                     <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/users', 'login']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Log In</a>
+                        <a class="nav-link" [routerLink]="['/users', 'login']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Log in</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/users', 'register']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Sign Up</a>
+                        <a class="nav-link" [routerLink]="['/users', 'register']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Get started</a>
                     </li>
                 </ng-container>
                 <ng-container *ngIf="currentUser">
                     <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/users', 'ask']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Ask Questions</a>
+                        <a class="nav-link" [routerLink]="['/users', 'ask']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Ask questions</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/users', 'answers']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Get Answers</a>
+                        <a class="nav-link" [routerLink]="['/users', 'answers']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Get answers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/users']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">My Profile</a>
+                        <a class="nav-link" [routerLink]="['/users']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">My profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" (click)="logout()">Logout</a>

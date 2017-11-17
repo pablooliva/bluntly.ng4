@@ -1,7 +1,7 @@
 <div class="blnt-row-pad">
+    <blnt-alert></blnt-alert>
     <ng-container *ngIf="!successfulSub">
         <h1 class="blnt-primary-blue">Your Opinion Matters! <img src="../../assets/images/you-can-help.svg" alt="Your opinion matters" class="blnt-h1-img"></h1>
-        <blnt-alert></blnt-alert>
         <div class="blnt-content-group-green">
             <h2 class="h3">Can You Help?</h2>
             <ul class="fa-ul blnt-help-list">
@@ -22,15 +22,15 @@
                     <div class="form-group" *ngFor="let key of qKeys; index as i;">
                         <label class="control-label" [for]="key">{{ questions[key] }}</label>
                         <ng-container *ngIf="i === 0">
-                            <input type="text" [name]="key" [id]="key" class="form-control" autofocus [formControlName]="key">
+                            <textarea [name]="key" [id]="key" class="form-control" autofocus [formControlName]="key"></textarea>
                         </ng-container>
                         <ng-container *ngIf="i !== 0">
-                            <input type="text" [name]="key" [id]="key" class="form-control" [formControlName]="key">
+                            <textarea [name]="key" [id]="key" class="form-control" [formControlName]="key"></textarea>
                         </ng-container>
                     </div>
                 </ng-container>
             </div>
-            <button type="submit" class="btn btn-success" [disabled]="!qForm.valid">Save Answers <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
+            <button type="submit" class="btn btn-success" [disabled]="!qForm.valid">Save answers <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
         </form>
     </ng-container>
     <ng-container *ngIf="successfulSub">
@@ -42,7 +42,7 @@
         <div class="blnt-content-group-green" [ngClass]="{ 'blnt-content-group-last': !hasBio }">
             <h3>Create Your Own</h3>
             <p>Want blunt answers about yourself? Create your own set of questions to get honest, anonymous answers.</p>
-            <p><button (click)="anonCreateQuestions()" class="btn btn-success">Create Questions <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button></p>
+            <p><button (click)="anonCreateQuestions()" class="btn btn-success">Create questions <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button></p>
         </div>
         <div class="blnt-content-group-secondary blnt-content-group-last" *ngIf="hasBio">
             <h3>More About.. <img src="../../assets/images/creator.svg" alt="Interesting individual" class="blnt-sub-section-img"></h3>

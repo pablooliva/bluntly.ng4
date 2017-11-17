@@ -1,11 +1,11 @@
 <div class="blnt-row-pad">
-    <h1 class="blnt-primary-blue">Ask <img src="../../../assets/images/ask-questions.svg" alt="Ask Questions" class="blnt-h1-img"></h1>
     <blnt-alert></blnt-alert>
+    <h1 class="blnt-primary-blue">Ask <img src="../../../assets/images/ask-questions.svg" alt="Ask Questions" class="blnt-h1-img"></h1>
     <ng-container *ngIf="!showForm">
         <div class="blnt-content-group">
             <h2>Create New Questions</h2>
             <p>Create a new set of questions to share.</p>
-            <button class="btn btn-success" (click)="showForm = true">New Questions <i class="fa fa-plus fa-fw" aria-hidden="true"></i></button>
+            <button class="btn btn-success" (click)="showForm = true">New questions <i class="fa fa-plus fa-fw" aria-hidden="true"></i></button>
         </div>
         <blnt-share [shareTitle]="'Share Your Questions'" [questionSets]="questionSets"></blnt-share>
     </ng-container>
@@ -60,7 +60,7 @@
                     {{ bio.bioName }}
                 </label>
             </div>
-            <button type="submit" class="btn btn-success" [disabled]="!askQForm.valid">Save Set <i aria-hidden="true" class="fa fa-arrow-circle-right"></i></button> <button type="button" class="btn btn-danger" (click)="cancelQSet()">Cancel <i class="fa fa-ban" aria-hidden="true"></i>
+            <button type="submit" class="btn btn-success" [disabled]="!askQForm.valid">Save set <i aria-hidden="true" class="fa fa-arrow-circle-right"></i></button> <button type="button" class="btn btn-danger" (click)="cancelQSet()">Cancel <i class="fa fa-ban" aria-hidden="true"></i>
         </button>
         </form>
     </ng-container>
