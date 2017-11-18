@@ -22,7 +22,7 @@
                         <a class="nav-link" [routerLink]="['/users', 'answers']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Get answers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/users']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">My profile</a>
+                        <a class="nav-link" [routerLink]="['/users']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">User: {{ currentUser.email }}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" (click)="logout()">Logout</a>

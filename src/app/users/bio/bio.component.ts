@@ -39,6 +39,8 @@ export class BioComponent implements OnInit, OnDestroy {
         this.buttons[record.$key] = false;
       });
     });
+
+    window.scroll({ top: 0, left: 0, behavior: "smooth" });
   }
 
   public ngOnDestroy(): void {

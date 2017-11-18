@@ -13,6 +13,7 @@ export class ShareComponent implements OnInit, OnDestroy {
   @Input() shareTitle: string;
   @Input() questionSets: FirebaseListObservable<any[]>;
 
+  public loaded: boolean;
   public userId: string;
   public shareLinkPre: string;
   public haveQuestions: boolean;
@@ -26,10 +27,12 @@ export class ShareComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
+    this.loaded = false;
     this.haveQuestions = false;
     this.userId = this._authService.currentUser["uid"];
     this.shareLinkPre = process.env.APP_URL + "q/";
     this._questionsSubscription = this.questionSets.subscribe(records => {
+      this.loaded = true;
       if (records.length) {
         this.haveQuestions = true;
       }

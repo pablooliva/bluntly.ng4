@@ -14,23 +14,21 @@
             <div class="blnt-content-group-secondary blnt-content-group-last"
                  [ngClass]="{ 'blnt-group-error': qForm.hasError('atLeastOneRequired') && qForm.touched }">
                 <h2 class="h3">Questions</h2>
-                <p *ngIf="!questions">The question is... where are the questions?</p>
-                <ng-container *ngIf="questions">
-                    <div class="blnt-help-text"
-                         [ngClass]="{ 'hidden': qForm.hasError('atLeastOneRequired') && ( qForm.dirty || qForm.touched ) }">* Please answer at least one (1) question</div>
-                    <blnt-validation-msg [controlValidation]="controlValidation['group']" class="post-h2"></blnt-validation-msg>
-                    <div class="form-group" *ngFor="let key of qKeys; index as i;">
-                        <label class="control-label" [for]="key">{{ questions[key] }}</label>
-                        <ng-container *ngIf="i === 0">
-                            <textarea [name]="key" [id]="key" class="form-control" autofocus [formControlName]="key"></textarea>
-                        </ng-container>
-                        <ng-container *ngIf="i !== 0">
+                <div *ngIf="!loaded" class="spinner"></div>
+                <ng-container *ngIf="loaded">
+                    <p *ngIf="!questions">Are you sure you are using a valid link? We could not find any questions for this link.</p>
+                    <ng-container *ngIf="questions">
+                        <div class="blnt-help-text"
+                             [ngClass]="{ 'hidden': qForm.hasError('atLeastOneRequired') && ( qForm.dirty || qForm.touched ) }">* Please answer at least one (1) question</div>
+                        <blnt-validation-msg [controlValidation]="controlValidation['group']" class="post-h2"></blnt-validation-msg>
+                        <div class="form-group" *ngFor="let key of qKeys; index as i;">
+                            <label class="control-label" [for]="key">{{ questions[key] }}</label>
                             <textarea [name]="key" [id]="key" class="form-control" [formControlName]="key"></textarea>
-                        </ng-container>
-                    </div>
+                        </div>
+                    </ng-container>
                 </ng-container>
             </div>
-            <button type="submit" class="btn btn-success" [disabled]="!qForm.valid">Save answers <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
+            <button type="submit" class="btn btn-success" [disabled]="!questions || !qForm.valid">Save answers <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
         </form>
     </ng-container>
     <ng-container *ngIf="successfulSub">
@@ -41,7 +39,7 @@
         </div>
         <div class="blnt-content-group-green" [ngClass]="{ 'blnt-content-group-last': !hasBio }">
             <h3>Create Your Own</h3>
-            <p>Want blunt answers about yourself? Create your own set of questions to get honest, anonymous answers.</p>
+            <p>Create your own set of questions to get honest, anonymous answers.</p>
             <p><button (click)="anonCreateQuestions()" class="btn btn-success">Create questions <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button></p>
         </div>
         <div class="blnt-content-group-secondary blnt-content-group-last" *ngIf="hasBio">

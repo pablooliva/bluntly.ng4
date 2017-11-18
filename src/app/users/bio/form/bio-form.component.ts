@@ -91,17 +91,13 @@ export class BioFormComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public ngAfterViewInit(): void {
     this.needFocus.nativeElement.focus();
+    window.scroll({ top: 0, left: 0, behavior: "smooth" });
   }
 
   public ngOnDestroy(): void {
     if (this._existingBioSubscription) {
       this._existingBioSubscription.unsubscribe();
     }
-  }
-
-  public showOther(e: MouseEvent): void {
-    e.preventDefault();
-    this.showOtherConnect = true;
   }
 
   public onSubmit(): void {
@@ -124,6 +120,7 @@ export class BioFormComponent implements OnInit, AfterViewInit, OnDestroy {
             messagePrimary: "Please try again. Something went wrong.",
             persistent: false
           });
+          window.scroll({ top: 0, left: 0, behavior: "smooth" });
         });
     }
     // CREATE if no bioId present
@@ -132,7 +129,7 @@ export class BioFormComponent implements OnInit, AfterViewInit, OnDestroy {
         .then(response => {
           this._alertsService.addAlert({
             type: BSAlertTypes.success,
-            messagePrimary: `New bio, ${this.bioForm.value.bioName}, successfully created.`,
+            messagePrimary: `New bio "${this.bioForm.value.bioName}" successfully created.`,
             persistent: true
           });
 
@@ -145,6 +142,7 @@ export class BioFormComponent implements OnInit, AfterViewInit, OnDestroy {
             messagePrimary: "Please try again. Something went wrong.",
             persistent: false
           });
+          window.scroll({ top: 0, left: 0, behavior: "smooth" });
         });
     }
   }

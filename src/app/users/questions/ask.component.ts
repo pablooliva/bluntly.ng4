@@ -85,10 +85,11 @@ export class AskComponent implements OnInit {
               if (i === filteredQuestions.length - 1) {
                 this._alertsService.addAlert({
                   type: BSAlertTypes.success,
-                  messagePrimary: `New question set [ "${this.askQForm.value.setName}" ] successfully created.`,
+                  messagePrimary: `New question set "${this.askQForm.value.setName}" successfully created.`,
                   persistent: false
                 });
                 this.askQForm.reset();
+                window.scroll({ top: 0, left: 0, behavior: "smooth" });
               }
             })
             .catch(error => {
@@ -107,6 +108,7 @@ export class AskComponent implements OnInit {
   public cancelQSet(): void {
     this.showForm = false;
     this.askQForm.reset();
+    window.scroll({ top: 0, left: 0, behavior: "smooth" });
   }
 
   public copyLink(event: MouseEvent): void {

@@ -99,7 +99,7 @@
                         [formControlName]="'github'">
                 </li>
             </ul>
-            <h6><button class="blnt-extra-margin" (click)="showOther($event)" *ngIf="!showOtherConnect"><i class="fa fa-plus" aria-hidden="true"></i></button> Other Ways to Connect</h6>
+            <h6><button class="blnt-extra-margin" (click)="showOtherConnect = true" *ngIf="!showOtherConnect"><i class="fa fa-plus" aria-hidden="true"></i></button> Other Ways to Connect</h6>
             <ng-container *ngIf="showOtherConnect">
                 <ol [formGroupName]="'other'">
                     <li [formGroupName]="'one'">

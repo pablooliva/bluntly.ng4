@@ -140,6 +140,57 @@ h1, .h1 {
 
 /*** block elements & skin ***/
 
+.spinner {
+  height: 60px;
+  width: 60px;
+  position: relative;
+  -webkit-animation: rotation .7s infinite linear;
+  -moz-animation: rotation .7s infinite linear;
+  -o-animation: rotation .7s infinite linear;
+  animation: rotation .7s infinite linear;
+  border-left: 5px solid $contrast-off-white;
+  border-right: 5px solid $contrast-off-white;
+  border-bottom: 5px solid $contrast-off-white;
+  border-top: 5px solid $header-color;
+  border-radius: 100%;
+}
+
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+  }
+}
+
+@-moz-keyframes rotation {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+  to {
+    -moz-transform: rotate(359deg);
+  }
+}
+
+@-o-keyframes rotation {
+  from {
+    -o-transform: rotate(0deg);
+  }
+  to {
+    -o-transform: rotate(359deg);
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
 footer {
   background-color:$dark-blue;
 }
@@ -307,19 +358,16 @@ button {
     border-top:1px solid #e4defd;
   }
 
-  td:first-child {
-  }
-
   td:nth-child(3){
     font-size:1.6rem;
     line-height:1rem;
   }
 
   button{
-    margin-top: -0.2rem;
     padding: 0.3rem 0.5rem;
     font-size: 0.75rem;
     line-height: 1.2rem;
+    margin-top: -0.1rem;
   }
 }
 

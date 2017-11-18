@@ -1,6 +1,6 @@
 <div class="blnt-row-pad">
     <blnt-alert></blnt-alert>
-    <h1 class="blnt-primary-blue">Ask <img src="../../../assets/images/ask-questions.svg" alt="Ask Questions" class="blnt-h1-img"></h1>
+    <h1 class="blnt-primary-blue">Questions <img src="../../../assets/images/ask-questions.svg" alt="Ask Questions" class="blnt-h1-img"></h1>
     <ng-container *ngIf="!showForm">
         <div class="blnt-content-group">
             <h2>Create New Questions</h2>
@@ -51,7 +51,7 @@
                     <input name="question3" id="question3" class="form-control" [formControlName]="'question3'">
                 </div>
             </div>
-            <div class="blnt-form-group-last">
+            <div class="blnt-form-group-last blnt-floated">
                 <h4>Tell 'em About Yourself</h4>
                 <p>After someone is finished answering your questions, you can choose to display a brief "bio" and links to connect with you.</p>
                 <p><ng-container *ngIf="bios">Choose a Bio or </ng-container><a routerLink="/users/bio">Create/Edit a Bio</a>.</p>

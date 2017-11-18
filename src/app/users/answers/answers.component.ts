@@ -11,6 +11,7 @@ import { Subscription } from "rxjs/Subscription";
   styleUrls: ["./answers.component.scss"]
 })
 export class AnswersComponent implements OnInit, OnDestroy {
+  public loaded: boolean;
   public questionSets: any[];
   public questionSetsObs: FirebaseListObservable<any[]>;
   public haveQuestions: boolean;
@@ -31,6 +32,7 @@ export class AnswersComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
+    this.loaded = false;
     this.answers = {};
     this.questionRef = {};
     this.haveQuestions = false;
@@ -40,6 +42,7 @@ export class AnswersComponent implements OnInit, OnDestroy {
     this.questionSetsObs = this._db.list(questionsPath);
 
     this._questionsSubscription = this.questionSetsObs.subscribe(records => {
+      this.loaded = true;
       if (records.length) {
         this.haveQuestions = true;
       }

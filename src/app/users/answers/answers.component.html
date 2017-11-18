@@ -3,43 +3,46 @@
     <h1 class="blnt-primary-green">Answers <img src="../../../assets/images/answers.svg" alt="Get answers" class="blnt-h1-img"></h1>
     <div class="blnt-content-group-green">
         <h2>Browse Your Sets</h2>
-        <p *ngIf="!haveQuestions">You have not created any <a [routerLink]="['/users', 'ask']">question sets</a> yet.</p>
-        <ng-container *ngIf="haveQuestions && !displaySet">
-            <p>Select a set of questions to see the answers.</p>
-            <ol>
-                <li *ngFor="let set of questionSets"><button class="btn-link" type="button" (click)="displayQSet(set.$key)">{{ set.setName }}</button></li>
-            </ol>
-        </ng-container>
-        <ng-container *ngIf="displaySet">
-            <button class="btn-success btn-sm blnt-btn-sm" type="button" (click)="displaySet = null; questionRef = {}">
-                <i class="fa fa-arrow-circle-left fa-fw" aria-hidden="true"></i> All sets
-            </button>
-            <h3>Set "{{ displaySet.setName }}"</h3>
-            <p>Select a question to see the corresponding answers.</p>
-            <ol>
-                <li class="blnt-qlist" *ngFor="let key of questionKeys">
-                    <ng-container *ngIf="questionRef[key]">
-                        <button class="btn-outline-danger btn-sm blnt-close-btn-sm" type="button" (click)="questionRef[key] = null">
-                            <i class="fa fa-times-circle" aria-hidden="true"></i>
-                        </button> <span class="blnt-set-q">{{ displaySet.questions[key] }}</span>
-                    </ng-container>
-                    <button class="blnt-button-to-link blnt-set-q" type="button" *ngIf="!questionRef[key]" (click)="displayAnswers(key)">
-                        {{ displaySet.questions[key] }}
-                    </button>
-                    <div *ngIf="questionRef[key]">
-                        <ng-container *ngIf="haveAnswers[key]">
-                            <ul class="fa-ul blnt-answer">
-                                <li *ngFor="let answer of answers[key]"><i class="fa fa-check-circle fa-li" aria-hidden="true"></i> {{ answer["answer"] }}</li>
-                            </ul>
+        <div *ngIf="!loaded" class="spinner"></div>
+        <ng-container *ngIf="loaded">
+            <p *ngIf="!haveQuestions">You have not created any <a [routerLink]="['/users', 'ask']">question sets</a> yet.</p>
+            <ng-container *ngIf="haveQuestions && !displaySet">
+                <p>Select a set of questions to see the answers.</p>
+                <ol>
+                    <li *ngFor="let set of questionSets"><button class="btn-link" type="button" (click)="displayQSet(set.$key)">{{ set.setName }}</button></li>
+                </ol>
+            </ng-container>
+            <ng-container *ngIf="displaySet">
+                <button class="btn-success btn-sm blnt-btn-sm" type="button" (click)="displaySet = null; questionRef = {}">
+                    <i class="fa fa-arrow-circle-left fa-fw" aria-hidden="true"></i> All sets
+                </button>
+                <h3>Set "{{ displaySet.setName }}"</h3>
+                <p>Select a question to see the corresponding answers.</p>
+                <ol>
+                    <li class="blnt-qlist" *ngFor="let key of questionKeys">
+                        <ng-container *ngIf="questionRef[key]">
+                            <button class="btn-outline-danger btn-sm blnt-close-btn-sm" type="button" (click)="questionRef[key] = null">
+                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                            </button> <span class="blnt-set-q">{{ displaySet.questions[key] }}</span>
                         </ng-container>
-                        <ng-container *ngIf="!haveAnswers[key]">
-                            <ul class="fa-ul blnt-answer">
-                                <li><i class="fa fa-question-circle fa-li" aria-hidden="true"></i> Answers have not yet been submitted.</li>
-                            </ul>
-                        </ng-container>
-                    </div>
-                </li>
-            </ol>
+                        <button class="blnt-button-to-link blnt-set-q" type="button" *ngIf="!questionRef[key]" (click)="displayAnswers(key)">
+                            {{ displaySet.questions[key] }}
+                        </button>
+                        <div *ngIf="questionRef[key]">
+                            <ng-container *ngIf="haveAnswers[key]">
+                                <ul class="fa-ul blnt-answer">
+                                    <li *ngFor="let answer of answers[key]"><i class="fa fa-check-circle fa-li" aria-hidden="true"></i> {{ answer["answer"] }}</li>
+                                </ul>
+                            </ng-container>
+                            <ng-container *ngIf="!haveAnswers[key]">
+                                <ul class="fa-ul blnt-answer">
+                                    <li><i class="fa fa-question-circle fa-li" aria-hidden="true"></i> Answers have not yet been submitted.</li>
+                                </ul>
+                            </ng-container>
+                        </div>
+                    </li>
+                </ol>
+            </ng-container>
         </ng-container>
     </div>
     <blnt-share [shareTitle]="'Get More Answers'" [questionSets]="questionSetsObs"></blnt-share>

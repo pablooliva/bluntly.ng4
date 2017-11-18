@@ -17,6 +17,7 @@ import { IGeoLocation, SourceService } from "../shared/source.service";
   styleUrls: ["./questions.component.scss"]
 })
 export class QuestionsComponent implements OnInit, OnDestroy {
+  public loaded: boolean;
   public questions: Object;
   public qKeys: string[];
   public qForm: FormGroup;
@@ -41,6 +42,7 @@ export class QuestionsComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
+    this.loaded = false;
     this.successfulSub = false;
     this.hasBio = false;
     this._userId = this._route.snapshot.params["user"];
@@ -52,7 +54,8 @@ export class QuestionsComponent implements OnInit, OnDestroy {
     this.qForm = this.fb.group({});
 
     this._questionsSubscription = questions.subscribe(record => {
-      if (record.$value && record.$value === null) {
+      this.loaded = true;
+      if ("$value" in record && record.$value === null) {
         this._alertsService.addAlert({
           type: BSAlertTypes.danger,
           messagePrimary: "Are you sure you are using a valid link? We could not find any questions for this link.",
@@ -143,6 +146,7 @@ export class QuestionsComponent implements OnInit, OnDestroy {
       .then(response => {
         this.qForm.reset();
         this.successfulSub = true;
+        window.scroll({ top: 0, left: 0, behavior: "smooth" });
 
         const bioPath: string = this._afUtils.afPathMaker(["bios", this._userId, this._bioId]);
         const bio: FirebaseListObservable<any> = this._db.list(bioPath);
@@ -160,6 +164,7 @@ export class QuestionsComponent implements OnInit, OnDestroy {
           messagePrimary: "Please try again. Something went wrong.",
           persistent: false
         });
+        window.scroll({ top: 0, left: 0, behavior: "smooth" });
       });
   }
 }
