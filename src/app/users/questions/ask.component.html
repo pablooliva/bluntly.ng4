@@ -54,11 +54,21 @@
             <div class="blnt-form-group-last blnt-floated">
                 <h4>Tell 'em About Yourself</h4>
                 <p>After someone is finished answering your questions, you can choose to display a brief "bio" and links to connect with you.</p>
-                <p><ng-container *ngIf="bios">Choose a Bio or </ng-container><a routerLink="/users/bio">Create/Edit a Bio</a>.</p>
-                <label class="blnt-radio-button" *ngFor="let bio of (bios | async)">
-                    <input type="radio" name="bio" id="bio-{{i}}" value="{{ bio.$key }}" formControlName="bio">
-                    {{ bio.bioName }}
-                </label>
+                <ng-container *ngIf="!stashFormOption">
+                    <p><ng-container *ngIf="bios">Choose a Bio or </ng-container><button type="button" class="blnt-button-to-link" (click)="evalNavToBio()">Create/Edit a Bio</button>.</p>
+                    <label class="blnt-radio-button" *ngFor="let bio of (bios | async)">
+                        <input type="radio" name="bio" id="bio-{{i}}" value="{{ bio.$key }}" formControlName="bio">
+                        {{ bio.bioName }}
+                    </label>
+                </ng-container>
+                <ul class="fa-ul" *ngIf="stashFormOption">
+                    <li><i class="fa-li fa fa-exclamation-triangle" aria-hidden="true"></i> You have started to enter information into this form. Would you like to store this information temporarily while you Create/Edit a Bio?
+                        <div>
+                            <button type="button" class="btn btn-success" (click)="navToBio(true)">Yes</button>
+                            <button type="button" class="btn btn-danger" (click)="navToBio(false)">No</button>
+                        </div>
+                    </li>
+                </ul>
             </div>
             <button type="submit" class="btn btn-success" [disabled]="!askQForm.valid">Save set <i aria-hidden="true" class="fa fa-arrow-circle-right"></i></button> <button type="button" class="btn btn-danger" (click)="cancelQSet()">Cancel <i class="fa fa-ban" aria-hidden="true"></i>
         </button>

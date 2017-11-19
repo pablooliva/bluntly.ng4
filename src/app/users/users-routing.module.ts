@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
 import { AlertGuardService } from "../shared/alerts/alert-guard.service";
+import { AuthGuardService } from "../shared/auth-guard.service";
 import { UsersComponent } from "./users.component";
 import { RegisterComponent } from "./register/register.component";
 import { LoginComponent } from "./login/login.component";
@@ -15,11 +16,11 @@ const userRoutes: Routes = [
   {path: "", canActivate: [ AlertGuardService ], component: UsersComponent},
   {path: "login", canActivate: [ AlertGuardService ], component: LoginComponent},
   {path: "register", canActivate: [ AlertGuardService ], component: RegisterComponent},
-  {path: "bio", canActivate: [ AlertGuardService ], component: BioComponent},
-  {path: "bioCreate", canActivate: [ AlertGuardService ], component: BioCreateComponent},
-  {path: "bioEdit/:bioId", canActivate: [ AlertGuardService ], component: BioEditComponent},
-  {path: "ask", canActivate: [ AlertGuardService ], component: AskComponent},
-  {path: "answers", canActivate: [ AlertGuardService ], component: AnswersComponent}
+  {path: "bio", canActivate: [ AlertGuardService, AuthGuardService ], component: BioComponent},
+  {path: "bioCreate", canActivate: [ AlertGuardService, AuthGuardService ], component: BioCreateComponent},
+  {path: "bioEdit/:bioId", canActivate: [ AlertGuardService, AuthGuardService ], component: BioEditComponent},
+  {path: "ask", canActivate: [ AlertGuardService, AuthGuardService ], component: AskComponent},
+  {path: "answers", canActivate: [ AlertGuardService, AuthGuardService ], component: AnswersComponent}
 ];
 
 @NgModule({

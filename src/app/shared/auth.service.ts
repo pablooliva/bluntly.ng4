@@ -17,11 +17,6 @@ export class AuthService {
     this._afAuth.auth.onAuthStateChanged(user => {
       this.currentUserSubject.next(user);
       this.currentUser = user;
-      /*if (user) {
-        this._router.navigate(["/users"]);
-      } else {
-        this._router.navigate(["/"]);
-      }*/
     });
   }
 
@@ -88,6 +83,10 @@ export class AuthService {
   public logout(): void {
     this._afAuth.auth.signOut();
     this._router.navigate(["/"]);
+  }
+
+  public isAuthenticated(): boolean {
+    return !!this._afAuth.auth.currentUser;
   }
 
   private setAlert(type: BSAlertTypes, persistent: boolean, primaryMsg: string, secondaryMsg?: string): void {

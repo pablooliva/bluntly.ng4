@@ -11,10 +11,12 @@ import { CoreModule } from "./core/core.module";
 import { SharedModule } from "./shared/shared.module";
 
 import { AuthService } from "./shared/auth.service";
+import { AuthGuardService } from "./shared/auth-guard.service";
 import { AFUtils } from "./shared/utils";
 import { AlertsService} from "./shared/alerts/alerts.service";
 import { AlertGuardService } from "./shared/alerts/alert-guard.service";
 import { SourceService } from "./shared/source.service";
+import { DataStoreService } from "./shared/data-store.service";
 
 @NgModule({
   declarations: [
@@ -37,10 +39,12 @@ import { SourceService } from "./shared/source.service";
   ],
   providers: [
     AuthService,
+    AuthGuardService,
     AFUtils,
     AlertsService,
     AlertGuardService,
-    SourceService
+    SourceService,
+    DataStoreService
   ],
   bootstrap: [
     AppComponent

@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { AlertModule } from "ngx-bootstrap/alert";
 
 import { AlertsComponent } from "./alerts/alerts.component";
-import {FormValidationMessagesComponent} from "./validation/form-validation-messages.component";
+import { FormValidationMessagesComponent } from "./validation/form-validation-messages.component";
 
 @NgModule({
   declarations: [
