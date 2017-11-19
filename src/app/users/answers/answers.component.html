@@ -29,15 +29,18 @@
                             {{ displaySet.questions[key] }}
                         </button>
                         <div *ngIf="questionRef[key]">
-                            <ng-container *ngIf="haveAnswers[key]">
-                                <ul class="fa-ul blnt-answer">
-                                    <li *ngFor="let answer of answers[key]"><i class="fa fa-check-circle fa-li" aria-hidden="true"></i> {{ answer["answer"] }}</li>
-                                </ul>
-                            </ng-container>
-                            <ng-container *ngIf="!haveAnswers[key]">
-                                <ul class="fa-ul blnt-answer">
-                                    <li><i class="fa fa-question-circle fa-li" aria-hidden="true"></i> Answers have not yet been submitted.</li>
-                                </ul>
+                            <div *ngIf="!loaded2" class="spinner"></div>
+                            <ng-container *ngIf="loaded2">
+                                <ng-container *ngIf="!haveAnswers[key]">
+                                    <ul class="fa-ul blnt-answer">
+                                        <li><i class="fa fa-question-circle fa-li" aria-hidden="true"></i> At least 3 answers should be submitted before the responses are visible.</li>
+                                    </ul>
+                                </ng-container>
+                                <ng-container *ngIf="haveAnswers[key]">
+                                    <ul class="fa-ul blnt-answer">
+                                        <li *ngFor="let answer of answers[key]"><i class="fa fa-check-circle fa-li" aria-hidden="true"></i> {{ answer["answer"] }}</li>
+                                    </ul>
+                                </ng-container>
                             </ng-container>
                         </div>
                     </li>

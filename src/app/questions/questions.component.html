@@ -2,7 +2,7 @@
     <blnt-alert></blnt-alert>
     <ng-container *ngIf="!successfulSub">
         <h1 class="blnt-primary-blue">Your Opinion Matters! <img src="../../assets/images/you-can-help.svg" alt="Your opinion matters" class="blnt-h1-img"></h1>
-        <div class="blnt-content-group-green">
+        <div class="blnt-content-group-secondary">
             <h2 class="h3">Can You Help?</h2>
             <ul class="fa-ul blnt-help-list">
                 <li><i class="fa-li fa fa-thumbs-up" aria-hidden="true"></i> <strong>Please answer these questions honestly.</strong> Someone is counting on your opinion.</li>
@@ -13,7 +13,7 @@
         <form [formGroup]="qForm" (ngSubmit)="onSubmit()" (keydown.enter)="$event.preventDefault()" novalidate>
             <div class="blnt-content-group-secondary blnt-content-group-last"
                  [ngClass]="{ 'blnt-group-error': qForm.hasError('atLeastOneRequired') && qForm.touched }">
-                <h2 class="h3">Questions</h2>
+                <h2>Questions</h2>
                 <div *ngIf="!loaded" class="spinner"></div>
                 <ng-container *ngIf="loaded">
                     <p *ngIf="!questions">Are you sure you are using a valid link? We could not find any questions for this link.</p>

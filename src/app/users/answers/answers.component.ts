@@ -12,6 +12,7 @@ import { Subscription } from "rxjs/Subscription";
 })
 export class AnswersComponent implements OnInit, OnDestroy {
   public loaded: boolean;
+  public loaded2: boolean;
   public questionSets: any[];
   public questionSetsObs: FirebaseListObservable<any[]>;
   public haveQuestions: boolean;
@@ -32,7 +33,7 @@ export class AnswersComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
-    this.loaded = false;
+    this.loaded2 = this.loaded = false;
     this.answers = {};
     this.questionRef = {};
     this.haveQuestions = false;
@@ -68,13 +69,19 @@ export class AnswersComponent implements OnInit, OnDestroy {
   }
 
   public displayAnswers(answersId: string): void {
+    this.haveAnswers[answersId] = true;
+
     const answersPath: string = this._afUtils.afPathMaker(["answers", answersId]);
     const answersSet: FirebaseListObservable<any[]> = this._db.list(answersPath);
     const ansIndSubscription: Subscription = answersSet.subscribe(records => {
-      if (records.length) {
-        this.haveAnswers[answersId] = true;
+      const recLen: number = records.length;
+      if (recLen && recLen > 3) {
+        const recsInvalid: number = records.length % 3;
+        this.answers[answersId] = records.slice(0, recLen - recsInvalid);
+      } else {
+        this.haveAnswers[answersId] = false;
       }
-      this.answers[answersId] = records;
+      this.loaded2 = true;
     });
     this.questionRef[answersId] = answersId;
     this._answersSubscription.push(ansIndSubscription);

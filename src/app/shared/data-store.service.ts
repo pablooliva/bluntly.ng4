@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { IGeoLocation, SourceService } from "./source.service";
 
 export interface IDataStore {
   name: string;
@@ -7,6 +8,8 @@ export interface IDataStore {
 
 @Injectable()
 export class DataStoreService {
+  constructor(private _sourceService: SourceService) {}
+
   public putInStorage(dataObject: IDataStore): void {
     localStorage.setItem(dataObject.name, JSON.stringify(dataObject.data));
   }
@@ -19,5 +22,36 @@ export class DataStoreService {
   
   public removeFromStorage(dataName: string): void {
     localStorage.removeItem(dataName);
+  }
+
+  public saveLocalId(uid: string): void {
+    this._sourceService.getSource().subscribe(
+      (response: IGeoLocation) => {
+        this._saveLocalIdFinish(uid, response);
+      },
+      error => {
+        const geoData: IGeoLocation = {
+          ip: "",
+          country_name: "",
+          country_code: ""
+        };
+
+        this._saveLocalIdFinish(uid, geoData);
+      }
+    );
+  }
+
+  public getLocalId(): Object {
+    return JSON.parse(localStorage.getItem("blntUData"));
+  }
+
+  private _saveLocalIdFinish(uid: string, geoData: IGeoLocation): void {
+    localStorage.setItem("blntUData", JSON.stringify(
+      {
+        user: uid,
+        timestamp: Date.now(),
+        geoData: geoData
+      }
+    ));
   }
 }

@@ -2,17 +2,23 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { AngularFireAuth } from "angularfire2/auth";
 import * as firebase from "firebase/app";
+import { Subject } from "rxjs/Subject";
 
 import { AlertsService } from "./alerts/alerts.service";
 import { BSAlertTypes } from "./alerts/alerts.component";
-import { Subject } from "rxjs/Subject";
+import { DataStoreService } from "./data-store.service";
 
 @Injectable()
 export class AuthService {
   public currentUserSubject: Subject<firebase.User>;
   public currentUser: firebase.User;
 
-  constructor(private _afAuth: AngularFireAuth, private _alertsService: AlertsService, private _router: Router) {
+  constructor(
+    private _afAuth: AngularFireAuth,
+    private _alertsService: AlertsService,
+    private _router: Router,
+    private _dataStore: DataStoreService
+  ) {
     this.currentUserSubject = new Subject();
     this._afAuth.auth.onAuthStateChanged(user => {
       this.currentUserSubject.next(user);
@@ -52,6 +58,7 @@ export class AuthService {
   public login(email: string, password: string): void {
     this._afAuth.auth.signInWithEmailAndPassword(email, password)
       .then(response => {
+        this._dataStore.saveLocalId(response.uid);
         this._router.navigate(["/users"]);
       })
       .catch((error: firebase.FirebaseError) => {

@@ -3,8 +3,16 @@
   margin-bottom: 1.5rem;
 }
 
-.blnt-help-list li {
-  margin-bottom:0.8rem;
+.blnt-help-list {
+  margin-bottom:0;
+
+  li {
+    margin-bottom:0.8rem;
+
+    &:last-child {
+      margin-bottom:0;
+    }
+  }
 }
 
 .blnt-sub-section-img {

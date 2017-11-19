@@ -10,6 +10,7 @@ import { ControlType } from "../shared/validation/form-validation-messages.compo
 import { AlertsService } from "../shared/alerts/alerts.service";
 import { BSAlertTypes } from "../shared/alerts/alerts.component";
 import { IGeoLocation, SourceService } from "../shared/source.service";
+import { DataStoreService } from "../shared/data-store.service";
 
 @Component({
   selector: "blnt-questions",
@@ -38,6 +39,7 @@ export class QuestionsComponent implements OnInit, OnDestroy {
     private _afUtils: AFUtils,
     private _alertsService: AlertsService,
     private _sourceService: SourceService,
+    private _dataStore: DataStoreService,
     public fb: FormBuilder
   ) {}
 
@@ -111,26 +113,48 @@ export class QuestionsComponent implements OnInit, OnDestroy {
   }
 
   public onSubmit(): void {
-    this.qKeys.forEach(key => {
-      if (this.qForm.value[key]) {
-        const answersPath: string = this._afUtils.afPathMaker(["answers", key]);
-        const answers: FirebaseListObservable<any> = this._db.list(answersPath);
+    if (this._isSameUser()) {
+      this._alertsService.addAlert({
+        type: BSAlertTypes.danger,
+        messagePrimary: "Answers were not saved. Answering your own questions is prohibited.",
+        persistent: false
+      });
 
-        this._sourceService.getSource().subscribe(
-          (response: IGeoLocation) => {
-            this._finishSubmit(answers, key, response);
-          },
-          error => {
-            const noGeoLoc: IGeoLocation = {
-              ip: "",
-              country_name: "",
-              country_code: ""
-            };
-            this._finishSubmit(answers, key, noGeoLoc);
-          }
-        );
-      }
-    });
+      this.qForm.reset();
+      this.successfulSub = true;
+      window.scroll({ top: 0, left: 0, behavior: "smooth" });
+
+      const bioPath: string = this._afUtils.afPathMaker(["bios", this._userId, this._bioId]);
+      const bio: FirebaseListObservable<any> = this._db.list(bioPath);
+
+      this._bioSubscription = bio.subscribe(result => {
+        if (result.length) {
+          this.hasBio = true;
+        }
+        this.bio = result[1];
+      });
+    } else {
+      this.qKeys.forEach(key => {
+        if (this.qForm.value[key]) {
+          const answersPath: string = this._afUtils.afPathMaker(["answers", key]);
+          const answers: FirebaseListObservable<any> = this._db.list(answersPath);
+
+          this._sourceService.getSource().subscribe(
+            (response: IGeoLocation) => {
+              this._finishSubmit(answers, key, response);
+            },
+            error => {
+              const noGeoLoc: IGeoLocation = {
+                ip: "",
+                country_name: "",
+                country_code: ""
+              };
+              this._finishSubmit(answers, key, noGeoLoc);
+            }
+          );
+        }
+      });
+    }
   }
 
   private _finishSubmit(
@@ -166,5 +190,10 @@ export class QuestionsComponent implements OnInit, OnDestroy {
         });
         window.scroll({ top: 0, left: 0, behavior: "smooth" });
       });
+  }
+
+  private _isSameUser(): boolean {
+    const localId: Object = this._dataStore.getLocalId();
+    return localId["user"] === this._userId;
   }
 }
