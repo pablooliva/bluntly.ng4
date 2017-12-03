@@ -1,6 +1,8 @@
 const webpack = require("webpack"),
   HtmlWebpackPlugin = require("html-webpack-plugin"),
   ExtractTextPlugin = require("extract-text-webpack-plugin"),
+  FaviconsWebpackPlugin = require("favicons-webpack-plugin"),
+  CopyWebpackPlugin = require("copy-webpack-plugin"),
   helpers = require("./helpers");
 
 module.exports = {
@@ -129,6 +131,25 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "src/index.html",
       inject: "body"
-    })
+    }),
+    new FaviconsWebpackPlugin({
+      logo: "./src/static/favicon.png",
+      icons: {
+        android: true,
+        appleIcon: true,
+        appleStartup: false,
+        coast: false,
+        favicons: true,
+        firefox: true,
+        opengraph: true,
+        twitter: true,
+        yandex: true,
+        windows: true
+      }
+    }),
+    new CopyWebpackPlugin([
+      { from: "./src/.htaccess", to: "./" },
+      { from: "./src/static/og.png", to: "./assets/og.png" }
+    ])
   ]
 };

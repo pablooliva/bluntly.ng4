@@ -1,6 +1,7 @@
-import { BrowserModule } from "@angular/platform-browser";
+import { BrowserModule, Title } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpModule } from "@angular/http";
+import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { AngularFireModule } from "angularfire2";
 import { AngularFireAuthModule } from "angularfire2/auth";
 import { AngularFireDatabaseModule } from "angularfire2/database";
@@ -17,6 +18,8 @@ import { AlertsService} from "./shared/alerts/alerts.service";
 import { AlertGuardService } from "./shared/alerts/alert-guard.service";
 import { SourceService } from "./shared/source.service";
 import { DataStoreService } from "./shared/data-store.service";
+
+declare let ga: any;
 
 @NgModule({
   declarations: [
@@ -51,4 +54,25 @@ import { DataStoreService } from "./shared/data-store.service";
   ]
 })
 export class AppModule {
+  constructor(
+    private _router: Router,
+    private _activatedRoute: ActivatedRoute,
+    private _title: Title) {
+    let thisEvent: any;
+
+    this._router.events
+      .filter((event) => event instanceof NavigationEnd)
+      .map((event) => thisEvent = event)
+      .map(() => this._activatedRoute)
+      .map((route) => {
+        while (route.firstChild) route = route.firstChild;
+        return route;
+      })
+      .filter((route) => route.outlet === "primary")
+      .mergeMap((route) => route.data)
+      .subscribe((event) => {
+        ga("send", "pageview", thisEvent.urlAfterRedirects);
+        this._title.setTitle(event["title"]);
+      });
+  }
 }

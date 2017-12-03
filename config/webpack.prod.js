@@ -1,6 +1,7 @@
 const webpack = require("webpack"),
   webpackMerge = require("webpack-merge"),
   ExtractTextPlugin = require("extract-text-webpack-plugin"),
+  CopyWebpackPlugin = require("copy-webpack-plugin"),
   commonConfig = require("./webpack.common.js"),
   helpers = require("./helpers"),
   ENV = process.env.NODE_ENV = process.env.ENV = "production",
@@ -11,7 +12,7 @@ const webpack = require("webpack"),
   });
 
 module.exports = webpackMerge(commonConfig, {
-  devtool: "source-map",
+  // devtool: "source-map",
   output: {
     path: helpers.root("dist"),
     publicPath: "/",
@@ -43,7 +44,10 @@ module.exports = webpackMerge(commonConfig, {
       htmlLoader: {
         minimize: false // workaround for ng2
       }
-    })
+    }),
+    new CopyWebpackPlugin([
+      { from: "./src/.htaccess", to: "./" }
+    ])
   ]
 });
 
