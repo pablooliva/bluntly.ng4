@@ -9,7 +9,10 @@ const questionsRoutes: Routes = [
     path: "",
     canActivate: [ AlertGuardService ],
     component: QuestionsComponent,
-    data: { title: "b.luntly answer questions anonymously" }
+    data: {
+      title: "b.luntly answer questions anonymously",
+      description: "Answer questions anonymously and honestly. A chance to provide honest and constructive feedback."
+    }
   }
 ];
 

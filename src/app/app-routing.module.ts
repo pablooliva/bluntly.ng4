@@ -11,13 +11,19 @@ const appRoutes: Routes = [
     pathMatch: "full",
     canActivate: [ AlertGuardService ],
     component: HomeComponent,
-    data: { title: "b.luntly - honest (blunt) & anonymous answers" }
+    data: {
+      title: "b.luntly - honest (blunt) & anonymous answers",
+      description: "Get anonymous and honest answers to your personal questions."
+    }
   },
   {
     path: "not-found",
     canActivate: [ AlertGuardService ],
     component: NotFoundComponent,
-    data: { title: "page not found" }
+    data: {
+      title: "page not found",
+      description: "Sorry. The page that you are searching for was not found."
+    }
   },
   {
     path: "users",

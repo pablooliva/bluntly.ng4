@@ -17,49 +17,73 @@ const userRoutes: Routes = [
     path: "",
     canActivate: [ AlertGuardService ],
     component: UsersComponent,
-    data: { title: "b.luntly users" }
+    data: {
+      title: "b.luntly users",
+      description: "User options for managing your questions and details shared."
+    }
   },
   {
     path: "login",
     canActivate: [ AlertGuardService ],
     component: LoginComponent,
-    data: { title: "b.luntly log in" }
+    data: {
+      title: "b.luntly log in",
+      description: "Log in to your b.luntly user account to create and share questions, and review the answers."
+    }
   },
   {
     path: "register",
     canActivate: [ AlertGuardService ],
     component: RegisterComponent,
-    data: { title: "b.luntly register" }
+    data: {
+      title: "b.luntly register",
+      description: "Register for a b.luntly user account to begin creating questions to share."
+    }
   },
   {
     path: "bio",
     canActivate: [ AlertGuardService, AuthGuardService ],
     component: BioComponent,
-    data: { title: "b.luntly user bio" }
+    data: {
+      title: "b.luntly user bio",
+      description: "Create and manage user profiles that can be shared with those that answer your questions."
+    }
   },
   {
     path: "bioCreate",
     canActivate: [ AlertGuardService, AuthGuardService ],
     component: BioCreateComponent,
-    data: { title: "b.luntly create a user bio" }
+    data: {
+      title: "b.luntly create a user bio",
+      description: "Create user profiles to share with those that answers your questions."
+    }
   },
   {
     path: "bioEdit/:bioId",
     canActivate: [ AlertGuardService, AuthGuardService ],
     component: BioEditComponent,
-    data: { title: "b.luntly edit a user bio" }
+    data: {
+      title: "b.luntly edit a user bio",
+      description: "Manage user profiles that are shared with those that answers your questions."
+    }
   },
   {
     path: "ask",
     canActivate: [ AlertGuardService, AuthGuardService ],
     component: AskComponent,
-    data: { title: "b.luntly user questions" }
+    data: {
+      title: "b.luntly user questions",
+      description: "Create and share sets of questions that can be answered anonymously."
+    }
   },
   {
     path: "answers",
     canActivate: [ AlertGuardService, AuthGuardService ],
     component: AnswersComponent,
-    data: { title: "b.luntly get answers" }
+    data: {
+      title: "b.luntly get answers",
+      description: "Get anonymous answers to your questions. Review the honest responses."
+    }
   }
 ];
 

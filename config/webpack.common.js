@@ -61,7 +61,7 @@ module.exports = {
             {
               loader: "css-loader",
               options: {
-                sourceMap: true
+                sourceMap: false
               }
             }
           ]
@@ -74,7 +74,10 @@ module.exports = {
           fallback: "style-loader",
           use: [
             {
-              loader: "css-loader"
+              loader: "css-loader",
+              options: {
+                sourceMap: false
+              }
             },
             {
               loader: "postcss-loader",

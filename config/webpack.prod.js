@@ -1,11 +1,10 @@
 const webpack = require("webpack"),
   webpackMerge = require("webpack-merge"),
   ExtractTextPlugin = require("extract-text-webpack-plugin"),
-  CopyWebpackPlugin = require("copy-webpack-plugin"),
   commonConfig = require("./webpack.common.js"),
   helpers = require("./helpers"),
   ENV = process.env.NODE_ENV = process.env.ENV = "production",
-  APP_URL = process.env.APP_URL = "http://b.luntly.com/",
+  APP_URL = process.env.APP_URL = "https://b.luntly.com/",
   METADATA = webpackMerge(commonConfig.metadata, {
     APP_URL: APP_URL,
     ENV: ENV
@@ -28,7 +27,7 @@ module.exports = webpackMerge(commonConfig, {
       compress: {
         warnings: false
       },
-      sourceMap: true
+      sourceMap: false
     }),
     new ExtractTextPlugin("[name].[hash].css"),
     new webpack.DefinePlugin({
@@ -44,10 +43,7 @@ module.exports = webpackMerge(commonConfig, {
       htmlLoader: {
         minimize: false // workaround for ng2
       }
-    }),
-    new CopyWebpackPlugin([
-      { from: "./src/.htaccess", to: "./" }
-    ])
+    })
   ]
 });
 

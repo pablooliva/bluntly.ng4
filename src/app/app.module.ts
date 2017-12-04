@@ -1,4 +1,4 @@
-import { BrowserModule, Title } from "@angular/platform-browser";
+import { BrowserModule, Meta, Title } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpModule } from "@angular/http";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
@@ -57,7 +57,9 @@ export class AppModule {
   constructor(
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
-    private _title: Title) {
+    private _title: Title,
+    private _meta: Meta
+  ) {
     let thisEvent: any;
 
     this._router.events
@@ -71,8 +73,12 @@ export class AppModule {
       .filter((route) => route.outlet === "primary")
       .mergeMap((route) => route.data)
       .subscribe((event) => {
-        ga("send", "pageview", thisEvent.urlAfterRedirects);
         this._title.setTitle(event["title"]);
+        this._meta.updateTag(
+          { name: "description", content: event["description"] },
+          `name="description"`
+        );
+        ga("send", "pageview", thisEvent.urlAfterRedirects);
       });
   }
 }
