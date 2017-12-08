@@ -8,7 +8,8 @@ const webpack = require("webpack"),
   METADATA = webpackMerge(commonConfig.metadata, {
     APP_URL: APP_URL,
     ENV: ENV
-  });
+  }),
+  BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 module.exports = webpackMerge(commonConfig, {
   // devtool: "source-map",
@@ -43,6 +44,10 @@ module.exports = webpackMerge(commonConfig, {
       htmlLoader: {
         minimize: false // workaround for ng2
       }
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerHost: "127.0.0.1",
+      analyzerPort: 8989,
     })
   ]
 });
