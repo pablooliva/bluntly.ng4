@@ -1,6 +1,7 @@
 const webpack = require("webpack"),
   webpackMerge = require("webpack-merge"),
   ExtractTextPlugin = require("extract-text-webpack-plugin"),
+  WorkboxPlugin = require("workbox-webpack-plugin"),
   commonConfig = require("./webpack.common.js"),
   helpers = require("./helpers"),
   ENV = process.env.NODE_ENV = process.env.ENV = "production",
@@ -48,6 +49,14 @@ module.exports = webpackMerge(commonConfig, {
     new BundleAnalyzerPlugin({
       analyzerHost: "127.0.0.1",
       analyzerPort: 8989,
+    }),
+    new WorkboxPlugin({
+      globDirectory: "dist",
+      globPatterns: [
+        "**/*.{css,html,js,eot,png,svg,ttf,woff2,woff,ico,png}"
+      ],
+      swSrc: helpers.root("src/assets/js/sw-base.js"),
+      swDest: helpers.root("dist/sw.js")
     })
   ]
 });

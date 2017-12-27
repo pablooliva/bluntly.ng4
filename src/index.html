@@ -5,9 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <base href="/">
     <link rel="canonical" href="https://b.luntly.com">
+    <link rel="manifest" href="/manifest.json">
     <title>b.luntly</title>
     <meta name="description" content="Get anonymous and honest answers to your personal questions.">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
     <meta property="og:url" content="https://b.luntly.com">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Personal questions, blunt answers.">
@@ -16,13 +17,16 @@
     <meta name="google-site-verification" content="1TkdAxrG6LF5qXihe6XFbxoRn9v3f_i5Bzpf7fo-RsU" />
 </head>
 <body class="container-fluid blnt-body">
-<blnt-app><div class="spinner center"></div></blnt-app>
+<blnt-app>
+    <img class="blnt-logo-main" alt="b.luntly home" src="./assets/images/b.luntly-logo.svg">
+    <div class="spinner center"></div>
+</blnt-app>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-110552811-1', 'auto');
+  })(window,document,"script","https://www.google-analytics.com/analytics.js","ga");
+  ga("create", "UA-110552811-1", "auto");
 </script>
 </body>
 </html>

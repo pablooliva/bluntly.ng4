@@ -9,7 +9,7 @@
             <ng-container *ngIf="haveQuestions && !displaySet">
                 <p>Select a set of questions to see the answers.</p>
                 <ol>
-                    <li *ngFor="let set of questionSets"><button class="btn-link" type="button" (click)="displayQSet(set.$key)">{{ set.setName }}</button></li>
+                    <li *ngFor="let set of questionSets"><button class="btn-link blnt-btn-as-link" type="button" (click)="displayQSet(set.$key)">{{ set.setName }}</button></li>
                 </ol>
             </ng-container>
             <ng-container *ngIf="displaySet">

@@ -20,7 +20,7 @@
         "src/**/*.ts"
     ],
     "angularCompilerOptions": {
-        "genDir": ".compiled",
+        "genDir": "compiled",
         "entryModule": "app/app-module#AppModule",
         "skipMetadataEmit": true
     }

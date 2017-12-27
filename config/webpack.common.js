@@ -152,7 +152,9 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       { from: "./src/.htaccess", to: "./" },
-      { from: "./src/static/og.png", to: "./assets/og.png" }
+      { from: "./src/static/og.png", to: "./assets/" },
+      { from: "./src/assets/js/manifest.json", to: "./" },
+      { from: "./node_modules/workbox-sw/build/importScripts/workbox-sw.prod.*.js", to: "./workbox-sw.prod.js" }
     ])
   ]
 };

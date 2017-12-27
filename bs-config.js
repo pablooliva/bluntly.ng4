@@ -1,8 +1,8 @@
 module.exports = {
   server: {
-      baseDir: './dist',
+      baseDir: "./dist",
       middleware: {
-          1: require('connect-history-api-fallback')({index: '/index.html', verbose: true})
+          1: require("connect-history-api-fallback")({index: "/index.html", verbose: true})
       }
   }
 };

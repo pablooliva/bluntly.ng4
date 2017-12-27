@@ -80,6 +80,10 @@ h1, .h1 {
   margin-bottom:1.5rem;
 }
 
+.blnt-btn-as-link {
+  border:none;
+}
+
 /*** document & structure ***/
 
 .blnt-body {
@@ -256,8 +260,9 @@ button {
 }
 
 .blnt-logo-main {
-  display: none;
-  @include blnt-logo(7);
+  display:block;
+  margin:1rem auto;
+  @include blnt-logo(4);
 }
 
 .blnt-logo-footer {
@@ -481,9 +486,6 @@ input.ng-dirty.ng-invalid, input.ng-touched.ng-invalid {
 @media (min-width: 768px) {
   #navbar ul {
     margin: 0;
-  }
-  .blnt-logo-main {
-    display: block;
   }
   .blnt-home-bg.blnt-row-pad {
     padding-bottom:25rem;
