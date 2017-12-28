@@ -194,6 +194,6 @@ export class QuestionsComponent implements OnInit, OnDestroy {
 
   private _isSameUser(): boolean {
     const localId: Object = this._dataStore.getLocalId();
-    return localId["user"] === this._userId;
+    return localId ? localId["user"] === this._userId : false;
   }
 }

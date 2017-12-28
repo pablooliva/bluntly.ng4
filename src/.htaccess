@@ -499,9 +499,9 @@ AddDefaultCharset utf-8
 
 <IfModule mod_headers.c>
     # Header set Content-Security-Policy "script-src 'self'; object-src 'self'"
-    Header set Content-Security-Policy: "default-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com; object-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' https://www.google-analytics.com; media-src 'none'; frame-src 'none'; font-src 'self'; connect-src *; manifest-src 'self'"
-    Header set X-Content-Security-Policy: "default-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com; object-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' https://www.google-analytics.com; media-src 'none'; frame-src 'none'; font-src 'self'; connect-src *; manifest-src 'self'"
-    Header set X-WebKit-CSP: "default-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com; object-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' https://www.google-analytics.com; media-src 'none'; frame-src 'none'; font-src 'self'; connect-src *; manifest-src 'self'"
+    Header set Content-Security-Policy: "default-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval' data: https://www.google-analytics.com https://*.firebaseio.com; object-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com; media-src 'none'; frame-src https://*.firebaseio.com; font-src 'self'; connect-src *; manifest-src 'self'"
+    Header set X-Content-Security-Policy: "default-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval' data: https://www.google-analytics.com https://*.firebaseio.com; object-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com; media-src 'none'; frame-src https://*.firebaseio.com; font-src 'self'; connect-src *; manifest-src 'self'"
+    Header set X-WebKit-CSP: "default-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval' data: https://www.google-analytics.com https://*.firebaseio.com; object-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com; media-src 'none'; frame-src https://*.firebaseio.com; font-src 'self'; connect-src *; manifest-src 'self'"
 
     # `mod_headers` cannot match based on the content-type, however,
     # the `Content-Security-Policy` response header should be send
