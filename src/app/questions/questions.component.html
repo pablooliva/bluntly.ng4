@@ -49,14 +49,16 @@
             <p *ngIf="bio.desc">About me: {{ bio.desc }}</p>
             <p *ngIf="bio.fact">You may not know that... {{ bio.fact }}</p>
             <h4 class="bltn-social-sect">Connect with Me</h4>
-            <ul *ngIf="bio.facebook || bio.twitter || bio.linkedin || bio.xing || bio.github || bio.other.one.name || bio.other.two.name" class="list-unstyled blnt-inline-list">
+            <ul *ngIf="bio.facebook || bio.twitter || bio.linkedin || bio.xing || bio.github || bio.other" class="list-unstyled blnt-inline-list">
                 <li *ngIf="bio.facebook"><a href="{{ bio.facebook }}"><img class="blnt-social-logos" alt="Facebook" src="../../assets/images/facebook-logo.svg"></a></li>
                 <li *ngIf="bio.twitter"><a href="{{ bio.twitter }}"><img class="blnt-social-logos" alt="Twitter" src="../../assets/images/twitter-logo.svg"></a></li>
                 <li *ngIf="bio.linkedin"><a href="{{ bio.linkedin }}"><img class="blnt-social-logos" alt="LinkedIn" src="../../assets/images/linkedin-logo.svg"></a></li>
                 <li *ngIf="bio.xing"><a href="{{ bio.xing }}"><img class="blnt-social-logos" alt="Xing" src="../../assets/images/xing-logo.svg"></a></li>
                 <li *ngIf="bio.github"><a href="{{ bio.github }}"><img class="blnt-social-logos" alt="GitHub" src="../../assets/images/github-logo.svg"></a></li>
-                <li *ngIf="bio.other.one.name"><a class="blnt-lrg-text" href="{{ bio.other.one.link }}">{{ bio.other.one.name }}</a></li>
-                <li *ngIf="bio.other.two.name"><a class="blnt-lrg-text" href="{{ bio.other.two.link }}">{{ bio.other.two.name }}</a></li>
+                <ng-container *ngIf="bio.other">
+                    <li *ngIf="bio.other.one && bio.other.one.name"><a class="blnt-lrg-text" href="{{ bio.other.one.link }}">{{ bio.other.one.name }}</a></li>
+                    <li *ngIf="bio.other.two && bio.other.two.name"><a class="blnt-lrg-text" href="{{ bio.other.two.link }}">{{ bio.other.two.name }}</a></li>
+                </ng-container>
             </ul>
         </div>
     </ng-container>

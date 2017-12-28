@@ -130,8 +130,8 @@ export class QuestionsComponent implements OnInit, OnDestroy {
       this._bioSubscription = bio.subscribe(result => {
         if (result.length) {
           this.hasBio = true;
+          this.bio = result[0].bioSubForm;
         }
-        this.bio = result[1];
       });
     } else {
       this.qKeys.forEach(key => {
@@ -178,8 +178,8 @@ export class QuestionsComponent implements OnInit, OnDestroy {
         this._bioSubscription = bio.subscribe(result => {
           if (result.length) {
             this.hasBio = true;
+            this.bio = result[0].bioSubForm;
           }
-          this.bio = result[1];
         });
       })
       .catch(error => {
